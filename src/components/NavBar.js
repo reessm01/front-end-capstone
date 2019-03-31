@@ -21,13 +21,29 @@ class NavBar extends Component {
                         Disabled
     </Nav.Link>
                 </Nav.Item>
-            </Nav>;
+            </Nav>
 
 );
 
     }
 
 }
+<>
+<Navbar bg="dark" variant="dark">
+    <Navbar.Brand href="#home">Garden App Homepage</Navbar.Brand>
+    <Nav className="mr-auto">
+      <Nav.Link href="#home">HomePage</Nav.Link>
+      <Nav.Link href="#profile">Profile</Nav.Link>
+      <Nav.Link href="#feed">Feed</Nav.Link>
+      <Nav.Link href="#planner">Planner</Nav.Link>
+    </Nav>
+    <Form inline>
+      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+      <Button variant="outline-info">Search</Button>
+    </Form>
+  </Navbar>
+  <br />
+</>
 
 
 export default NavBar
