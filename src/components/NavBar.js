@@ -28,7 +28,7 @@ class NavBar extends Component {
     }
 
 }
-<>
+{/* <>
 <Navbar bg="dark" variant="dark">
     <Navbar.Brand href="#home">Garden App Homepage</Navbar.Brand>
     <Nav className="mr-auto">
@@ -43,7 +43,7 @@ class NavBar extends Component {
     </Form>
   </Navbar>
   <br />
-</>
+</> */}
 
 
 export default NavBar
