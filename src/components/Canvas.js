@@ -52,8 +52,11 @@ export class Canvas extends Component {
     event.dataTransfer.setData("pictureId", pictureId);
   };
   handleDrop = event => {
-    let xCoord = event.clientX;
-    let yCoord = event.clientY;
+    let canvasCoords = document.getElementById("0,0").getBoundingClientRect()
+    console.log(canvasCoords)
+    let gridCoords = event.target.getBoundingClientRect()
+    let xCoord = gridCoords.x - canvasCoords.x;
+    let yCoord = gridCoords.y - canvasCoords.y;
     console.log(xCoord + "," + yCoord);
     let pictureId = event.dataTransfer.getData("pictureId");
     console.log(pictureId);
@@ -63,7 +66,8 @@ export class Canvas extends Component {
         pictureId: pictureId,
         xCoord: xCoord,
         yCoord: yCoord,
-        bgColor: this.state.pictures.bgColor
+        bgColor: this.state.pictures.bgColor,
+        
       }
     ];
     this.setState({ ...this.state, attachedPictures: newAttachedPictures });
@@ -74,7 +78,7 @@ export class Canvas extends Component {
     for (let i = 0; i < this.state.grid.length; i++) {
       let row = [];
       for (let j = 0; j < this.state.grid[0].length; j++) {
-        row.push(<Grid key={i + "," + j} />);
+          row.push(<Grid key={i + "," + j} id={i + "," + j}/>);
       }
       store.push(row);
     }

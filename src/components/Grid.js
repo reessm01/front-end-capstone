@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export class Grid extends Component {
     render() {
         return (
-           <div style={{backgroundColor:"white",border:"1px solid grey",width:"10px", display:"inline-block",height:"10px"}}></div>
+           <div id={this.props.id}style={{backgroundColor:"white",border:"1px solid grey",width:"10px", display:"inline-block",height:"10px"}}></div>
         ) ;  
     }
 }
