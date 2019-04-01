@@ -35,3 +35,7 @@ body{
     transform: rotate(360deg);
   }
 }
+
+.profilePage {
+  border: 1px solid black;
+}

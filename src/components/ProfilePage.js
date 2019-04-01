@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
-// import logo from './logo';
 import './App.css';
+//import { Link } from "react-router-dom"
 // import { connect } from 'react-redux'
-import { Button, Form, Row, Col } from 'react-bootstrap/Button';
 //import UserImage from "./UserImage.js"
 //import DeleteUserAccount from "./DeleteUserAccount.js"
 //Need to add transition to update and return to a page in ../actions
-
+import { Button, Form, Row, Col } from 'react-bootstrap/Button';
 class userProfilePage extends Component {
 
     state = {
         username: "",
         password: "",
         displayName: "",
-        about: ""
+        about: this.props.about
     }
 
     handleUserUpdate = e => {
         e.preventDefault();
-        this.props.update({state: this.state, accountInfo: this.props.accountInfo })
+        this.props.update({state: this.state, userInfo: this.props.userInfo })
     }
 
     handleChange = e => {
@@ -30,12 +29,13 @@ class userProfilePage extends Component {
         return (
             <div className="profilePageDiv">
                 {/* <header className="App-header"></header> */}
-                {/* <Link exact to="/feed"></Link>
+                {/* <Link to="/feed"></Link>
                 <UserImage /> */}
                 <Form onSubmit={this.handleUserUpdate}>
                     <Form.Group controlId="userInfoDisplay">
                         <Form.Label>Display Name: {this.props.displayName}</Form.Label>
                         <Form.Label>User Name: {this.props.username}</Form.Label>
+                        <Form.Label>All About You: {this.props.about}</Form.Label>
                     </Form.Group>
                         <Row>  
                             <Col>
@@ -74,7 +74,7 @@ class userProfilePage extends Component {
                                 />
                         </Row>
                         />
-                    <Button variant="primary" type="submit">/>
+                    <Button variant="primary" type="submit">
                         Submit
                     </Button>
                 </Form>;
@@ -82,5 +82,16 @@ class userProfilePage extends Component {
         );
     }
 }
+
+/////Code to connect after wired up////
+// export default connect(
+//     ({ auth, users}) => ({
+//         userInfo: auth.login,
+//         username: users.currentUsername,
+//         displayName: users.currentDisplayName,
+//         about: users.currentAbout,
+//         passwordValue: users.currentPassword
+//     })
+// )
 
 export default userProfilePage;
