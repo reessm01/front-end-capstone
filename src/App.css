@@ -31,3 +31,8 @@
     transform: rotate(360deg);
   }
 }
+
+.RegistrationPage {
+  border: 1px solid black;
+  height: 500px;
+}
