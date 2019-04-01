@@ -42,6 +42,11 @@ export class Canvas extends Component {
       console.log("finish dragging");
       e.preventDefault()
   }
+  handleDragStart = pictureId => event=>{
+      console.log(pictureId)
+      event.dataTransfer.setData("pictureId",pictureId)
+  }
+  
 
   render() {
     const store = [];
@@ -63,7 +68,7 @@ export class Canvas extends Component {
         </div>
         <br />
         <div>
-          <PictureList pictures={this.state.pictures} />
+          <PictureList pictures={this.state.pictures} handleDragStart={this.handleDragStart}/>
         </div>
         <div onDragOver={this.handleDragOver}
           style={{
