@@ -1,3 +1,7 @@
+body{
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
@@ -32,7 +36,6 @@
   }
 }
 
-.RegistrationPage {
+.profilePage {
   border: 1px solid black;
-  height: 500px;
 }
