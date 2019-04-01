@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { pictureStyles } from "./style"
 //import { connect } from "react-redux";
 export class Picture extends Component {
     // handleDragStart = (pictureId)=>(event)=>{
@@ -6,9 +7,9 @@ export class Picture extends Component {
     //    event.dataTransfer.setData("pictureId",pictureId)
     // }
     render() {
+        let pictureStyle = {...pictureStyles, backgroundColor: this.props.bgColor }
         return (
-            <div pictureId={this.props.pictureId} draggable style={{ border: "1px solid grey", width: "40px", height: "40px", backgroundColor:this.props.bgColor,zIndex:1000}} onDragStart={this.props.handleDragStart}>
-            </div>
+            <div pictureId={this.props.pictureId} draggable style={pictureStyle} onDragStart={this.props.handleDragStart}></div>
         );
     }
 }

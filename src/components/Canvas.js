@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import { Grid } from "./Grid";
+import { Grid } from "./Grid/Grid";
 import { ToolBar } from "./ToolBar";
 import { PictureList } from "./PictureList";
-import {AttachedPic} from "./AttachedPic"
+import { width } from "./Grid/styles"
+import { AttachedPic } from "./AttachedPic"
 //import { connect } from "react-redux";
 export class Canvas extends Component {
   state = {
-    numRows: 50,
-    numCols: 50,
-    canvasWidth: 500,
+    numRows: 10,
+    numCols: 10,
+    canvasWidth: 0,
     pictures: [
       { pictureId: 1, bgColor: "red" },
       { pictureId: 2, bgColor: "blue" }
@@ -16,10 +17,9 @@ export class Canvas extends Component {
     attachedPictures: []
   };
   componentWillMount() {
-    let grid = Array(this.state.numRows)
-      .fill(null)
-      .map(() => Array(this.state.numCols).fill({ pictureLink: null }));
-    this.setState({ ...this.state, grid: grid });
+    let grid = Array(this.state.numRows).fill(null).map(() => Array(this.state.numCols).fill({ pictureLink: null }))
+    let initWidth = this.state.numRows * width
+    this.setState({ ...this.state, grid: grid, canvasWidth: initWidth })
   }
   handleAddGrid = () => {
     let newGrid = Array.from(this.state.grid);
@@ -28,7 +28,7 @@ export class Canvas extends Component {
     this.setState({
       numRows: this.state.numRows + 1,
       numCols: this.state.numCols + 1,
-      canvasWidth: this.state.canvasWidth + 10,
+      canvasWidth: this.state.canvasWidth + width,
       grid: newGrid
     });
   };
@@ -39,7 +39,7 @@ export class Canvas extends Component {
     this.setState({
       numRows: this.state.numRows - 1,
       numCols: this.state.numCols - 1,
-      canvasWidth: this.state.canvasWidth - 10,
+      canvasWidth: this.state.canvasWidth - width,
       grid: newGrid
     });
   };
@@ -74,11 +74,12 @@ export class Canvas extends Component {
   };
 
   render() {
+    
     const store = [];
     for (let i = 0; i < this.state.grid.length; i++) {
       let row = [];
       for (let j = 0; j < this.state.grid[0].length; j++) {
-          row.push(<Grid key={i + "," + j} id={i + "," + j}/>);
+        row.push(<Grid key={i + "," + j} image={this.state.grid[i][j].pictureLink}/>);
       }
       store.push(row);
     }
