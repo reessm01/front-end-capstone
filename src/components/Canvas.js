@@ -5,6 +5,7 @@ import { PictureList } from "./PictureList";
 import { width } from "./Grid/styles"
 import { Button, OverlayTrigger } from "react-bootstrap"
 import { toolTip } from "./ToolTip"
+import { AttachedPic } from "./AttachedPic"
 //import { connect } from "react-redux";
 
 export class Canvas extends Component {
@@ -15,7 +16,8 @@ export class Canvas extends Component {
     pictures: [
       { pictureId: 1, bgColor: "red" },
       { pictureId: 2, bgColor: "blue" }
-    ]
+    ],
+    attachedPictures: []
   };
 
   componentWillMount() {
@@ -110,6 +112,14 @@ export class Canvas extends Component {
         row.push(<Grid key={i + "," + j} image={this.state.grid[i][j].pictureLink} />);
       }
       store.push(row);
+    }
+    const pictureHolder = []
+    if(this.state.attachedPictures.length!==0){
+        this.state.attachedPictures.map(curPic =>(
+            pictureHolder.push(<AttachedPic top={curPic.yCoord} left={curPic.xCoord} bgColor="green"
+        />)
+            
+        ))
     }
 
     return (
