@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Picture } from "./Picture"
+import { Picture } from "./Picture/Picture"
 
 export class PictureList extends Component {
     render() {
