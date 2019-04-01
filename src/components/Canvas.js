@@ -14,33 +14,34 @@ export class Canvas extends Component {
     ]
   };
   componentWillMount() {
-    let grid = [];
-    for (let i = 0; i < 50; i++) {
-      let newArray = [];
-      for (let j = 0; j < 50; j++) {
-        newArray.push({ row: i, columen: j });
-      }
-      grid.push(newArray);
-    }
+    let grid = Array(this.state.numRows).fill(null).map(() => Array(this.state.numCols).fill({ pictureLink: null }))
     this.setState({ ...this.state, grid: grid });
   }
   handleAddGrid = () => {
+    let newGrid = Array.from(this.state.grid)
+    newGrid.map(row => row.push({ pictureLink: null }))
+    newGrid.push(Array(this.state.numCols + 1).fill({ pictureLink: null }))
     this.setState({
       numRows: this.state.numRows + 1,
       numCols: this.state.numCols + 1,
-      canvasWidth: this.state.canvasWidth + 10
+      canvasWidth: this.state.canvasWidth + 10,
+      grid: newGrid
     });
   };
   handleSubtractGrid = () => {
+    let newGrid = Array.from(this.state.grid)
+    newGrid.pop()
+    newGrid.forEach(row => row.pop())
     this.setState({
       numRows: this.state.numRows - 1,
       numCols: this.state.numCols - 1,
-      canvasWidth: this.state.canvasWidth - 10
+      canvasWidth: this.state.canvasWidth - 10,
+      grid: newGrid
     });
   };
-  handleDragOver = (e) =>{
-      console.log("finish dragging");
-      e.preventDefault()
+  handleDragOver = (e) => {
+    console.log("finish dragging");
+    e.preventDefault()
   }
   handleDragStart = pictureId => event=>{
       console.log(pictureId)
@@ -50,9 +51,9 @@ export class Canvas extends Component {
 
   render() {
     const store = [];
-    for (let i = 0; i < this.state.numRows; i++) {
+    for (let i = 0; i < this.state.grid.length; i++) {
       let row = [];
-      for (let j = 0; j < this.state.numCols; j++) {
+      for (let j = 0; j < this.state.grid[0].length; j++) {
         row.push(<Grid key={i + "," + j} />);
       }
       store.push(row);
