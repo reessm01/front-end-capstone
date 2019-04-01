@@ -3,8 +3,11 @@ import { Grid } from "./Grid/Grid";
 import { ToolBar } from "./ToolBar";
 import { PictureList } from "./PictureList";
 import { width } from "./Grid/styles"
+import { Button, OverlayTrigger } from "react-bootstrap"
+import { toolTip } from "./ToolTip"
 import { AttachedPic } from "./AttachedPic"
 //import { connect } from "react-redux";
+
 export class Canvas extends Component {
   state = {
     numRows: 10,
@@ -16,70 +19,97 @@ export class Canvas extends Component {
     ],
     attachedPictures: []
   };
+
   componentWillMount() {
     let grid = Array(this.state.numRows).fill(null).map(() => Array(this.state.numCols).fill({ pictureLink: null }))
     let initWidth = this.state.numRows * width
     this.setState({ ...this.state, grid: grid, canvasWidth: initWidth })
   }
-  handleAddGrid = () => {
-    let newGrid = Array.from(this.state.grid);
-    newGrid.map(row => row.push({ pictureLink: null }));
-    newGrid.push(Array(this.state.numCols + 1).fill({ pictureLink: null }));
+
+  handleClick = e => {
+    switch (e.button) {
+      case 0:
+        this.handleAddGrid(e.target.id)
+        break
+    }
+  }
+
+  contextMenu = e => {
+    console.log(e.target)
+    e.preventDefault()
+    this.handleSubtractGrid(e.target.id)
+  }
+
+  handleAddGrid = id => {
+    let newGrid = Array.from(this.state.grid)
+    let newRow = 0
+    let newCol = 0
+    let newWidth = width
+
+    if (id === "col") {
+      newCol = 1
+      newGrid.map(row => row.push({ pictureLink: null }))
+    } else {
+      newRow = 1
+      newWidth = 0
+      newGrid.push(Array(this.state.numCols).fill({ pictureLink: null }))
+    }
+
     this.setState({
-      numRows: this.state.numRows + 1,
-      numCols: this.state.numCols + 1,
-      canvasWidth: this.state.canvasWidth + width,
+      numRows: this.state.numRows + newRow,
+      numCols: this.state.numCols + newCol,
+      canvasWidth: this.state.canvasWidth + newWidth,
       grid: newGrid
     });
-  };
-  handleSubtractGrid = () => {
-    let newGrid = Array.from(this.state.grid);
-    newGrid.pop();
-    newGrid.forEach(row => row.pop());
-    this.setState({
-      numRows: this.state.numRows - 1,
-      numCols: this.state.numCols - 1,
-      canvasWidth: this.state.canvasWidth - width,
-      grid: newGrid
-    });
-  };
-  handleDragOver = e => {
-    console.log("finish dragging");
-    e.preventDefault();
-  };
-  handleDragStart = pictureId => event => {
-    console.log(pictureId);
-    event.dataTransfer.setData("pictureId", pictureId);
-  };
-  handleDrop = event => {
-    let canvasCoords = document.getElementById("0,0").getBoundingClientRect()
-    console.log(canvasCoords)
-    let gridCoords = event.target.getBoundingClientRect()
-    let xCoord = gridCoords.x - canvasCoords.x;
-    let yCoord = gridCoords.y - canvasCoords.y;
-    console.log(xCoord + "," + yCoord);
-    let pictureId = event.dataTransfer.getData("pictureId");
-    console.log(pictureId);
-    let newAttachedPictures = [
-      ...this.state.attachedPictures,
-      {
-        pictureId: pictureId,
-        xCoord: xCoord,
-        yCoord: yCoord,
-        bgColor: this.state.pictures.bgColor,
-        
-      }
-    ];
-    this.setState({ ...this.state, attachedPictures: newAttachedPictures });
   };
 
+  handleSubtractGrid = id => {
+    const minRows = (this.state.numRows > 1) && (id === "rows")
+    const minCols = (this.state.numCols > 1) && (id === "col")
+    const removalAllowed = minRows || minCols
+    console.log(id)
+    if(removalAllowed){
+
+      let newGrid = Array.from(this.state.grid)
+      let newRow = 0
+      let newCol = 0
+      let newWidth = width
+  
+      if (id === "col") {
+        newCol = 1
+        newGrid.forEach(row => row.pop())
+      } else {
+        newRow = 1
+        newWidth = 0
+        newGrid.pop()
+      }
+  
+      this.setState({
+        numRows: this.state.numRows - newRow,
+        numCols: this.state.numCols - newCol,
+        canvasWidth: this.state.canvasWidth - newWidth,
+        grid: newGrid
+      })
+    }
+  }
+
+  handleDragOver = (e) => {
+    console.log("finish dragging");
+    e.preventDefault()
+  }
+
+  handleDragStart = pictureId => event => {
+    console.log(pictureId)
+    event.dataTransfer.setData("pictureId", pictureId)
+  }
+
   render() {
-    
+
     const store = [];
     for (let i = 0; i < this.state.grid.length; i++) {
       let row = [];
       for (let j = 0; j < this.state.grid[0].length; j++) {
-        row.push(<Grid key={i + "," + j} image={this.state.grid[i][j].pictureLink}/>);
+        row.push(<Grid key={i + "," + j} image={this.state.grid[i][j].pictureLink} />);
       }
       store.push(row);
     }
@@ -96,29 +126,56 @@ export class Canvas extends Component {
       <div>
         <div>
           <ToolBar
-            handleAddGrid={this.handleAddGrid}
-            handleSubtractGrid={this.handleSubtractGrid}
           />
         </div>
         <br />
         <div>
-          <PictureList
-            pictures={this.state.pictures}
-            handleDragStart={this.handleDragStart}
-          />
+          <PictureList pictures={this.state.pictures} handleDragStart={this.handleDragStart} />
         </div>
-        <div
-          onDragOver={this.handleDragOver}
-          onDrop={this.handleDrop}
-          style={{
-            display: "flex",
-            width: this.state.canvasWidth + "px",
-            flexWrap: "wrap",
-            position:"relative"
-          }}
-        >
-          {store}
-          {pictureHolder}
+        <div style={{ display: "block" }}>
+          <div style={{ display: "flex" }}>
+            <div onDragOver={this.handleDragOver}
+              style={{
+                display: "flex",
+                width: this.state.canvasWidth + "px",
+                flexWrap: "wrap",
+                margin: "0px"
+              }}
+            >
+              {store}
+            </div>
+            <OverlayTrigger
+              placement="right"
+              delay={{ show: 250, hide: 400 }}
+              overlay={toolTip}
+            >
+              <Button
+                id="col"
+                onClick={this.handleClick}
+                onContextMenu={this.contextMenu}
+                style={{ width: "25px", margin: "0px" }}
+              >
+                <div style={{ display: "flex", justifyContent: "flex-start" }}>
+                  <i class="fas fa-chevron-right" />
+                </div>
+              </Button>
+            </OverlayTrigger>
+          </div>
+          <OverlayTrigger
+            placement="bottom"
+            delay={{ show: 250, hide: 400 }}
+            overlay={toolTip}
+          >
+            <Button
+              id="rows"
+              onClick={this.handleClick}
+              onContextMenu={this.contextMenu}
+              style={{ height: "25px", margin: "0px", width: this.state.canvasWidth + "px" }} >
+                <div id="rows" style={{ display: "flex", justifyContent:"center", width:"initial" }}>
+                  <i id="rows" class="fas fa-chevron-down" />
+                </div>
+              </Button>
+          </OverlayTrigger>
         </div>
       </div>
     );
