@@ -167,7 +167,7 @@ export class Canvas extends Component {
           >
             <Button
               id="rows"
-              onClick={this.handleClick}
+              onClick={e => this.props.expandGrid(e.target.id)}
               onContextMenu={this.contextMenu}
               style={{ height: "25px", margin: "0px", width: this.props.width + "px" }} >
               <div id="rows" style={{ display: "flex", justifyContent: "center", width: "initial" }}>
