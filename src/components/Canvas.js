@@ -10,8 +10,12 @@ import { connect } from "react-redux"
 import {
   initGrid,
   expandGrid,
-  subtractGrid
+  subtractGrid,
+  dropPlant
 } from "../actions"
+
+let i=0
+let j=0
 
 export class Canvas extends Component {
   state = {
@@ -30,7 +34,7 @@ export class Canvas extends Component {
     }
   }
 
-  componentWillMount =() => {
+  componentWillMount = () => {
     console.log(this.props.width)
   }
 
@@ -51,7 +55,7 @@ export class Canvas extends Component {
     } else {
       newRow = 1
       newWidth = 0
-      newGrid.push(Array(this.state.numCols).fill({ pictureLink: null }))
+      newGrid.push(Array(this.state.numCols).fill({ id:Math.random()*100000, pictureLink: null }))
     }
 
     this.setState({
@@ -93,8 +97,9 @@ export class Canvas extends Component {
   }
 
   handleDragOver = (e) => {
-    console.log("finish dragging");
     e.preventDefault()
+    i=e.target.dataset.i
+    j=e.target.dataset.j
   }
 
   handleDragStart = pictureId => event => {
@@ -102,13 +107,19 @@ export class Canvas extends Component {
     event.dataTransfer.setData("pictureId", pictureId)
   }
 
+  handleDrop = e => {
+    e.preventDefault()
+    this.props.dropPlant(i,j)
+  }
+
   render() {
     const { grid } = this.props
+    console.log(grid)
     const store = [];
     for (let i = 0; i < grid.length; i++) {
       let row = [];
       for (let j = 0; j < grid[0].length; j++) {
-        row.push(<Grid key={i + "," + j} image={grid[i][j].pictureLink} />);
+        row.push(<Grid key={i + "," + j} i={i} j={j} image={grid[i][j].pictureLink} />);
       }
       store.push(row);
     }
@@ -133,7 +144,9 @@ export class Canvas extends Component {
         </div>
         <div style={{ display: "block" }}>
           <div style={{ display: "flex" }}>
-            <div onDragOver={this.handleDragOver}
+            <div
+              onDragOverCapture={this.handleDragOver}
+              onDrop={this.handleDrop}
               style={{
                 display: "flex",
                 width: this.props.width + "px",
@@ -191,7 +204,8 @@ function mapStateToProps({ grid }) {
 const mapDispatchToProps = {
   initGrid,
   expandGrid,
-  subtractGrid
+  subtractGrid,
+  dropPlant
 }
 
 export default connect(

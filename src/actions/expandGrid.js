@@ -15,7 +15,9 @@ export const expandGrid = id => dispatch => {
     } else {
         newRow = 1
         newWidth = 0
-        newGrid.push(Array(store.getState().grid.numCols).fill({ pictureLink: null }))
+        newGrid.push(Array(store.getState().grid.numCols).fill(null).map(entry=>
+            entry = { pictureLink: null }))
+        
     }
 
     return dispatch({
