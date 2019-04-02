@@ -7,6 +7,7 @@ import { userProfilePage } from './ProfilePage'
 import { userLogin } from './Login'
 import { userRegistration } from './RegistrationPage'
 import { BrowserRouter,Switch, Route } from "react-router-dom";
+import userProfilePage from "./ProfilePage";
 
 
 class App extends Component {

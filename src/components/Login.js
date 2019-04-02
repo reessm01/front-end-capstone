@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import logo from './logo';
-import './App.css';
+import '../App.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { Button, Form } from 'react-bootstrap/Button';

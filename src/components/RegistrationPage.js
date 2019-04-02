@@ -1,6 +1,6 @@
 ////Not sure yet if we want to make this a separate page or a modal////
 import React, { Component } from 'react';
-import './App.css';
+import '../App.css';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { registerNavToProfile as register } from '../../actions/auth';
