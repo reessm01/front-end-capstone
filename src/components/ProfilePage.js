@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
-//import { Link } from "react-router-dom"
-// import { connect } from 'react-redux'
-//import UserImage from "./UserImage.js"
-//import DeleteUserAccount from "./DeleteUserAccount.js"
-//Need to add transition to update and return to a page in ../actions
+import '../App.css';
+import { Link } from "react-router-dom"
+ import { connect } from 'react-redux'
+ import { updateNavToProfile as update } from '../actions/users.js'
+// import UserImage from "./UserImage.js"
+// import DeleteUserAccount from "./DeleteUserAccount.js"
 import { Button, Form, Row, Col } from 'react-bootstrap/Button';
 class userProfilePage extends Component {
 
@@ -84,14 +84,12 @@ class userProfilePage extends Component {
 }
 
 /////Code to connect after wired up////
-// export default connect(
-//     ({ auth, users}) => ({
-//         userInfo: auth.login,
-//         username: users.currentUsername,
-//         displayName: users.currentDisplayName,
-//         about: users.currentAbout,
-//         passwordValue: users.currentPassword
-//     })
-// )
-
-export default userProfilePage;
+ export default connect(
+     ({ auth, users}) => ({
+         userInfo: auth.login,
+         username: users.currentUsername,
+         displayName: users.currentDisplayName,
+         about: users.currentAbout,
+         passwordValue: users.currentPassword
+     })
+ )(userProfilePage);
