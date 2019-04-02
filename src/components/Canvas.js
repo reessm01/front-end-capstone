@@ -60,18 +60,27 @@ export class Canvas extends Component {
     console.log(xCoord + "," + yCoord);
     let pictureId = event.dataTransfer.getData("pictureId");
     console.log(pictureId);
+    let bgColor = this.state.pictures.find(pic => pic.pictureId === Number(pictureId))
     let newAttachedPictures = [
       ...this.state.attachedPictures,
       {
         pictureId: pictureId,
         xCoord: xCoord,
         yCoord: yCoord,
-        bgColor: this.state.pictures.bgColor,
+        bgColor: bgColor.bgColor,
+        picNum:pictureId+"-"+Math.random()*5000
         
       }
     ];
     this.setState({ ...this.state, attachedPictures: newAttachedPictures });
   };
+//   handleDragStartCanvasPic = pictureId => event => {
+//     console.log(pictureId);
+//     event.dataTransfer.setData("pictureId", pictureId);
+//   };
+//   handleDropCanvasPic = event => {
+
+//   }
 
   render() {
     const store = [];
@@ -85,7 +94,7 @@ export class Canvas extends Component {
     const pictureHolder = []
     if(this.state.attachedPictures.length!==0){
         this.state.attachedPictures.map(curPic =>(
-            pictureHolder.push(<AttachedPic top={curPic.yCoord} left={curPic.xCoord} bgColor="green"
+            pictureHolder.push(<AttachedPic key={curPic.picNum} handleDragStart={this.handleDragStart(curPic.pictureId)} top={curPic.yCoord} left={curPic.xCoord} bgColor={curPic.bgColor}
         />)
             
         ))
@@ -101,7 +110,7 @@ export class Canvas extends Component {
         </div>
         <br />
         <div>
-          <PictureList
+          <PictureList handleDragOver={this.handleDragOver} handleDropPic={this.handleDropPic}
             pictures={this.state.pictures}
             handleDragStart={this.handleDragStart}
           />
