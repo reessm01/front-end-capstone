@@ -2,14 +2,15 @@ import {
     EXPAND_GRID,
     INIT_GRID,
     SUBTRACT_GRID,
-    DROP_PLANT
+    DROP_PLANT, 
+    REMOVE_PLANT
 } from '../actions/';
 import { width } from "../components/Grid/styles"
 
 const initialState = {
     numRows: 10,
     numCols: 10,
-    grid: Array(10).fill(null).map(() => Array(10).fill(null).map(entry=>
+    grid: Array(10).fill(null).map(() => Array(10).fill(null).map(entry =>
         entry = { pictureLink: null })),
     canvasWidth: 10 * width
 }
@@ -32,7 +33,8 @@ export default (state = initialState, action) => {
                 grid: action.grid
             }
         case DROP_PLANT:
-            return{
+        case REMOVE_PLANT:
+            return {
                 ...state,
                 grid: action.grid
             }
