@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Grid } from "./Grid/Grid";
 import { ToolBar } from "./ToolBar";
 import { PictureList } from "./PictureList";
-import { width } from "./Grid/styles"
 import { Button, OverlayTrigger } from "react-bootstrap"
 import { toolTip } from "./ToolTip"
 import { AttachedPic } from "./AttachedPic"
@@ -11,11 +10,14 @@ import {
   initGrid,
   expandGrid,
   subtractGrid,
-  dropPlant
+  dropPlant,
+  removePlant
 } from "../actions"
 
-let i=0
-let j=0
+let i = 0
+let j = 0
+let originRow
+let originCol
 
 export class Canvas extends Component {
   state = {
@@ -24,14 +26,6 @@ export class Canvas extends Component {
       { pictureId: 2, bgColor: "blue" }
     ],
     attachedPictures: []
-  }
-
-  handleClick = e => {
-    switch (e.button) {
-      case 0:
-        this.handleAddGrid(e.target.id)
-        break
-    }
   }
 
   componentWillMount = () => {
@@ -43,87 +37,46 @@ export class Canvas extends Component {
     this.props.subtractGrid(e.target.id)
   }
 
-  handleAddGrid = id => {
-    let newGrid = Array.from(this.props.grid)
-    let newRow = 0
-    let newCol = 0
-    let newWidth = width
-
-    if (id === "col") {
-      newCol = 1
-      newGrid.map(row => row.push({ pictureLink: null }))
-    } else {
-      newRow = 1
-      newWidth = 0
-      newGrid.push(Array(this.state.numCols).fill({ id:Math.random()*100000, pictureLink: null }))
-    }
-
-    this.setState({
-      numRows: this.state.numRows + newRow,
-      numCols: this.state.numCols + newCol,
-      canvasWidth: this.state.canvasWidth + newWidth,
-      grid: newGrid
-    });
-  };
-
-  handleSubtractGrid = id => {
-    const minRows = (this.state.numRows > 1) && (id === "rows")
-    const minCols = (this.state.numCols > 1) && (id === "col")
-    const removalAllowed = minRows || minCols
-
-    if (removalAllowed) {
-
-      let newGrid = Array.from(this.props.grid)
-      let newRow = 0
-      let newCol = 0
-      let newWidth = width
-
-      if (id === "col") {
-        newCol = 1
-        newGrid.forEach(row => row.pop())
-      } else {
-        newRow = 1
-        newWidth = 0
-        newGrid.pop()
-      }
-
-      this.setState({
-        numRows: this.state.numRows - newRow,
-        numCols: this.state.numCols - newCol,
-        canvasWidth: this.state.canvasWidth - newWidth,
-        grid: newGrid
-      })
-    }
-  }
-
   handleDragOver = (e) => {
     e.preventDefault()
-    i=e.target.dataset.i
-    j=e.target.dataset.j
+    i = e.target.dataset.i
+    j = e.target.dataset.j
   }
 
-  handleDragStart = pictureId => event => {
-    console.log(pictureId)
-    event.dataTransfer.setData("pictureId", pictureId)
+  handleDragStart = event => {
+    if (event.target.id !== "static") {
+      originRow = event.target.dataset.i
+      originCol = event.target.dataset.j
+    }
   }
 
   handleDrop = e => {
     e.preventDefault()
-    this.props.dropPlant(i,j)
+    this.props.dropPlant(i, j)
+    this.props.removePlant(originRow, originCol)
   }
 
   render() {
     const { grid } = this.props
-    console.log(grid)
     const store = [];
+
     for (let i = 0; i < grid.length; i++) {
       let row = [];
       for (let j = 0; j < grid[0].length; j++) {
-        row.push(<Grid key={i + "," + j} i={i} j={j} image={grid[i][j].pictureLink} />);
+        row.push(
+          <Grid
+            key={i + "," + j}
+            i={i}
+            j={j}
+            image={grid[i][j].pictureLink}
+            handleDragStart={this.handleDragStart}
+          />);
       }
       store.push(row);
     }
+
     const pictureHolder = []
+
     if (this.state.attachedPictures.length !== 0) {
       this.state.attachedPictures.map(curPic => (
         pictureHolder.push(<AttachedPic top={curPic.yCoord} left={curPic.xCoord} bgColor="green"
@@ -205,7 +158,8 @@ const mapDispatchToProps = {
   initGrid,
   expandGrid,
   subtractGrid,
-  dropPlant
+  dropPlant,
+  removePlant
 }
 
 export default connect(

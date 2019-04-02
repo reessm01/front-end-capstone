@@ -9,7 +9,7 @@ export class Picture extends Component {
     render() {
         let pictureStyle = {...pictureStyles, backgroundColor: this.props.bgColor }
         return (
-            <div pictureId={this.props.pictureId} draggable style={pictureStyle} onDragStart={this.props.handleDragStart}></div>
+            <div name="static" pictureId={this.props.pictureId} draggable="true" style={pictureStyle} onDragStart={this.props.handleDragStart}></div>
         );
     }
 }
