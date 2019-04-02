@@ -72,7 +72,7 @@ const userUpdate = newUserData => dispatch => {
         };
         return res.json();
     });
-    .then(result => {
+        .then(result => {
         dispatch({
             type: UPDATE_SUCCESS,
             payload: result
