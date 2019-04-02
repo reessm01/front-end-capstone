@@ -240,9 +240,8 @@ fetch(url, {
         }
    
         return res.json();
-      })
-      .then(result => {
-        console.log(result)
+    });
+        .then(result => {
         dispatch({
           type: UPDATE_SUCCESS,
           payload: result//data.user.displayName

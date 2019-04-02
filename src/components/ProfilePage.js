@@ -28,7 +28,6 @@ class userProfilePage extends Component {
 
         return (
             <div className="profilePageDiv">
-                {/* <header className="App-header"></header> */}
                 {/* <Link to="/feed"></Link>
                 <UserImage /> */}
                 <Form onSubmit={this.handleUserUpdate}>
@@ -82,14 +81,13 @@ class userProfilePage extends Component {
         );
     }
 }
-
 /////Code to connect after wired up////
  export default connect(
      ({ auth, users}) => ({
-         userInfo: auth.login,
-         username: users.currentUsername,
-         displayName: users.currentDisplayName,
-         about: users.currentAbout,
-         passwordValue: users.currentPassword
-     })
- )(userProfilePage);
+        userInfo: auth.login,
+        username: users.currentUsername,
+        displayName: users.currentDisplayName,
+        about: users.currentAbout,
+        passwordValue: users.currentPassword
+    }), { update }
+)(userProfilePage)

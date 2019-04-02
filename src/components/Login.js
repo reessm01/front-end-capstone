@@ -4,7 +4,7 @@ import '../App.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { Button, Form } from 'react-bootstrap/Button';
-
+import {loginNavToProfile as login } from '../../actions/auth';
 class userLogin extends Component {
 
     state = {
@@ -22,12 +22,9 @@ class userLogin extends Component {
     }
 
     render() {
-
+        const { isloading, err} = this.props;
         return (
             <div className="App">
-                <header className="App-header">
-                    {/* <img src={logo} className="App-logo" alt="logo" /> */}
-                </header>
                 <Form>
                     <Form.Group controlId="userLoginUserName">
                         <Form.Label>UserName</Form.Label>
@@ -37,22 +34,19 @@ class userLogin extends Component {
                             autoFocus
                             onSubmit={this.handleUserLogin}
                             onChange={this.handleChange}
-                            // onKeyDown={this.addTodo}
-                            //   control={Input}
+                            // control={Input}
                             required
                         />
                     </Form.Group>
                     <Form.Group controlId="userLoginPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control
-                            // <input />
                             className="password"
                             type="password"
                             placeholder="Password"
                             autoFocus
                             onSubmit={this.handleUserLogin}
                             onChange={this.handleChange}
-                            // onKeyDown={this.addTodo}
                             //   control={Input}
                             required
                         />
@@ -66,4 +60,9 @@ class userLogin extends Component {
     }
 }
 
-export default userLogin;
+export default connect(
+    ({ auth }) => ({
+        isLoading: auth.loginLoading,
+        err: auth.loginError
+    }),
+    { login })(userLogin);

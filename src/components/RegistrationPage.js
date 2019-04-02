@@ -1,5 +1,4 @@
 ////Not sure yet if we want to make this a separate page or a modal////
-
 import React, { Component } from 'react';
 import '../App.css';
 import { connect } from 'react-redux'
@@ -25,11 +24,11 @@ class userRegistration extends Component {
     }
 
     render() {
-
+        const { isLoading } = this.props;
         return (
             <div className="RegistrationPage">
                 <Form onSubmit={this.handleUserRegistration}>
-                <Form.Group controlId="registerDisplayName">
+                    <Form.Group controlId="registerDisplayName">
                         <Form.Label>Display Name</Form.Label>
                         <Form.Control
                             type="text"
@@ -76,4 +75,10 @@ class userRegistration extends Component {
     }
 }
 
-export default userRegistration;
+export default connect(
+    ({ auth }) => ({
+        isLoading: auth.registerLoading,
+        err: auth.registerError
+        }),
+        { register }
+    )(userRegistration);
