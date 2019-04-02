@@ -1,5 +1,3 @@
-////Not sure yet if we want to make this a separate page or a modal////
-
 import React, { Component } from 'react';
 import './App.css';
 // import { connect } from 'react-redux'
@@ -70,7 +68,7 @@ class userRegistration extends Component {
                     </Button>
                 </Form>;
       </div>
-        );
+        )
     }
 }
 

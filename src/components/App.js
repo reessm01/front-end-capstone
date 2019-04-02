@@ -2,6 +2,7 @@ import React, { Component } from "react";
 //import "./App.css";
 import {Canvas} from "./Canvas";
 import {ToolBar} from "./ToolBar"
+import {Login2} from "./Login2"
 import { BrowserRouter,Switch, Route } from "react-router-dom";
 
 
@@ -12,6 +13,8 @@ class App extends Component {
         <Switch>
           <Route exact path="/" render={() => <Canvas />} />
           <Route path="/toolbar" render={() => <ToolBar />} />
+          <Route exact path="/Login" render={() => <Login2 />} />
+          {/* <Route exact path="/Register" render={() => <RegistrationPage />} /> */}
         </Switch>
     
     </BrowserRouter>
