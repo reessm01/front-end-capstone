@@ -4,5 +4,6 @@ export const cellStyle = {
     border:"1px solid grey",
     width: width + "px", 
     height: width + "px",
-    backgroundSize: "cover"
+    backgroundSize: "cover",
+    zIndex: 1000
 }

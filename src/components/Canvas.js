@@ -6,24 +6,24 @@ import { width } from "./Grid/styles"
 import { Button, OverlayTrigger } from "react-bootstrap"
 import { toolTip } from "./ToolTip"
 import { AttachedPic } from "./AttachedPic"
-//import { connect } from "react-redux";
+import { connect } from "react-redux"
+import {
+  initGrid,
+  expandGrid,
+  subtractGrid,
+  dropPlant
+} from "../actions"
+
+let i=0
+let j=0
 
 export class Canvas extends Component {
   state = {
-    numRows: 10,
-    numCols: 10,
-    canvasWidth: 0,
     pictures: [
       { pictureId: 1, bgColor: "red" },
       { pictureId: 2, bgColor: "blue" }
     ],
     attachedPictures: []
-  };
-
-  componentWillMount() {
-    let grid = Array(this.state.numRows).fill(null).map(() => Array(this.state.numCols).fill({ pictureLink: null }))
-    let initWidth = this.state.numRows * width
-    this.setState({ ...this.state, grid: grid, canvasWidth: initWidth })
   }
 
   handleClick = e => {
@@ -34,14 +34,17 @@ export class Canvas extends Component {
     }
   }
 
+  componentWillMount = () => {
+    console.log(this.props.width)
+  }
+
   contextMenu = e => {
-    console.log(e.target)
     e.preventDefault()
-    this.handleSubtractGrid(e.target.id)
+    this.props.subtractGrid(e.target.id)
   }
 
   handleAddGrid = id => {
-    let newGrid = Array.from(this.state.grid)
+    let newGrid = Array.from(this.props.grid)
     let newRow = 0
     let newCol = 0
     let newWidth = width
@@ -52,7 +55,7 @@ export class Canvas extends Component {
     } else {
       newRow = 1
       newWidth = 0
-      newGrid.push(Array(this.state.numCols).fill({ pictureLink: null }))
+      newGrid.push(Array(this.state.numCols).fill({ id:Math.random()*100000, pictureLink: null }))
     }
 
     this.setState({
@@ -67,14 +70,14 @@ export class Canvas extends Component {
     const minRows = (this.state.numRows > 1) && (id === "rows")
     const minCols = (this.state.numCols > 1) && (id === "col")
     const removalAllowed = minRows || minCols
-    console.log(id)
-    if(removalAllowed){
 
-      let newGrid = Array.from(this.state.grid)
+    if (removalAllowed) {
+
+      let newGrid = Array.from(this.props.grid)
       let newRow = 0
       let newCol = 0
       let newWidth = width
-  
+
       if (id === "col") {
         newCol = 1
         newGrid.forEach(row => row.pop())
@@ -83,7 +86,7 @@ export class Canvas extends Component {
         newWidth = 0
         newGrid.pop()
       }
-  
+
       this.setState({
         numRows: this.state.numRows - newRow,
         numCols: this.state.numCols - newCol,
@@ -94,8 +97,9 @@ export class Canvas extends Component {
   }
 
   handleDragOver = (e) => {
-    console.log("finish dragging");
     e.preventDefault()
+    i=e.target.dataset.i
+    j=e.target.dataset.j
   }
 
   handleDragStart = pictureId => event => {
@@ -103,23 +107,29 @@ export class Canvas extends Component {
     event.dataTransfer.setData("pictureId", pictureId)
   }
 
-  render() {
+  handleDrop = e => {
+    e.preventDefault()
+    this.props.dropPlant(i,j)
+  }
 
+  render() {
+    const { grid } = this.props
+    console.log(grid)
     const store = [];
-    for (let i = 0; i < this.state.grid.length; i++) {
+    for (let i = 0; i < grid.length; i++) {
       let row = [];
-      for (let j = 0; j < this.state.grid[0].length; j++) {
-        row.push(<Grid key={i + "," + j} image={this.state.grid[i][j].pictureLink} />);
+      for (let j = 0; j < grid[0].length; j++) {
+        row.push(<Grid key={i + "," + j} i={i} j={j} image={grid[i][j].pictureLink} />);
       }
       store.push(row);
     }
     const pictureHolder = []
-    if(this.state.attachedPictures.length!==0){
-        this.state.attachedPictures.map(curPic =>(
-            pictureHolder.push(<AttachedPic top={curPic.yCoord} left={curPic.xCoord} bgColor="green"
+    if (this.state.attachedPictures.length !== 0) {
+      this.state.attachedPictures.map(curPic => (
+        pictureHolder.push(<AttachedPic top={curPic.yCoord} left={curPic.xCoord} bgColor="green"
         />)
-            
-        ))
+
+      ))
     }
 
     return (
@@ -134,10 +144,12 @@ export class Canvas extends Component {
         </div>
         <div style={{ display: "block" }}>
           <div style={{ display: "flex" }}>
-            <div onDragOver={this.handleDragOver}
+            <div
+              onDragOverCapture={this.handleDragOver}
+              onDrop={this.handleDrop}
               style={{
                 display: "flex",
-                width: this.state.canvasWidth + "px",
+                width: this.props.width + "px",
                 flexWrap: "wrap",
                 margin: "0px"
               }}
@@ -151,7 +163,7 @@ export class Canvas extends Component {
             >
               <Button
                 id="col"
-                onClick={this.handleClick}
+                onClick={e => this.props.expandGrid(e.target.id)}
                 onContextMenu={this.contextMenu}
                 style={{ width: "25px", margin: "0px" }}
               >
@@ -168,16 +180,35 @@ export class Canvas extends Component {
           >
             <Button
               id="rows"
-              onClick={this.handleClick}
+              onClick={e => this.props.expandGrid(e.target.id)}
               onContextMenu={this.contextMenu}
-              style={{ height: "25px", margin: "0px", width: this.state.canvasWidth + "px" }} >
-                <div id="rows" style={{ display: "flex", justifyContent:"center", width:"initial" }}>
-                  <i id="rows" class="fas fa-chevron-down" />
-                </div>
-              </Button>
+              style={{ height: "25px", margin: "0px", width: this.props.width + "px" }} >
+              <div id="rows" style={{ display: "flex", justifyContent: "center", width: "initial" }}>
+                <i id="rows" class="fas fa-chevron-down" />
+              </div>
+            </Button>
           </OverlayTrigger>
         </div>
       </div>
     );
   }
 }
+
+function mapStateToProps({ grid }) {
+  return {
+    grid: grid.grid,
+    width: grid.canvasWidth
+  }
+}
+
+const mapDispatchToProps = {
+  initGrid,
+  expandGrid,
+  subtractGrid,
+  dropPlant
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Canvas)
