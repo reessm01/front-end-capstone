@@ -6,24 +6,21 @@ import { width } from "./Grid/styles"
 import { Button, OverlayTrigger } from "react-bootstrap"
 import { toolTip } from "./ToolTip"
 import { AttachedPic } from "./AttachedPic"
-//import { connect } from "react-redux";
+import { connect } from "react-redux"
+import {
+  initGrid,
+  expandGrid,
+  subtractGrid
+} from "../actions"
 
 export class Canvas extends Component {
   state = {
-    numRows: 10,
-    numCols: 10,
-    canvasWidth: 0,
+    grid: ['cool code here'], // <--- add this?
     pictures: [
       { pictureId: 1, bgColor: "red" },
       { pictureId: 2, bgColor: "blue" }
     ],
     attachedPictures: []
-  };
-
-  componentWillMount() {
-    let grid = Array(this.state.numRows).fill(null).map(() => Array(this.state.numCols).fill({ pictureLink: null }))
-    let initWidth = this.state.numRows * width
-    this.setState({ ...this.state, grid: grid, canvasWidth: initWidth })
   }
 
   handleClick = e => {
@@ -41,7 +38,7 @@ export class Canvas extends Component {
   }
 
   handleAddGrid = id => {
-    let newGrid = Array.from(this.state.grid)
+    let newGrid = Array.from(this.props.grid)
     let newRow = 0
     let newCol = 0
     let newWidth = width
@@ -67,14 +64,14 @@ export class Canvas extends Component {
     const minRows = (this.state.numRows > 1) && (id === "rows")
     const minCols = (this.state.numCols > 1) && (id === "col")
     const removalAllowed = minRows || minCols
-    console.log(id)
-    if(removalAllowed){
 
-      let newGrid = Array.from(this.state.grid)
+    if (removalAllowed) {
+
+      let newGrid = Array.from(this.props.grid)
       let newRow = 0
       let newCol = 0
       let newWidth = width
-  
+
       if (id === "col") {
         newCol = 1
         newGrid.forEach(row => row.pop())
@@ -83,7 +80,7 @@ export class Canvas extends Component {
         newWidth = 0
         newGrid.pop()
       }
-  
+
       this.setState({
         numRows: this.state.numRows - newRow,
         numCols: this.state.numCols - newCol,
@@ -104,22 +101,22 @@ export class Canvas extends Component {
   }
 
   render() {
-
+    const { grid } = this.props
     const store = [];
-    for (let i = 0; i < this.state.grid.length; i++) {
+    for (let i = 0; i < grid.length; i++) {
       let row = [];
-      for (let j = 0; j < this.state.grid[0].length; j++) {
-        row.push(<Grid key={i + "," + j} image={this.state.grid[i][j].pictureLink} />);
+      for (let j = 0; j < grid[0].length; j++) {
+        row.push(<Grid key={i + "," + j} image={grid[i][j].pictureLink} />);
       }
       store.push(row);
     }
     const pictureHolder = []
-    if(this.state.attachedPictures.length!==0){
-        this.state.attachedPictures.map(curPic =>(
-            pictureHolder.push(<AttachedPic top={curPic.yCoord} left={curPic.xCoord} bgColor="green"
+    if (this.state.attachedPictures.length !== 0) {
+      this.state.attachedPictures.map(curPic => (
+        pictureHolder.push(<AttachedPic top={curPic.yCoord} left={curPic.xCoord} bgColor="green"
         />)
-            
-        ))
+
+      ))
     }
 
     return (
@@ -171,13 +168,30 @@ export class Canvas extends Component {
               onClick={this.handleClick}
               onContextMenu={this.contextMenu}
               style={{ height: "25px", margin: "0px", width: this.state.canvasWidth + "px" }} >
-                <div id="rows" style={{ display: "flex", justifyContent:"center", width:"initial" }}>
-                  <i id="rows" class="fas fa-chevron-down" />
-                </div>
-              </Button>
+              <div id="rows" style={{ display: "flex", justifyContent: "center", width: "initial" }}>
+                <i id="rows" class="fas fa-chevron-down" />
+              </div>
+            </Button>
           </OverlayTrigger>
         </div>
       </div>
     );
   }
 }
+
+function mapStateToProps({ grid }) {
+  return {
+    grid: grid.grid
+  }
+}
+
+const mapDispatchToProps = {
+  initGrid,
+  expandGrid,
+  subtractGrid
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Canvas)
