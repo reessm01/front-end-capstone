@@ -20,9 +20,9 @@ export const expandGrid = id => dispatch => {
 
     return dispatch({
         type: EXPAND_GRID,
-        numRows: this.state.numRows + newRow,
-        numCols: this.state.numCols + newCol,
-        canvasWidth: this.state.canvasWidth + newWidth,
+        numRows: store.getState().grid.numRows + newRow,
+        numCols: store.getState().grid.numCols + newCol,
+        canvasWidth: store.getState().grid.canvasWidth + newWidth,
         grid: newGrid
     })
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 //import "./App.css";
-import {Canvas} from "./Canvas";
+import Canvas from "./Canvas";
 import {ToolBar} from "./ToolBar"
 import { BrowserRouter,Switch, Route } from "react-router-dom";
 

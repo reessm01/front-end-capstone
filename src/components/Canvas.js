@@ -15,7 +15,6 @@ import {
 
 export class Canvas extends Component {
   state = {
-    grid: ['cool code here'], // <--- add this?
     pictures: [
       { pictureId: 1, bgColor: "red" },
       { pictureId: 2, bgColor: "blue" }
@@ -31,10 +30,13 @@ export class Canvas extends Component {
     }
   }
 
+  componentWillMount =() => {
+    console.log(this.props.width)
+  }
+
   contextMenu = e => {
-    console.log(e.target)
     e.preventDefault()
-    this.handleSubtractGrid(e.target.id)
+    this.props.subtractGrid(e.target.id)
   }
 
   handleAddGrid = id => {
@@ -134,7 +136,7 @@ export class Canvas extends Component {
             <div onDragOver={this.handleDragOver}
               style={{
                 display: "flex",
-                width: this.state.canvasWidth + "px",
+                width: this.props.width + "px",
                 flexWrap: "wrap",
                 margin: "0px"
               }}
@@ -148,7 +150,7 @@ export class Canvas extends Component {
             >
               <Button
                 id="col"
-                onClick={this.handleClick}
+                onClick={e => this.props.expandGrid(e.target.id)}
                 onContextMenu={this.contextMenu}
                 style={{ width: "25px", margin: "0px" }}
               >
@@ -167,7 +169,7 @@ export class Canvas extends Component {
               id="rows"
               onClick={this.handleClick}
               onContextMenu={this.contextMenu}
-              style={{ height: "25px", margin: "0px", width: this.state.canvasWidth + "px" }} >
+              style={{ height: "25px", margin: "0px", width: this.props.width + "px" }} >
               <div id="rows" style={{ display: "flex", justifyContent: "center", width: "initial" }}>
                 <i id="rows" class="fas fa-chevron-down" />
               </div>
@@ -181,7 +183,8 @@ export class Canvas extends Component {
 
 function mapStateToProps({ grid }) {
   return {
-    grid: grid.grid
+    grid: grid.grid,
+    width: grid.canvasWidth
   }
 }
 

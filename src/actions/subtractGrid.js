@@ -9,6 +9,7 @@ export const subtractGrid = id => dispatch => {
   const removalAllowed = minRows || minCols
 
   if (removalAllowed) {
+      console.log(id)
     let newGrid = Array.from(store.getState().grid.grid)
     let newRow = 0
     let newCol = 0
@@ -27,7 +28,7 @@ export const subtractGrid = id => dispatch => {
       type: SUBTRACT_GRID,
       numRows: store.getState().grid.numRows - newRow,
       numCols: store.getState().grid.numCols - newCol,
-      canvasWidth: store.getState().grid.width - newWidth,
+      canvasWidth: store.getState().grid.canvasWidth - newWidth,
       grid: newGrid
     })
   }
