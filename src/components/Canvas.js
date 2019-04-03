@@ -27,21 +27,23 @@ export class Canvas extends Component {
 
   contextMenu = e => {
     e.preventDefault()
-    if(e.target.id === "rows" || e.target.id === "col"){ 
+    if (e.target.id === "rows" || e.target.id === "col") {
       this.props.subtractGrid(e.target.id)
     } else {
       this.props.removePlant(e.target.dataset.i, e.target.dataset.j)
     }
-    
+
   }
 
   handleDragOver = (e) => {
     e.preventDefault()
-    this.setState({
-      ...this.state,
-      targetRow: e.target.dataset.i,
-      targetCol: e.target.dataset.j
-    })
+    if (e.target.dataset.i !== this.state.targetRow || e.target.dataset.j !== this.state.targetCol) {
+      this.setState({
+        ...this.state,
+        targetRow: e.target.dataset.i,
+        targetCol: e.target.dataset.j
+      })
+    }
   }
 
   handleDragStart = event => {
@@ -53,19 +55,19 @@ export class Canvas extends Component {
         originCol: event.target.dataset.j,
         prevElement: event.target
       })
-      
+
     }
   }
 
   handleDrop = e => {
     e.preventDefault()
     let stateCopy = this.state.prevElement
-    if(this.state.prevElement !== null) {
+    if (this.state.prevElement !== null) {
       this.props.removePlant(this.state.originRow, this.state.originCol)
       stateCopy.style.opacity = 1.0
     }
     this.props.dropPlant(this.state.targetRow, this.state.targetCol)
-    
+
     this.setState({
       ...this.state,
       originRow: null,
@@ -142,7 +144,7 @@ export class Canvas extends Component {
                 onContextMenu={this.contextMenu}
                 style={{ width: "25px", margin: "0px", padding: "0px" }}
               >
-                <div id="col" style={{ display: "flex", justifyContent: "flex-end", marginRight:"3px" }}>
+                <div id="col" style={{ display: "flex", justifyContent: "flex-end", marginRight: "3px" }}>
                   <i id="col" class="fas fa-chevron-right" />
                 </div>
               </Button>
@@ -157,7 +159,7 @@ export class Canvas extends Component {
               id="rows"
               onClick={e => this.props.expandGrid(e.target.id)}
               onContextMenu={this.contextMenu}
-              style={{ height: "25px", margin:"0px", width: this.props.width + "px" }} >
+              style={{ height: "25px", margin: "0px", width: this.props.width + "px" }} >
               <div id="rows" style={{ display: "flex", justifyContent: "center", width: "initial" }}>
                 <i id="rows" class="fas fa-chevron-down" />
               </div>
