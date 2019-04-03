@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Grid } from "./Grid/Grid";
 import { ToolBar } from "./ToolBar";
 import { PictureList } from "./PictureList";
-import { Button, OverlayTrigger } from "react-bootstrap"
+import { OverlayTrigger } from "react-bootstrap"
+import { Button } from "semantic-ui-react"
 import { toolTip } from "./ToolTip"
 import { AttachedPic } from "./AttachedPic"
 import { connect } from "react-redux"
@@ -14,22 +15,14 @@ import {
   removePlant
 } from "../actions"
 
-let i = 0
-let j = 0
-let originRow
-let originCol
-
 export class Canvas extends Component {
   state = {
     pictures: [
       { pictureId: 1, bgColor: "red" },
       { pictureId: 2, bgColor: "blue" }
     ],
-    attachedPictures: []
-  }
-
-  componentWillMount = () => {
-    console.log(this.props.width)
+    attachedPictures: [],
+    prevElement: null
   }
 
   contextMenu = e => {
@@ -39,21 +32,40 @@ export class Canvas extends Component {
 
   handleDragOver = (e) => {
     e.preventDefault()
-    i = e.target.dataset.i
-    j = e.target.dataset.j
+    this.setState({
+      ...this.state,
+      targetRow: e.target.dataset.i,
+      targetCol: e.target.dataset.j
+    })
   }
 
   handleDragStart = event => {
     if (event.target.id !== "static") {
-      originRow = event.target.dataset.i
-      originCol = event.target.dataset.j
+      event.target.style.opacity = 0.3
+      this.setState({
+        ...this.state,
+        originRow: event.target.dataset.i,
+        originCol: event.target.dataset.j,
+        prevElement: event.target
+      })
+      
     }
   }
 
   handleDrop = e => {
     e.preventDefault()
-    this.props.dropPlant(i, j)
-    this.props.removePlant(originRow, originCol)
+    this.props.removePlant(this.state.originRow, this.state.originCol)
+    this.props.dropPlant(this.state.targetRow, this.state.targetCol)
+    let stateCopy = this.state.prevElement
+    this.state.prevElement !== null && (stateCopy.style.opacity = 1.0)
+    this.setState({
+      ...this.state,
+      originRow: null,
+      originCol: null,
+      targetRow: null,
+      targetCol: null,
+      prevElement: null
+    })
   }
 
   render() {
@@ -118,9 +130,9 @@ export class Canvas extends Component {
                 id="col"
                 onClick={e => this.props.expandGrid(e.target.id)}
                 onContextMenu={this.contextMenu}
-                style={{ width: "25px", margin: "0px" }}
+                style={{ width: "25px", margin: "0px", padding: "0px" }}
               >
-                <div style={{ display: "flex", justifyContent: "flex-start" }}>
+                <div style={{ display: "flex", justifyContent: "flex-end", marginRight:"3px" }}>
                   <i class="fas fa-chevron-right" />
                 </div>
               </Button>
@@ -135,7 +147,7 @@ export class Canvas extends Component {
               id="rows"
               onClick={e => this.props.expandGrid(e.target.id)}
               onContextMenu={this.contextMenu}
-              style={{ height: "25px", margin: "0px", width: this.props.width + "px" }} >
+              style={{ height: "25px", margin:"0px", width: this.props.width + "px" }} >
               <div id="rows" style={{ display: "flex", justifyContent: "center", width: "initial" }}>
                 <i id="rows" class="fas fa-chevron-down" />
               </div>
