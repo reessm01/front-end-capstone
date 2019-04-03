@@ -27,7 +27,7 @@ export class Canvas extends Component {
 
   contextMenu = e => {
     e.preventDefault()
-    if(e.target.id === "row" || e.target.id === "col"){ 
+    if(e.target.id === "rows" || e.target.id === "col"){ 
       this.props.subtractGrid(e.target.id)
     } else {
       this.props.removePlant(e.target.dataset.i, e.target.dataset.j)
@@ -142,8 +142,8 @@ export class Canvas extends Component {
                 onContextMenu={this.contextMenu}
                 style={{ width: "25px", margin: "0px", padding: "0px" }}
               >
-                <div style={{ display: "flex", justifyContent: "flex-end", marginRight:"3px" }}>
-                  <i class="fas fa-chevron-right" />
+                <div id="col" style={{ display: "flex", justifyContent: "flex-end", marginRight:"3px" }}>
+                  <i id="col" class="fas fa-chevron-right" />
                 </div>
               </Button>
             </OverlayTrigger>
