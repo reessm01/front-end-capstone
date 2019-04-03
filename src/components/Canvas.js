@@ -27,7 +27,12 @@ export class Canvas extends Component {
 
   contextMenu = e => {
     e.preventDefault()
-    this.props.subtractGrid(e.target.id)
+    if(e.target.id === "row" || e.target.id === "col"){ 
+      this.props.subtractGrid(e.target.id)
+    } else {
+      this.props.removePlant(e.target.dataset.i, e.target.dataset.j)
+    }
+    
   }
 
   handleDragOver = (e) => {
@@ -85,6 +90,7 @@ export class Canvas extends Component {
             j={j}
             image={grid[i][j].pictureLink}
             handleDragStart={this.handleDragStart}
+            onContextMenu={this.contextMenu}
           />);
       }
       store.push(row);
@@ -121,6 +127,7 @@ export class Canvas extends Component {
                 flexWrap: "wrap",
                 margin: "0px"
               }}
+              onContextMenu={this.contextMenu}
             >
               {store}
             </div>
