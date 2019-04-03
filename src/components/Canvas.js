@@ -54,10 +54,13 @@ export class Canvas extends Component {
 
   handleDrop = e => {
     e.preventDefault()
-    this.props.removePlant(this.state.originRow, this.state.originCol)
-    this.props.dropPlant(this.state.targetRow, this.state.targetCol)
     let stateCopy = this.state.prevElement
-    this.state.prevElement !== null && (stateCopy.style.opacity = 1.0)
+    if(this.state.prevElement !== null) {
+      this.props.removePlant(this.state.originRow, this.state.originCol)
+      stateCopy.style.opacity = 1.0
+    }
+    this.props.dropPlant(this.state.targetRow, this.state.targetCol)
+    
     this.setState({
       ...this.state,
       originRow: null,
