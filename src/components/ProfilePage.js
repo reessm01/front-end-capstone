@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
-import '../App.css';
 import { Link } from "react-router-dom"
- import { connect } from 'react-redux'
- import { updateNavToProfile as update } from '../actions/users.js'
+import '../App.css';
+import { NavBar } from "./NavBar"
+//import { connect } from 'react-redux'
+//import { updateNavToProfile as update } from '../actions/users.js'
 // import UserImage from "./UserImage.js"
 // import DeleteUserAccount from "./DeleteUserAccount.js"
-import { Button, Form, Row, Col } from 'react-bootstrap/Button';
-class userProfilePage extends Component {
+//import { Button, Form, Row, Col } from 'react-bootstrap/Button';
+import {
+    Card,
+    Button,
+    Form,
+    Input
+} from "semantic-ui-react";
+//import { NavBar } from './NavBar'
+export class ProfilePage extends Component {
 
     state = {
         username: "",
@@ -17,7 +25,7 @@ class userProfilePage extends Component {
 
     handleUserUpdate = e => {
         e.preventDefault();
-        this.props.update({state: this.state, userInfo: this.props.userInfo })
+        this.props.update({ state: this.state, userInfo: this.props.userInfo })
     }
 
     handleChange = e => {
@@ -27,67 +35,69 @@ class userProfilePage extends Component {
     render() {
 
         return (
+        <React.Fragment>
+            <NavBar /> 
             <div className="profilePageDiv">
-                {/* <Link to="/feed"></Link>
-                <UserImage /> */}
+                {/* <Link to="/feed"></Link> */}
                 <Form onSubmit={this.handleUserUpdate}>
-                    <Form.Group controlId="userInfoDisplay">
-                        <Form.Label>Display Name: {this.props.displayName}</Form.Label>
-                        <Form.Label>User Name: {this.props.username}</Form.Label>
-                        <Form.Label>All About You: {this.props.about}</Form.Label>
-                    </Form.Group>
-                        <Row>  
-                            <Col>
-                                <Form.Control 
-                                    xs={12} md={8}
-                                    placeholder="Change Your Display Name"
-                                    type="text"
-                                    name="displayName"
-                                    autoFocus
-                                    onChange={this.handleUserChange}
-                                    // onKeyDown={this.addTodo}
-                                    // control={Input}
-                                />
-                            </Col>
-                            <Col>
-                                <Form.Control 
-                                    xs={12} md={8}
-                                    placeholder="Enter a New Password"
-                                    type="password"
-                                    name="password"
-                                    autoFocus
-                                    onChange={this.handleChange}
-                                    // control={Input}
-                                />
-                            </Col>
-                        </Row>
-                        <Row>
-                        <Form.Control 
-                                    xs={12} md={8}
-                                    placeholder="Tell the World Who You Are!"
-                                    type="text"
-                                    name="about"
-                                    autoFocus
-                                    onChange={this.handleChange}
-                                    // control={Input}
-                                />
-                        </Row>
+                    <Card> 
+                    {/* <UserImage /> */}
+                        <Card.Header>Display Name: {this.props.displayName}</Card.Header>
+                        <Card.Content>User Name: {this.props.username}</Card.Content>
+                        <Card.Description>All About You: {this.props.about}</Card.Description>
+                    </Card>
+                    <Form.Field>
+                        <label>Make Changes to Your Account</label>
+                        <input
+                            placeholder="Change Your Display Name"
+                            type="text"
+                            defaultValue={this.props.displayName}
+                            name="displayName"
+                            onChange={this.handleUserChange}
+                        // control={Input}
                         />
-                    <Button variant="primary" type="submit">
-                        Submit
+                    </Form.Field>
+                    <Form.Field>
+                        <Input
+                            placeholder="Change Password"
+                            type="password"
+                            defaultValue={this.props.passwordValue}
+                            name="password"
+                            onChange={this.handleChange}
+                            // control={Input}
+                        />
+                    </Form.Field>
+                    <Form.TextArea
+                        placeholder='Change Your "About Me" Section And Tell the World Who You Are...'
+                        type="text"
+                        defaultValue={this.props.about}
+                        name="about"
+                        onChange={this.handleChange}
+                        // control={Input}
+                    />
+                    <Button
+                        type="submit"
+                        size="large"
+                         color="green"
+                        onSubmit={this.handleUpdate}>
+                       Submit Changes
                     </Button>
-                </Form>;
-      </div>
-        );
+                </Form>
+                {/* <DeleteAccount /> */}
+            </div>
+            </React.Fragment>
+        )
     }
 }
 /////Code to connect after wired up////
- export default connect(
-     ({ auth, users}) => ({
-        userInfo: auth.login,
-        username: users.currentUsername,
-        displayName: users.currentDisplayName,
-        about: users.currentAbout,
-        passwordValue: users.currentPassword
-    }), { update }
-)(userProfilePage)
+// export default connect(
+//     ({ auth, users }) => ({
+//         userInfo: auth.login,
+//         username: users.currentUsername,
+//         displayName: users.currentDisplayName,
+//         about: users.currentAbout,
+//         passwordValue: users.currentPassword
+//     }), { update }
+// )(ProfilePage)
+
+export default ProfilePage;
