@@ -3,9 +3,10 @@ import React, { Component } from "react";
 import Canvas from "./Canvas";
 import { ToolBar } from "./ToolBar"
 import { Login2 } from "./Login2"
+import { ProfilePage } from "./ProfilePage"
+import { RegistrationPage } from './RegistrationPage'
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
-// import userProfilePage from "./ProfilePage";
 
 
 class App extends Component {
@@ -16,9 +17,9 @@ class App extends Component {
           <Route exact path="/" render={() => <Canvas />} />
           <Route path="/toolbar" render={() => <ToolBar />} />
           <Route exact path="/Login" render={() => <Login2 />} />
-          {/* <Route exact path="/Register" render={() => <RegistrationPage />} /> */}
+          <Route exact path="/profile" render={() => <ProfilePage />} />
+          <Route exact path="/register" render={() => <RegistrationPage /> } />
         </Switch>
-
       </BrowserRouter>
 
     );
