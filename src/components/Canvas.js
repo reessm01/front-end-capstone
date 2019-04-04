@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import { Grid } from "./Grid/Grid";
-import { ToolBar } from "./ToolBar";
-import { PictureList } from "./PictureList";
+import React, { Component } from "react"
+import { Grid } from "./Grid/Grid"
+import { ToolBar } from "./ToolBar"
+// import { CanvasToolBar }
+import { PictureList } from "./PictureList"
 import { OverlayTrigger } from "react-bootstrap"
 import { Button } from "semantic-ui-react"
 import { toolTip } from "./ToolTip"
