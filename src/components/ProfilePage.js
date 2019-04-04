@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 //import { Link } from "react-router-dom"
 import '../App.css';
 import { NavBar } from "./NavBar"
-//import { connect } from 'react-redux'
-//import { updateNavToProfile as update } from '../actions/users.js'
+import { connect } from 'react-redux'
+import { updateThenNavToProfile as update } from '../actions/users.js'
 // import UserImage from "./UserImage.js"
 // import DeleteUserAccount from "./DeleteUserAccount.js"
 //import { Button, Form, Row, Col } from 'react-bootstrap/Button';
@@ -90,14 +90,14 @@ export class ProfilePage extends Component {
     }
 }
 /////Code to connect after wired up////
-// export default connect(
-//     ({ auth, users }) => ({
-//         userInfo: auth.login,
-//         username: users.currentUsername,
-//         displayName: users.currentDisplayName,
-//         about: users.currentAbout,
-//         passwordValue: users.currentPassword
-//     }), { update }
-// )(ProfilePage)
+ export default connect(
+     ({ auth, users }) => ({
+         userInfo: auth.login,
+         username: users.currentUsername,
+         displayName: users.currentDisplayName,
+         about: users.currentAbout,
+         passwordValue: users.currentPassword
+     }), { update }
+ )(ProfilePage)
 
-export default ProfilePage;
+//export default ProfilePage;

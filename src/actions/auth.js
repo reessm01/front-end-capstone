@@ -21,7 +21,6 @@ export const LOGOUTCURRENTUSER = "LOGOUTCURRENTUSER"
 
 const url = domain + "/auth";
 
-// action creators
 const login = loginData => dispatch => {
     dispatch({
         type: LOGIN
@@ -49,15 +48,14 @@ const login = loginData => dispatch => {
         });
 };
 
-export const loginNavToProfile = loginData => (dispatch, getState) => {
-    return dispatch(login(loginData))
-        .then(() => {
-            const id = getState().auth.login.id
-            return dispatch(downloadUserImage(id))
-        }
-
-        )
-        .then(() => dispatch(push("/feed")));
+ export const loginThenNavToProfile = loginData => (dispatch, getState) => { 
+  return dispatch(login(loginData))
+    .then(() => {
+      const id = getState().auth.login.id
+      return dispatch(downloadUserImage(id))
+    }
+    )
+    .then(() => dispatch(push("/feed")));
 };
 
 const register = registerData => dispatch => {
@@ -70,12 +68,13 @@ const register = registerData => dispatch => {
         headers: jsonHeaders,
         body: JSON.stringify(registerData)
     })
-        .then(handleJsonResponse)
-        .then(result => {
-            return dispatch({
-                type: REGISTER_SUCCESS,
-                payload: result
-            });
+    .catch(err => {
+      return Promise.reject(
+        dispatch({
+          type: REGISTER_FAIL,
+          payload: alert(
+            "That username has been taken. Please choose a different username."
+          )
         })
         .catch(err => {
             return Promise.reject(
@@ -89,33 +88,32 @@ const register = registerData => dispatch => {
         });
 };
 
-export const registerNavToProfile = registerData => dispatch => {
-    return dispatch(register(registerData))
-        .then(() => dispatch(loginNavToProfile(registerData)));
+export const registerThenNavToProfile = registerData => dispatch => {
+  return dispatch(register(registerData))
+    .then(() => dispatch(loginThenNavToProfile(registerData)));
 };
 
 export const logout = logoutData => (dispatch, getState) => {
-    const token = getState().auth.login.token
-    dispatch({
-        type: LOGOUT
-    });
+  const token = getState().auth.login.token
+  dispatch({
+    type: LOGOUT
+  });
 
-    fetch(url + "/logout", {
-        method: "GET",
-        headers: {
-            Authorization: "Bearer" + token,
-        },
-        body: JSON.stringify(logoutData)
+  fetch(url + "/logout", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer" + token,
+    },
+    body: JSON.stringify(logoutData)
+  })
+    .then(handleJsonResponse)
+    .then(dispatch(push("/")))
+    .then(result => {
+      dispatch({
+        type: LOGOUT_SUCCESS,
+        payload: result
+
+      })
     })
-        .then(handleJsonResponse)
-        .then(dispatch(push("/")))
-        .then(result => {
-            dispatch({
-                type: LOGOUT_SUCCESS,
-                payload: result
-
-            })
-        })
-
 };
-
+export const logoutThenGoToLogin = logoutData => dispatch => { return dispatch(logout(logoutData)).then(() => dispatch(push("/feed"))); };
