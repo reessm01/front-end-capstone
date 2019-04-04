@@ -73,13 +73,13 @@ const register = registerData => dispatch => {
       return dispatch({
         type: REGISTER_SUCCESS,
         payload: result
-      });
+      })
     })
     .catch(err => {
       return Promise.reject(
         dispatch({
           type: REGISTER_FAIL,
-          payload: alert(
+          payload: err.alert(
             "That username has been taken. Please choose a different username."
           )
         })
@@ -89,7 +89,7 @@ const register = registerData => dispatch => {
 
 export const registerThenNavToProfile = registerData => dispatch => {
   return dispatch(register(registerData))
-    .then(() => dispatch(loginThenNavToProfile(registerData)));
+    .then(() => dispatch(login(registerData)));
 };
 
 export const logout = logoutData => (dispatch, getState) => {

@@ -18,24 +18,20 @@ export class Login2 extends Component {
     password: ""
   };
 
-  handleUsernameChange = event => {
-    this.setState({
-      username: event.target.value
-    });
+  handleLogin = e => {
+    e.preventDefault()
+    this.props.login(this.state);
   };
-  handlePasswordChange = event => {
-    this.setState({
-      password: event.target.value
-    });
-  };
-  handleLogin = event => {
-    this.props.login({
-      username: this.state.username,
-      password: this.state.password
-    });
+
+  handleChange = e => {
+    this.setState({[e.target.name]: e.target.value})
   };
 
   render() {
+
+    const { handleLogin, handleChange } = this
+    const { isLoading } = this.props
+
     return (
       <Grid
         textAlign="center"
@@ -51,7 +47,7 @@ export class Login2 extends Component {
           <Header as="h2" color="grey" textAlign="center">
             Login
           </Header>
-          <Form onSubmit={this.handleLogin} size="large">
+          <Form onSubmit={handleLogin} size="large">
             <Segment stacked color="grey">
               <Form.Field
                 label="Username:"
@@ -60,7 +56,7 @@ export class Login2 extends Component {
                 type="text"
                 control={Input}
                 autoFocus
-                onChange={this.handleUsernameChange}
+                onChange={handleChange}
               />
               <Form.Field
                 label="Password:"
@@ -68,7 +64,7 @@ export class Login2 extends Component {
                 placeholder="Password"
                 type="password"
                 control={Input}
-                onChange={this.handlePasswordChange}
+                onChange={handleChange}
               />
               <Button.Group>
                 <Button 
@@ -76,7 +72,7 @@ export class Login2 extends Component {
                   positive
                   size="large"
                   to="/profile"
-                  
+                  disabled={ isLoading }
                 >
                   Login to Your Account!
                 </Button>
