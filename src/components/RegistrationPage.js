@@ -26,19 +26,21 @@ export class RegistrationPage extends Component {
       };
 
     render() {
-        //const { isLoading } = this.props
+        const {handleRegister, handleChange } = this
+        //const { isLoading, err } = this.props
 
         return (
+            <React.Fragment>
             <div className="RegistrationPage">
-                <Form onSubmit={this.handleRegister} >
+                <Form onSubmit={handleRegister} >
                     <Form.Field
                             label="Username:"
                             required
                             placeholder="Username"
                             type="text"
-                           control={Input}
+                            control={ Input }
                             autoFocus
-                            onChange={this.handleChange}
+                            onChange={handleChange}
                             name="username"
                         />
                     <Form.Field
@@ -47,7 +49,7 @@ export class RegistrationPage extends Component {
                         placeholder="Password"
                         type="password"
                         control={ Input }
-                        onChange={this.handleChange}
+                        onChange={handleChange}
                         name="password"
                     />
                     <Form.Field
@@ -56,14 +58,15 @@ export class RegistrationPage extends Component {
                         placeholder="Choose a Display Name"
                         type="text"
                         control={Input}
-                        onChange={this.handleChange}
+                        onChange={handleChange}
                         name="displayName"
                     />
                     <Button variant="primary" type="submit">
                         Start Gardening!
                      </Button>
-                </Form>;
+                </Form>
        </div>
+       </React.Fragment>
         )
     }
 }
