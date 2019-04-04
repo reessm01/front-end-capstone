@@ -1,76 +1,71 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../App.css';
 // import { connect } from 'react-redux'
-// import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 // import { registerNavToProfile as register } from '../../actions/auth';
-// import { Button, Form } from 'react-bootstrap/Button';
+import {
+    Button,
+    Form
+} from "semantic-ui-react";
+export class RegistrationPage extends Component {
 
-// class userRegistration extends Component {
+    state = {
+        username: "",
+        password: "",
+        displayName: ""
+    }
 
-//     state = {
-//         username: "",
-//         password: "",
-//         displayName: ""
-//     }
+    handleUserRegistration = e => {
+        e.preventDefault();
+        this.props.userRegistration(this.state)
+    }
 
-//     handleUserRegistration = e => {
-//         e.preventDefault();
-//         this.props.userRegistration(this.state)
-//     }
+    handleChange = e => {
+        this.setState({ [e.target.name]: e.target.value })
+    }
 
-//     handleChange = e => {
-//         this.setState({ [e.target.name]: e.target.value })
-//     }
+    render() {
+        //const { isLoading } = this.props
 
         return (
             <div className="RegistrationPage">
-                <Form onSubmit={this.handleUserRegistration}>
-                <Form.Group controlId="registerDisplayName">
-                        <Form.Label>Display Name</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Create Your Display Name"
-                            autoFocus
-                            onChange={this.handleChange}
-                            // onKeyDown={this.addTodo}
-                            //   control={Input}
-                            required
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="registerUserName">
-                        <Form.Label>Username</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Create Your UserName"
-                            autoFocus
-                            onChange={this.handleChange}
-                            // onKeyDown={this.addTodo}
-                            //   control={Input}
-                            required
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="registerPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control
-                            // <input />
-                            className="registerPassword"
-                            type="text"
-                            placeholder="Create Your Password"
-                            autoFocus
-                            onChange={this.handleChange}
-                            // onKeyDown={this.addTodo}
-                            //   control={Input}
-                            required
-                        />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">/>
+                <Form className="RegistrationForm" onSubmit={this.handleUserRegistration}>
+                <Form.Field
+                        label="Username:"
+                        required
+                        placeholder="Username"
+                        type="text"
+                        //control={Input}
+                        autoFocus
+                        onChange={this.handleChange}
+                        name="username"
+                    />
+                    <Form.Field
+                        label="Password:"
+                        required
+                        placeholder="Password"
+                        type="password"
+                        //control={Input}
+                        onChange={this.handleChange}
+                        name="password"
+                    />
+                    <Form.Field
+                        label="Display Name:"
+                        required
+                        placeholder="Choose a Display Name"
+                        type="text"
+                        //control={Input}
+                        onChange={this.handleChange}
+                        name="displayName"
+                    />
+                    <Button variant="primary" type="submit">
                         Start Gardening!
-                    </Button>
+                     </Button>
                 </Form>;
-      </div>
+       </div>
         )
-    
-
+    }
+}
 
 // export default connect(
 //     ({ auth }) => ({
@@ -79,3 +74,5 @@ import './App.css';
 //         }),
 //         { register }
 //     )(userRegistration);
+
+export default RegistrationPage

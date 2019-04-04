@@ -1,6 +1,6 @@
 import React from "react";
 
-export const toolTip = props => (
+export const gridToolTip = props => (
     <div
         {...props}
         style={{
@@ -11,7 +11,6 @@ export const toolTip = props => (
             zIndex: 2000,
             ...props.style
         }}>
-        Left click to add <br />
-        Right click to remove
+        L'Click to remove
     </div>
 )

@@ -27,8 +27,27 @@ body{
   color: #61dafb;
 }
 
+.NavBar {
+ background-color: white;
 
-.profilePage {
-  border: 1px solid black;
-  height: 80%;
 }
+
+.largeSucculent {
+  height: 10%;
+  width: 10%;
+}
+.profilePageDiv {
+  border: 2px solid black;
+  background-color: #ACC9AC;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 10%;
+
+}
+
+ /* .bar1 {
+  /* background: #E8CBC0;  fallback for old browsers */
+  /* background: -webkit-linear-gradient(to top, #636FA4, #E8CBC0);  Chrome 10-25, Safari 5.1-6 */
+  /* background: linear-gradient(to top, #636FA4, #E8CBC0); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  /*  }   */
+  
