@@ -39,6 +39,7 @@ const login = loginData => dispatch => {
       });
     })
     .catch(err => {
+        console.log(err)
       return Promise.reject(
         dispatch({
           type: LOGIN_FAIL,
