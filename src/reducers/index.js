@@ -3,6 +3,7 @@ import { connectRouter } from 'connected-react-router'
 import auth from './auth'
 import users from './users'
 import grid from './grid'
+import  getFlowerData from './getFlowerData';
 //import messages from './messages';
 
 export default history => 
@@ -10,6 +11,7 @@ export default history =>
         router: connectRouter(history),
         auth,
         users,
-        grid
+        grid, 
+        flowers: getFlowerData
         //messages
     });
