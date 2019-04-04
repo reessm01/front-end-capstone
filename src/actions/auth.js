@@ -22,30 +22,30 @@ export const LOGOUTCURRENTUSER = "LOGOUTCURRENTUSER"
 const url = domain + "/auth";
 
 const login = loginData => dispatch => {
-  dispatch({
-    type: LOGIN
-  });
-
-  return fetch(url + "/login", {
-    method: "POST",
-    headers: jsonHeaders,
-    body: JSON.stringify(loginData)
-  })
-    .then(handleJsonResponse)
-    .then(result => {
-      return dispatch({
-        type: LOGIN_SUCCESS,
-        payload: result
-      });
-    })
-    .catch(err => {
-      return Promise.reject(
-        dispatch({
-          type: LOGIN_FAIL,
-          payload: alert("Incorrect login or password.")
-        })
-      );
+    dispatch({
+        type: LOGIN
     });
+
+    return fetch(url + "/login", {
+        method: "POST",
+        headers: jsonHeaders,
+        body: JSON.stringify(loginData)
+    })
+        .then(handleJsonResponse)
+        .then(result => {
+            return dispatch({
+                type: LOGIN_SUCCESS,
+                payload: result
+            });
+        })
+        .catch(err => {
+            return Promise.reject(
+                dispatch({
+                    type: LOGIN_FAIL,
+                    payload: alert("Incorrect login or password.")
+                })
+            );
+        });
 };
 
  export const loginThenNavToProfile = loginData => (dispatch, getState) => { 
@@ -59,21 +59,14 @@ const login = loginData => dispatch => {
 };
 
 const register = registerData => dispatch => {
-  dispatch({
-    type: REGISTER
-  });
+    dispatch({
+        type: REGISTER
+    });
 
-  return fetch(url + "/register", {
-    method: "POST",
-    headers: jsonHeaders,
-    body: JSON.stringify(registerData)
-  })
-    .then(handleJsonResponse)
-    .then(result => {
-      return dispatch({
-        type: REGISTER_SUCCESS,
-        payload: result
-      });
+    return fetch(url + "/register", {
+        method: "POST",
+        headers: jsonHeaders,
+        body: JSON.stringify(registerData)
     })
     .catch(err => {
       return Promise.reject(
@@ -83,8 +76,16 @@ const register = registerData => dispatch => {
             "That username has been taken. Please choose a different username."
           )
         })
-      );
-    });
+        .catch(err => {
+            return Promise.reject(
+                dispatch({
+                    type: REGISTER_FAIL,
+                    payload: alert(
+                        "Username already in use, Please choose a different username."
+                    )
+                })
+            );
+        });
 };
 
 export const registerThenNavToProfile = registerData => dispatch => {
