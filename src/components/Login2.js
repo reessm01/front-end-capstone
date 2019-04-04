@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import { connect } from "react-redux";
-
+import { connect } from "react-redux";
+import { loginThenNavToProfile as login } from '../actions/auth';
 import {
   Button,
   Form,
@@ -96,18 +96,18 @@ export class Login2 extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     result: state.loginResult
-//   };
-// };
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     login: loginData => dispatch(login(loginData))
-//   };
-// };
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Login2);
-export default Login2
+ const mapStateToProps = state => {
+   return {
+     result: state.loginResult
+   };
+ };
+ const mapDispatchToProps = dispatch => {
+   return {
+     login: loginData => dispatch(login(loginData))
+   };
+ };
+ export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+ )(Login2);
+//export default Login2
