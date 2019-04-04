@@ -1,13 +1,13 @@
 //action creator for google doc
 
-// import config from "../Constants/config.js";
-// import load from "../Helpers/spreadsheet.js";
+import config from "../Helpers/config";
+import load from "../Helpers/flowers.js";
 export const GET_FLOWER_DATA = "GET_FLOWER_DATA";
 export const GET_FLOWER_DATA_SUCCESS = "GET_FLOWER_DATA_SUCCESS";
 export const GET_FLOWER_DATA_FAIL = "GET_FLOWER_DATA_FAIL";
 
 
-export const getFLOWERData = () => dispatch => {
+export const getFlowerData = () => dispatch => {
   dispatch({ type: GET_FLOWER_DATA });
 
   const initClient = () => {
@@ -26,7 +26,7 @@ export const getFLOWERData = () => dispatch => {
 
   const onLoad = (data, error) => {
     if (data) {
-      const flower = data.flower;
+      const flower = data.flowers;
 
       dispatch({ type: GET_FLOWER_DATA_SUCCESS, flower });
     } else {

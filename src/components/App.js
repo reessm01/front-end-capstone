@@ -4,6 +4,7 @@ import Canvas from "./Canvas";
 import { ToolBar } from "./ToolBar"
 import { Login2 } from "./Login2"
 import { ProfilePage } from "./ProfilePage"
+import { FlowerSearch } from "./FlowerSearch.js";
 import { RegistrationPage } from './RegistrationPage'
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
@@ -19,6 +20,7 @@ class App extends Component {
           <Route exact path="/Login" render={() => <Login2 />} />
           <Route exact path="/profile" render={() => <ProfilePage />} />
           <Route exact path="/register" render={() => <RegistrationPage /> } />
+          <Route exact path="/flowers" render={() => <FlowerSearch />} />
         </Switch>
       </BrowserRouter>
 
