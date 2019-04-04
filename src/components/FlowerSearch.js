@@ -3,7 +3,7 @@ import {
     Dropdown,
     Menu,
     Accordion,
-    Form,
+    Form
     
 } from "semantic-ui-react";
 import {FlowerCards} from "./FlowerCards";
@@ -67,8 +67,8 @@ const stateOptions = [
     { text: "Wyoming", key: "WY", value: "WY" }
 ];
 
-export class FlowerSearch extends Component {
-    state = { activeIndex: 0, filterflowers: this.props.flowers && [], value: "" };
+class FlowerSearch extends Component {
+    state = { activeIndex: 0, filterflowers: this.props.flowers || [], value: "" };
     componentDidMount() {
         this.props.getFlowerData();
     }
@@ -279,7 +279,7 @@ export class FlowerSearch extends Component {
     }
 }
 const mapStateToProps = state => {
-    return { flowers: state.flower, error: state.error };
+    return { flowers: state.flowers.flower, error: state.error };
 };
 const mapDispatchToProps = dispatch => {
     return { getFlowerData: () => dispatch(getFlowerData()) };
