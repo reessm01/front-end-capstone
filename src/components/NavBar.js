@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import Logout from "../Logout.js"
 import '../App.css';
 // import { connect } from 'react-redux'
-import { Menu, Segment, Image } from 'semantic-ui-react'
+import { Menu, Image } from 'semantic-ui-react'
 import  largeSucculent  from '../components/Images/side.jpg'
 
 export class NavBar extends Component {

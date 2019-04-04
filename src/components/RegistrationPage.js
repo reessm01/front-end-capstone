@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-//import '../App.css';
+import '../App.css';
 // import { connect } from 'react-redux'
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 // import { registerNavToProfile as register } from '../../actions/auth';
-// import { Button, Form } from 'react-bootstrap/Button';
 import {
     Button,
-    Form,
-    Input
+    Form
 } from "semantic-ui-react";
 export class RegistrationPage extends Component {
 
@@ -25,47 +23,42 @@ export class RegistrationPage extends Component {
     handleChange = e => {
         this.setState({ [e.target.name]: e.target.value })
     }
+
     render() {
+        //const { isLoading } = this.props
+
         return (
             <div className="RegistrationPage">
-                <Form
-                    onSubmit={this.handleUserRegistration}>
-                    <Form.Group controlId="registerDisplayName">
-                        <Form.Label>Display Name</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Create Your Display Name"
-                            autoFocus
-                            onChange={this.handleChange}
-                            //control={Input}
-                            required
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="registerUserName">
-                        <Form.Label>Username</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Create Your UserName"
-                            autoFocus
-                            onChange={this.handleChange}
-                            //control={Input}
-                            required
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="registerPassword">
-                        <Form.Label>Password</Form.Label>
-                         {/* <Form.Control
-                        <Input
-                        className="registerPassword"
+                <Form className="RegistrationForm" onSubmit={this.handleUserRegistration}>
+                <Form.Field
+                        label="Username:"
+                        required
+                        placeholder="Username"
                         type="text"
-                        placeholder="Create Your Password"
-                        autoFocus
-                             onChange={this.handleChange}
                         //control={Input}
-                        required 
-                    /> */}
-                     </Form.Group>
-                    <Button variant="primary" type="submit">/>
+                        autoFocus
+                        onChange={this.handleChange}
+                        name="username"
+                    />
+                    <Form.Field
+                        label="Password:"
+                        required
+                        placeholder="Password"
+                        type="password"
+                        //control={Input}
+                        onChange={this.handleChange}
+                        name="password"
+                    />
+                    <Form.Field
+                        label="Display Name:"
+                        required
+                        placeholder="Choose a Display Name"
+                        type="text"
+                        //control={Input}
+                        onChange={this.handleChange}
+                        name="displayName"
+                    />
+                    <Button variant="primary" type="submit">
                         Start Gardening!
                      </Button>
                 </Form>;
