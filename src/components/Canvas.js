@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { Grid } from "./Grid/Grid"
-import { ToolBar } from "./ToolBar"
 // import { CanvasToolBar }
 import { PictureList } from "./PictureList"
 import { OverlayTrigger } from "react-bootstrap"
@@ -8,6 +7,7 @@ import { Button } from "semantic-ui-react"
 import { toolTip } from "./ToolTip"
 import { AttachedPic } from "./AttachedPic"
 import { connect } from "react-redux"
+import MainMenu from "./MainMenu/MainMenu"
 import {
   initGrid,
   expandGrid,
@@ -111,10 +111,7 @@ export class Canvas extends Component {
 
     return (
       <div>
-        <div>
-          <ToolBar
-          />
-        </div>
+        <MainMenu layoutHasId={this.props.layoutHasId} width={this.props.width}/>
         <br />
         <div>
           <PictureList pictures={this.state.pictures} handleDragStart={this.handleDragStart} />
@@ -175,7 +172,8 @@ export class Canvas extends Component {
 function mapStateToProps({ grid }) {
   return {
     grid: grid.grid,
-    width: grid.canvasWidth
+    width: grid.canvasWidth,
+    layoutHasId: grid.layoutHasId
   }
 }
 

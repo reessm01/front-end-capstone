@@ -12,7 +12,10 @@ const initialState = {
     numCols: 10,
     grid: Array(10).fill(null).map(() => Array(10).fill(null).map(entry =>
         entry = { pictureLink: null })),
-    canvasWidth: 10 * width
+    canvasWidth: 10 * width,
+    layoutHasId: false,
+    selectedLayout: null,
+    layouts: null
 }
 
 export default (state = initialState, action) => {
