@@ -1,5 +1,4 @@
-// import config from ;
-
+import config from "./config.js";
 
 export default function load(callback) {
     window.gapi.client.load("sheets", "v4", () => {
