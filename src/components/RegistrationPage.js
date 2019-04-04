@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import '../App.css';
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 //import { Link } from 'react-router-dom';
-// import { registerNavToProfile as register } from '../../actions/auth';
+import { registerThenNavToProfile as register } from '../actions/auth';
 import {
+    Form,
     Button,
-    Form
+    Input
 } from "semantic-ui-react";
 export class RegistrationPage extends Component {
 
@@ -15,37 +16,37 @@ export class RegistrationPage extends Component {
         displayName: ""
     }
 
-    handleUserRegistration = e => {
+    handleRegister = e => {
         e.preventDefault();
-        this.props.userRegistration(this.state)
-    }
-
-    handleChange = e => {
-        this.setState({ [e.target.name]: e.target.value })
-    }
+        this.props.register(this.state);
+      };
+    
+      handleChange = e => {
+        this.setState({ [e.target.name]: e.target.value });
+      };
 
     render() {
         //const { isLoading } = this.props
 
         return (
             <div className="RegistrationPage">
-                <Form className="RegistrationForm" onSubmit={this.handleUserRegistration}>
-                <Form.Field
-                        label="Username:"
-                        required
-                        placeholder="Username"
-                        type="text"
-                        //control={Input}
-                        autoFocus
-                        onChange={this.handleChange}
-                        name="username"
-                    />
+                <Form onSubmit={this.handleRegister} >
+                    <Form.Field
+                            label="Username:"
+                            required
+                            placeholder="Username"
+                            type="text"
+                           control={Input}
+                            autoFocus
+                            onChange={this.handleChange}
+                            name="username"
+                        />
                     <Form.Field
                         label="Password:"
                         required
                         placeholder="Password"
                         type="password"
-                        //control={Input}
+                        control={ Input }
                         onChange={this.handleChange}
                         name="password"
                     />
@@ -54,7 +55,7 @@ export class RegistrationPage extends Component {
                         required
                         placeholder="Choose a Display Name"
                         type="text"
-                        //control={Input}
+                        control={Input}
                         onChange={this.handleChange}
                         name="displayName"
                     />
@@ -67,12 +68,12 @@ export class RegistrationPage extends Component {
     }
 }
 
-// export default connect(
-//     ({ auth }) => ({
-//         isLoading: auth.registerLoading,
-//         err: auth.registerError
-//         }),
-//         { register }
-//     )(userRegistration);
+export default connect(
+    ({ auth }) => ({
+        isLoading: auth.registerLoading,
+        err: auth.registerError
+    }),
+    { register }
+)(RegistrationPage);
 
-export default RegistrationPage
+//export default RegistrationPage
