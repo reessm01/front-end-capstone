@@ -14,7 +14,7 @@ export class NavBar extends Component {
   
       return (
         <div class="NavBar">
-          <Menu stackabe pointing secondary>
+          <Menu stackable pointing secondary>
             <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
             <Menu.Item name='feed' active={activeItem === 'feed'} onClick={this.handleItemClick} />
             <Menu.Item
