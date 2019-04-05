@@ -42,12 +42,8 @@ export class FlowerCards extends Component {
                                         <Image wrapped size="huge" src={flower.image} />
                                         <Modal.Description>
                                             <Header>{flower.species}</Header>
-                                            <p>
-                                                Name: <i>{flower.name}</i>
-                                            </p>
-                                            <p>
-                                                Blooms: {flower.blooms} ({flower.blooms})
-                      </p>
+                                            <p>Name: <i>{flower.name}</i></p>
+                                            <p>Blooms: {flower.blooms} ({flower.blooms})</p>
                                             <p>Size: {flower.size}</p>
                                             <p>Needs: {flower.sun}</p>
                                             <p>Color(s): {flower.color}</p>

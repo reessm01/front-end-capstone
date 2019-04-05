@@ -8,6 +8,7 @@ import  FlowerSearch from "./FlowerSearch.js";
 import { RegistrationPage } from './RegistrationPage'
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
+// import { VeggieCards } from "./VeggieCards";
 
 
 class App extends Component {
