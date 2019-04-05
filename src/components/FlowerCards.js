@@ -45,11 +45,11 @@ export class FlowerCards extends Component {
                                             <p>
                                                 Name: <i>{flower.name}</i>
                                             </p>
-                                            <p>Size: {flower.size}</p>
                                             <p>
                                                 Blooms: {flower.blooms} ({flower.blooms})
                       </p>
                                             <p>Size: {flower.size}</p>
+                                            <p>Needs: {flower.sun}</p>
                                             <p>Color(s): {flower.color}</p>
                                             <p>Description: {flower.description}</p>
                                             <p>State(s): {flower.states}</p>
