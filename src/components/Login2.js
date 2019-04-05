@@ -10,7 +10,7 @@ import {
 } from "semantic-ui-react";
 
 import picture from "./Images/Header.png"
-export class Login2 extends Component {
+class Login2 extends Component {
   state = {
     username: "",
     password: ""
@@ -18,11 +18,11 @@ export class Login2 extends Component {
 
   handleLogin = e => {
     e.preventDefault()
-    this.props.login(this.props);
+    this.props.login({...this.state});
   };
 
   handleChange = e => {
-    this.setState({[e.target.name]: e.target.value})
+    this.setState({...this.state, [e.target.name]: e.target.value })
   };
 
   render() {
@@ -31,30 +31,31 @@ export class Login2 extends Component {
     const { isLoading } = this.props
 
     return (
-          <React.Fragment>
-            <div className="formDiv">
-                <Grid
-                    textAlign="center"
-                    style={{ height: "100%" }}
-                    verticalAlign="middle"
-                >   
-                    <Grid.Column style={{ maxWidth: 450 }}>
-                    <div className="ui title">
-                        <Header as="h1" textAlign="center">
-                            Flower Power
+      <React.Fragment>
+        <div className="formDiv">
+          <Grid
+            textAlign="center"
+            style={{ height: "100%" }}
+            verticalAlign="middle"
+          >
+            <Grid.Column style={{ maxWidth: 450 }}>
+              <div className="ui title">
+                <Header as="h1" textAlign="center">
+                  Flower Power
                         </Header>
-    </div>
-                        <Image src={picture} size="medium" centered />
-                        <Header as="h2" color="grey" textAlign="center">
-                            Login
+              </div>
+              <Image src={picture} size="medium" centered />
+              <Header as="h2" color="grey" textAlign="center">
+                Login
                         </Header>
-                    </Grid.Column>
-                </Grid>
-           
+            </Grid.Column>
+          </Grid>
+
           <Form onSubmit={handleLogin} size="large">
             <Segment stacked color="grey">
               <Form.Field
                 label="Username:"
+                name="username"
                 required
                 placeholder="Username"
                 type="text"
@@ -64,6 +65,7 @@ export class Login2 extends Component {
               />
               <Form.Field
                 label="Password:"
+                name="password"
                 required
                 placeholder="Password"
                 type="password"
@@ -71,12 +73,12 @@ export class Login2 extends Component {
                 onChange={handleChange}
               />
               <Button.Group>
-                <Button 
+                <Button
                   type="submit"
                   positive
                   size="large"
                   to="/profile"
-                  disabled={ isLoading }
+                  disabled={isLoading}
                 >
                   Login to Your Account!
                 </Button>
@@ -90,24 +92,23 @@ export class Login2 extends Component {
               <div>{this.props.result}</div>
             </Segment>
           </Form>
-          </div>
-          </React.Fragment>
+        </div>
+      </React.Fragment>
     )
   }
 }
 
- const mapStateToProps = state => {
-   return {
-     result: state.loginResult
-   };
- };
- const mapDispatchToProps = dispatch => {
-   return {
-     login: loginData => dispatch(login(loginData))
-   };
- };
- export default connect(
-   mapStateToProps,
-   mapDispatchToProps
- )(Login2);
-//export default Login2
+const mapStateToProps = state => {
+  return {
+    result: state.loginResult
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    login: loginData => dispatch(login(loginData))
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login2);
