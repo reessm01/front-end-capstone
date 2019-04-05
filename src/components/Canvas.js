@@ -15,6 +15,7 @@ import {
   dropPlant,
   removePlant
 } from "../actions"
+import MainMenu from "./MainMenu/MainMenu";
 
 class Canvas extends Component {
   state = {
@@ -111,10 +112,7 @@ class Canvas extends Component {
 
     return (
       <div>
-        <div>
-          <ToolBar
-          />
-        </div>
+        <MainMenu width={this.props.width}/>
         <br />
         <div>
           <PictureList pictures={this.state.pictures} handleDragStart={this.handleDragStart} />
