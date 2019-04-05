@@ -2,6 +2,8 @@ body {
   /* max-width: 1080px; */
   max-width: 100%;
   box-sizing: border-box;
+  font-family: 'Raleway';
+  padding: 2%;
 }
 
 .App {
@@ -21,43 +23,33 @@ body {
   color: white;
 }  
 */
-
-
-/* .headerImage {
+.profilePageDiv {
   display: flex;
-  width: 20%;
-  height: 20%;
-} */
+  flex-direction: row;
+  margin-top: 2%;
+}
 
 .App-link {
   color: #61dafb;
 }
 
- .NavBar {
-  /* justify-content: center; */
- background-color: white;
-} 
-
-ui pointing secondary stackable menu {
-
-}
-/* .profilePageBody {
+.userCard {
   display: flex;
-  width: 100%;
-  border: 1px red solid
-} */
-
-/* .profilePageDiv {
-  background-color: #ACC9AC;
-} */
-
+  flex-direction: column;
+  width: 20%;
+  height: 10%;
+  /* background-color: #ACC9AC; */
+  border:  9px solid rgb(131, 137, 114);
+  border-radius: 20px;
+  padding: 1%;
+} 
 
 .formDiv {
   display: flex;
   flex-direction: column;
-  height: 50%;
-  margin-left: 30%;
-  margin-right: 30%;
-  margin-top: 10%; 
-  border: 2px groove #5B5F50;
+  width: 40%; 
+  border:  9px solid rgb(131, 137, 114);
+  border-radius: 20px;
+  padding: 1%; 
+  /* background-color: #ACC9AC; */
 } 

@@ -8,7 +8,7 @@ import {
   Input,
   Segment, Grid, Image, Header
 } from "semantic-ui-react";
-
+//import  '../App.css'
 import picture from "./Images/Header.png"
 class Login2 extends Component {
   state = {
@@ -18,11 +18,11 @@ class Login2 extends Component {
 
   handleLogin = e => {
     e.preventDefault()
-    this.props.login({...this.state});
+    this.props.login({ ...this.state });
   };
 
   handleChange = e => {
-    this.setState({...this.state, [e.target.name]: e.target.value })
+    this.setState({ ...this.state, [e.target.name]: e.target.value })
   };
 
   render() {
@@ -31,27 +31,25 @@ class Login2 extends Component {
     const { isLoading } = this.props
 
     return (
-      <React.Fragment>
+      <React.Fragment> 
+        <Grid
+         textAlign="center"
+         style={{ height: "100%" }}
+         verticalAlign="middle"
+        >
+          <Grid.Column style={{ maxWidth: 450 }}>
+              <Header as="h1" textAlign="center">
+                Flower Power
+              </Header>
+            <Image src={picture} size="medium" centered />
+            <Header as="h2" color="grey" textAlign="center">
+              Login
+            </Header>
+            <div style={{padding: '5%'}}></div>
+          </Grid.Column>
+        </Grid>
         <div className="formDiv">
-          <Grid
-            textAlign="center"
-            style={{ height: "100%" }}
-            verticalAlign="middle"
-          >
-            <Grid.Column style={{ maxWidth: 450 }}>
-              <div className="ui title">
-                <Header as="h1" textAlign="center">
-                  Flower Power
-                        </Header>
-              </div>
-              <Image src={picture} size="medium" centered />
-              <Header as="h2" color="grey" textAlign="center">
-                Login
-                        </Header>
-            </Grid.Column>
-          </Grid>
-
-          <Form onSubmit={handleLogin} size="large">
+          <Form  onSubmit={handleLogin} size="large">
             <Segment stacked color="grey">
               <Form.Field
                 label="Username:"

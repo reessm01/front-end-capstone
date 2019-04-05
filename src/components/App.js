@@ -9,7 +9,7 @@ import RegistrationPage from './RegistrationPage'
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
 import {AmazonAds } from './Amazon'
-// import { PageHeader as Title } from './PageHeader'
+import  '../App.css'
 
 
 class App extends Component {
