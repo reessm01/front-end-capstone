@@ -4,16 +4,16 @@ import '../App.css';
 import { NavBar } from "./NavBar"
 import { connect } from 'react-redux'
 import { updateThenNavToProfile as update } from '../actions/users.js'
+import { PageHeader } from './PageHeader'
 // import UserImage from "./UserImage.js"
 // import DeleteUserAccount from "./DeleteUserAccount.js"
-//import { Button, Form, Row, Col } from 'react-bootstrap/Button';
+
 import {
     Card,
     Button,
     Form,
     Input
 } from "semantic-ui-react";
-//import { NavBar } from './NavBar'
 export class ProfilePage extends Component {
 
     state = {
@@ -36,27 +36,27 @@ export class ProfilePage extends Component {
 
         return (
         <React.Fragment>
+            <PageHeader />
             <NavBar /> 
-            <div className="profilePageDiv">
+            <div className="profilePageDiv formDiv">
                 {/* <Link to="/feed"></Link> */}
-                <Form onSubmit={this.handleUserUpdate}>
+                <Form onSubmit={this.handleUserUpdate} align= "center">
                     <Card> 
                     {/* <UserImage /> */}
                         <Card.Header>Display Name: {this.props.displayName}</Card.Header>
                         <Card.Content>User Name: {this.props.username}</Card.Content>
                         <Card.Description>All About You: {this.props.about}</Card.Description>
                     </Card>
-                    <Form.Field>
-                        <label>Make Changes to Your Account</label>
-                        <input
+                    <label>Make Changes to Your Account</label>
+                    <Form.Field
                             placeholder="Change Your Display Name"
                             type="text"
                             defaultValue={this.props.displayName}
                             name="displayName"
                             onChange={this.handleUserChange}
-                        // control={Input}
+                            control={Input}
                         />
-                    </Form.Field>
+                    
                     <Form.Field>
                         <Input
                             placeholder="Change Password"
