@@ -5,12 +5,10 @@ import { loginThenNavToProfile as login } from '../actions/auth';
 import {
   Button,
   Form,
-  Grid,
-  Header,
-  Image,
   Input,
-  Segment
+  Segment, Grid, Image, Header
 } from "semantic-ui-react";
+
 import picture from "./Images/Header.png"
 export class Login2 extends Component {
   state = {
@@ -20,7 +18,7 @@ export class Login2 extends Component {
 
   handleLogin = e => {
     e.preventDefault()
-    this.props.login(this.state);
+    this.props.login(this.props);
   };
 
   handleChange = e => {
@@ -33,20 +31,26 @@ export class Login2 extends Component {
     const { isLoading } = this.props
 
     return (
-      <Grid
-        textAlign="center"
-        style={{ height: "100%" }}
-        verticalAlign="middle"
-      >
-        <Grid.Column style={{ maxWidth: 450 }}>
-          <div />
-          <Header as="h1" color="teal" textAlign="center">
-            Flower Power
-          </Header>
-          <Image src={picture} size="medium" centered />
-          <Header as="h2" color="grey" textAlign="center">
-            Login
-          </Header>
+          <React.Fragment>
+            <div className="formDiv">
+                <Grid
+                    textAlign="center"
+                    style={{ height: "100%" }}
+                    verticalAlign="middle"
+                >   
+                    <Grid.Column style={{ maxWidth: 450 }}>
+                    <div className="ui title">
+                        <Header as="h1" textAlign="center">
+                            Flower Power
+                        </Header>
+    </div>
+                        <Image src={picture} size="medium" centered />
+                        <Header as="h2" color="grey" textAlign="center">
+                            Login
+                        </Header>
+                    </Grid.Column>
+                </Grid>
+           
           <Form onSubmit={handleLogin} size="large">
             <Segment stacked color="grey">
               <Form.Field
@@ -86,9 +90,9 @@ export class Login2 extends Component {
               <div>{this.props.result}</div>
             </Segment>
           </Form>
-        </Grid.Column>
-      </Grid>
-    );
+          </div>
+          </React.Fragment>
+    )
   }
 }
 

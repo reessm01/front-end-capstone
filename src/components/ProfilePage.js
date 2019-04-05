@@ -4,6 +4,7 @@ import '../App.css';
 import { NavBar } from "./NavBar"
 import { connect } from 'react-redux'
 import { updateThenNavToProfile as update } from '../actions/users.js'
+import { PageHeader } from './PageHeader'
 // import UserImage from "./UserImage.js"
 // import DeleteUserAccount from "./DeleteUserAccount.js"
 
@@ -35,10 +36,11 @@ export class ProfilePage extends Component {
 
         return (
         <React.Fragment>
+            <PageHeader />
             <NavBar /> 
-            <div className="profilePageDiv">
+            <div className="profilePageDiv formDiv">
                 {/* <Link to="/feed"></Link> */}
-                <Form onSubmit={this.handleUserUpdate}>
+                <Form onSubmit={this.handleUserUpdate} align= "center">
                     <Card> 
                     {/* <UserImage /> */}
                         <Card.Header>Display Name: {this.props.displayName}</Card.Header>

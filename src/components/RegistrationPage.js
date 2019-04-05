@@ -16,10 +16,11 @@ export class RegistrationPage extends Component {
         displayName: ""
     }
 
-    handleRegister = e => {
-        e.preventDefault();
-        this.props.register(this.state);
-      };
+   
+  handleRegister = e => {
+    e.preventDefault();
+    this.props.register(this.state);
+  };
     
       handleChange = e => {
         this.setState({ [e.target.name]: e.target.value });
