@@ -16,8 +16,8 @@ export default function load(callback) {
                 start: veggies[1],
                 sun: veggies[2],
                 description: veggies[3],
-                daysToHarvest: veggies[4],
-                images: veggies[5],
+                days: veggies[4],
+                image: veggies[5],
                 site: veggies[6],
                 type: veggies[7]
               })) || [];

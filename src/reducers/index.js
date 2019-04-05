@@ -4,6 +4,7 @@ import auth from './auth'
 import users from './users'
 import grid from './grid'
 import  getFlowerData from './getFlowerData';
+import getVeggieData from './getVeggieData';
 //import messages from './messages';
 
 export default history => 
@@ -12,6 +13,7 @@ export default history =>
         auth,
         users,
         grid, 
-        flowers: getFlowerData
+        flowers: getFlowerData, 
+        veggies: getVeggieData
         //messages
     });

@@ -40,6 +40,21 @@ export class NavBar extends Component {
               onClick={this.handleItemClick}
               to="/profile"
             />
+             <Menu.Item
+              name="flowers"
+              as={Link}
+              active={activeItem === "flowers"}
+              onClick={this.handleItemClick}
+              to="/flowers"
+            />
+            
+            <Menu.Item
+              name="veggies"
+              as={Link}
+              active={activeItem === "veggies"}
+              onClick={this.handleItemClick}
+              to="/veggies"
+            />
             <Menu.Menu position='right'>
               <Menu.Item
                 name='logout'

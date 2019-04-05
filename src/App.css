@@ -38,12 +38,10 @@ body{
   width: 10%;
 }
 .profilePageDiv {
-  border: 2px solid black;
   background-color: #ACC9AC;
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-top: 10%;
-
+}
+.ui title {
+  font-family: 'Courier New', Courier, monospace
 }
 .thumbnail {
   width: 220px;
@@ -53,6 +51,15 @@ body{
 }
 
 
+.formDiv {
+  /* margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 10%; */
+ 
+  border: 2px groove #5B5F50;
+  margin-top: 5%;
+
+}
  /* .bar1 {
   /* background: #E8CBC0;  fallback for old browsers */
   /* background: -webkit-linear-gradient(to top, #636FA4, #E8CBC0);  Chrome 10-25, Safari 5.1-6 */
