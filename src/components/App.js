@@ -5,7 +5,7 @@ import { ToolBar } from "./ToolBar"
 import Login2 from "./Login2"
 import { ProfilePage } from "./ProfilePage"
 import  FlowerSearch from "./FlowerSearch.js";
-import { RegistrationPage } from './RegistrationPage'
+import RegistrationPage from './RegistrationPage'
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
 // import { PageHeader as Title } from './PageHeader'

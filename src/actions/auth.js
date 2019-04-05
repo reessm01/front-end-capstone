@@ -69,6 +69,7 @@ const register = registerData => dispatch => {
     })
         .then(handleJsonResponse)
         .then(result => {
+            console.log(result)
             return dispatch({
                 type: REGISTER_SUCCESS,
                 payload: result
@@ -88,7 +89,7 @@ const register = registerData => dispatch => {
 
 export const registerThenNavToProfile = registerData => dispatch => {
     return dispatch(register(registerData))
-        .then(() => dispatch(login(registerData)));
+        .then(() => dispatch(login(registerData))).then(()=>history.push("/"));
 };
 
 export const logout = logoutData => (dispatch, getState) => {
