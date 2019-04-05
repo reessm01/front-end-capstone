@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 // import Logout from "../Logout.js"
 import '../App.css';
 // import { connect } from 'react-redux'
-import { Menu, Image } from 'semantic-ui-react'
-import  largeSucculent  from '../components/Images/side.jpg'
+import { Menu } from 'semantic-ui-react'
 
 export class NavBar extends Component {
     state = { activeItem: 'home' }
@@ -15,8 +14,7 @@ export class NavBar extends Component {
   
       return (
         <div class="NavBar">
-        <Image className="largeSucculent" src={largeSucculent}/>
-          <Menu pointing secondary>
+          <Menu stackabe pointing secondary>
             <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
             <Menu.Item name='feed' active={activeItem === 'feed'} onClick={this.handleItemClick} />
             <Menu.Item

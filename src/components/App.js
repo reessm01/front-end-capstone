@@ -8,12 +8,14 @@ import { FlowerSearch } from "./FlowerSearch.js";
 import { RegistrationPage } from './RegistrationPage'
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
+// import { PageHeader as Title } from './PageHeader'
 
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
+      {/* <Title /> */}
         <Switch>
           <Route exact path="/" render={() => <Canvas />} />
           <Route path="/toolbar" render={() => <ToolBar />} />
