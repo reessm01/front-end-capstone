@@ -13,8 +13,9 @@ export class NavBar extends Component {
       const { activeItem } = this.state
   
       return (
-        <div class="NavBar">
-          <Menu stackable pointing secondary>
+        <React.Fragment>
+          <Menu stackable pointing secondary color='pink'
+          style={{fontSize:"20px", fontFamily:'Raleway'}}>
             <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
             <Menu.Item name='feed' active={activeItem === 'feed'} onClick={this.handleItemClick} />
             <Menu.Item
@@ -30,7 +31,7 @@ export class NavBar extends Component {
               />
             </Menu.Menu>
           </Menu>
-        </div>
+      </React.Fragment>
       )
     }
   }
