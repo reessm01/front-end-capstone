@@ -7,6 +7,7 @@ import { updateThenNavToProfile as update } from '../actions/users.js'
 import { PageHeader } from './PageHeader'
 // import UserImage from "./UserImage.js"
 // import DeleteUserAccount from "./DeleteUserAccount.js"
+import { AmazonAds } from './Amazon'
 
 import {
     Card,
@@ -36,8 +37,10 @@ export class ProfilePage extends Component {
 
         return (
         <React.Fragment>
+            <div className="profilePageBody">
             <PageHeader />
             <NavBar /> 
+            <AmazonAds />
             <div className="profilePageDiv formDiv">
                 {/* <Link to="/feed"></Link> */}
                 <Form onSubmit={this.handleUserUpdate} align= "center">
@@ -84,6 +87,7 @@ export class ProfilePage extends Component {
                     </Button>
                 </Form>
                 {/* <DeleteAccount /> */}
+            </div>
             </div>
             </React.Fragment>
         )
