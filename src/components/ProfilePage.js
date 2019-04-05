@@ -7,6 +7,7 @@ import { PageHeader } from './PageHeader'
 // import UserImage from "./UserImage.js"
 // import DeleteUserAccount from "./DeleteUserAccount.js"
 import { AmazonAds } from './Amazon'
+import  UserImage  from './UserImage'
 
 import {
     Card,
@@ -36,7 +37,6 @@ export class ProfilePage extends Component {
 
         return (
             <React.Fragment>
-              
                     <PageHeader />
                     <NavBar />
                     <AmazonAds />
@@ -44,7 +44,7 @@ export class ProfilePage extends Component {
                     <div className = "profilePageDiv">
                         <div className="userCard">
                             <Card >
-                                {/* <UserImage /> */}
+                             <UserImage />
                                 <Card.Header>Display Name: {this.props.displayName}</Card.Header>
                                 <Card.Content>User Name: {this.props.username}</Card.Content>
                                 <Card.Description>All About You: {this.props.about}</Card.Description>
