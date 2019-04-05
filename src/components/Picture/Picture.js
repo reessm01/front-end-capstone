@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 //import { pictureStyles } from "./style"
-import { connect } from "react-redux";
+//import { connect } from "react-redux";
 export class Picture extends Component {
   // handleDragStart = (pictureId)=>(event)=>{
   //    console.log("pictureId:"+ pictureId)
@@ -17,10 +17,10 @@ export class Picture extends Component {
       overflow: "scroll"
     };
     return (
-      <div id="static" data-name={this.props.name}
+      <div  data-name={this.props.name}
         draggable="true"
         style={pictureStyle}
-        onDragStart={this.props.handleDragStart(this.props.name)}
+        onDragStart={this.props.handleDragStart}
       >
         {/* <img src={this.props.image} alt="" style={{width:"200px",height:"200px"}} /> */}
       </div>

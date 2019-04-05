@@ -5,7 +5,6 @@ import { PictureList } from "./PictureList";
 import { OverlayTrigger } from "react-bootstrap";
 import { Button } from "semantic-ui-react";
 import { toolTip } from "./ToolTip";
-import { AttachedPic } from "./AttachedPic";
 import { connect } from "react-redux";
 import { getFlowerData } from "../actions/getFlowerData";
 import MainMenu from "./MainMenu/MainMenu";
@@ -19,11 +18,6 @@ import {
 
 export class Canvas extends Component {
   state = {
-    pictures: [
-      { pictureId: 1, bgColor: "red" },
-      { pictureId: 2, bgColor: "blue" }
-    ],
-    attachedPictures: [],
     prevElement: null
   };
 
@@ -32,11 +26,11 @@ export class Canvas extends Component {
   }
 
   contextMenu = e => {
-    e.preventDefault();
+    e.preventDefault()
     if (e.target.id === "rows" || e.target.id === "col") {
-      this.props.subtractGrid(e.target.id);
+      this.props.subtractGrid(e.target.id)
     } else {
-      this.props.removePlant(e.target.dataset.i, e.target.dataset.j);
+      this.props.removePlant(e.target.dataset.i, e.target.dataset.j)
     }
   };
 
@@ -55,16 +49,16 @@ export class Canvas extends Component {
   };
 
   handleDragStart = event => {
-    if (event.target.id !== "static") {
-      event.target.style.opacity = 0.3;
-      this.setState({
-        ...this.state,
-        originRow: event.target.dataset.i,
-        originCol: event.target.dataset.j,
-        prevElement: event.target
-      });
-    }
-    let name = event.tartdet.dataset.name
+    // if (event.target.id !== "static") {
+    //   event.target.style.opacity = 0.3;
+    //   this.setState({
+    //     ...this.state,
+    //     originRow: event.target.dataset.i,
+    //     originCol: event.target.dataset.j,
+    //     prevElement: event.target
+    //   });
+    // }
+    let name = event.target.dataset.name
     if(name){
       event.dataTransfer.setData("name",name)
     }
@@ -79,7 +73,7 @@ export class Canvas extends Component {
     }
     let name = e.dataTransfer.getData("name")
     if(name){
-      let curflower = this.flowers.find(flower => flower.name===name)
+      let curflower = this.props.flowers.find(flower => flower.name===name)
       this.props.dropPlant(
         this.state.targetRow,
         this.state.targetCol,
@@ -126,19 +120,7 @@ export class Canvas extends Component {
       store.push(row);
     }
 
-    const pictureHolder = [];
-
-    if (this.state.attachedPictures.length !== 0) {
-      this.state.attachedPictures.map(curPic =>
-        pictureHolder.push(
-          <AttachedPic
-            top={curPic.yCoord}
-            left={curPic.xCoord}
-            bgColor="green"
-          />
-        )
-      );
-    }
+    
 
     return (
       <div>
@@ -195,7 +177,7 @@ export class Canvas extends Component {
                     marginRight: "3px"
                   }}
                 >
-                  <i id="col" class="fas fa-chevron-right" />
+                  <i id="col" className="fas fa-chevron-right" />
                 </div>
               </Button>
             </OverlayTrigger>
@@ -223,7 +205,7 @@ export class Canvas extends Component {
                   width: "initial"
                 }}
               >
-                <i id="rows" class="fas fa-chevron-down" />
+                <i id="rows" className="fas fa-chevron-down" />
               </div>
             </Button>
           </OverlayTrigger>
