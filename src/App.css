@@ -45,6 +45,12 @@ body{
   margin-top: 10%;
 
 }
+.thumbnail {
+  width: 220px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
 
  /* .bar1 {
   /* background: #E8CBC0;  fallback for old browsers */

@@ -12,6 +12,7 @@ import {
   Segment
 } from "semantic-ui-react";
 import picture from "./Images/Header.png"
+import { Card } from "react-bootstrap";
 export class Login2 extends Component {
   state = {
     username: "",
@@ -33,6 +34,7 @@ export class Login2 extends Component {
     const { isLoading } = this.props
 
     return (
+    
       <Grid
         textAlign="center"
         style={{ height: "100%" }}

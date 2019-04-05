@@ -9,10 +9,7 @@ import {
 import {FlowerCards} from "./FlowerCards";
 import { connect } from "react-redux";
 import { getFlowerData } from "../actions/getFlowerData";
-//import Flowerydex from "./flowerydex";
-//import { CircleArrow as ScrollUpButton } from "react-scroll-up-button";
 
-// stateOptions = [ { key: 'AL', value: 'AL', text: 'Alabama' }, ...  ]
 
 const stateOptions = [
     { text: "Alabama", key: "AL", value: "AL" },
@@ -168,9 +165,15 @@ class FlowerSearch extends Component {
                                             <Form.Group grouped>
                                                 <Form.Checkbox
                                                     onChange={this.handleFilter}
-                                                    label="Black"
+                                                    label="Purple"
                                                     name="color"
-                                                    value="black"
+                                                    value="purple"
+                                                />
+                                                <Form.Checkbox
+                                                    onChange={this.handleFilter}
+                                                    label="Violet"
+                                                    name="color"
+                                                    value="violet"
                                                 />
                                                 <Form.Checkbox
                                                     onChange={this.handleFilter}
@@ -180,33 +183,15 @@ class FlowerSearch extends Component {
                                                 />
                                                 <Form.Checkbox
                                                     onChange={this.handleFilter}
-                                                    label="Blue-gray"
-                                                    name="color"
-                                                    value="blue-gray"
-                                                />
-                                                <Form.Checkbox
-                                                    onChange={this.handleFilter}
-                                                    label="Dark Brown"
-                                                    name="color"
-                                                    value="dark brown"
-                                                />
-                                                <Form.Checkbox
-                                                    onChange={this.handleFilter}
-                                                    label="Gray"
-                                                    name="color"
-                                                    value="gray"
-                                                />
-                                                <Form.Checkbox
-                                                    onChange={this.handleFilter}
                                                     label="Green"
                                                     name="color"
                                                     value="green"
                                                 />
                                                 <Form.Checkbox
                                                     onChange={this.handleFilter}
-                                                    label="Light Brown"
+                                                    label="Brown"
                                                     name="color"
-                                                    value="light brown"
+                                                    value="brown"
                                                 />
                                                 <Form.Checkbox
                                                     onChange={this.handleFilter}
@@ -226,18 +211,7 @@ class FlowerSearch extends Component {
                                                     name="color"
                                                     value="red"
                                                 />
-                                                <Form.Checkbox
-                                                    onChange={this.handleFilter}
-                                                    label="Red-brown"
-                                                    name="color"
-                                                    value="red-brown"
-                                                />
-                                                <Form.Checkbox
-                                                    onChange={this.handleFilter}
-                                                    label="Violet"
-                                                    name="color"
-                                                    value="violet"
-                                                />
+                            
                                                 <Form.Checkbox
                                                     onChange={this.handleFilter}
                                                     label="White"
