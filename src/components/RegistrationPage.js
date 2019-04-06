@@ -8,8 +8,9 @@ import {
     Button,
     Input
 } from "semantic-ui-react";
-
-class RegistrationPage extends Component {
+import { NavBar } from './NavBar'
+import { PageHeader } from './PageHeader'
+export class RegistrationPage extends Component {
 
     state = {
         username: "",
@@ -31,10 +32,13 @@ class RegistrationPage extends Component {
         //const { isLoading, err } = this.props
 
         return (
-            <React.Fragment>
-                <div className="RegistrationPage">
-                    <Form onSubmit={handleRegister} >
-                        <Form.Field
+            <React.Fragment> 
+                <PageHeader />
+            <NavBar />
+            <div className="formDiv">
+           
+                <Form onSubmit={handleRegister} >
+                    <Form.Field
                             label="Username:"
                             required
                             placeholder="Username"
@@ -79,5 +83,3 @@ export default connect(
     }),
     { register }
 )(RegistrationPage);
-
-//export default RegistrationPage

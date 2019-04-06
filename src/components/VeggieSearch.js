@@ -1,10 +1,4 @@
 import React, { Component } from "react";
-import {
-    Menu,
-    Accordion,
-    Form
-    
-} from "semantic-ui-react";
 import {VeggieCards} from "./VeggieCards";
 import { NavBar } from "./NavBar"
 
@@ -17,7 +11,7 @@ class VeggieSearch extends Component {
         this.props.getVeggieData();
     }
     componentDidUpdate(prevProps) {
-        // Typical usage (don't forget to compare props):
+       
         if (this.props.veggies !== prevProps.veggies) {
             this.setState({ filterveggies: this.props.veggies });
         }

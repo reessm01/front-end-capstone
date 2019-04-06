@@ -1,7 +1,7 @@
 import { domain, jsonHeaders, handleJsonResponse } from "./constants";
 import { push } from "connected-react-router";
 import { history } from '../configureStore'
-import { downloadUserImage } from "."
+// import { downloadUserImage } from "."
 
 // action types
 export const LOGIN = "LOGIN";

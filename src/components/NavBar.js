@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 // import Logout from "../Logout.js"
 import '../App.css';
 // import { connect } from 'react-redux'
-import { Menu, Image } from 'semantic-ui-react'
-import  largeSucculent  from '../components/Images/side.jpg'
+import { Menu } from 'semantic-ui-react'
+// import  largeSucculent  from '../components/Images/side.jpg'
 import { Link } from "react-router-dom";
 
 export class NavBar extends Component {
@@ -15,10 +15,11 @@ export class NavBar extends Component {
       const { activeItem } = this.state
   
       return (
-        <div class="NavBar">
-        <Image className="largeSucculent" src={largeSucculent}/>
-          <Menu pointing secondary>
-            {/* <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} /> */}
+        <React.Fragment>
+          <Menu stackable pointing secondary color='pink'
+          style={{fontSize:"20px", fontFamily:'Raleway'}}>
+            <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
+            <Menu.Item name='feed' active={activeItem === 'feed'} onClick={this.handleItemClick} />
             <Menu.Item
             as={Link}
             name="feed"
@@ -63,7 +64,7 @@ export class NavBar extends Component {
               />
             </Menu.Menu>
           </Menu>
-        </div>
+      </React.Fragment>
       )
     }
   }

@@ -51,8 +51,12 @@ export class FlowerCards extends Component {
                                             <p>State(s): {flower.states}</p>
 
                                             <a href={flower.site} target="_blank">
-                                                Click here to research more about the {flower.name}!
-                      </a>
+                                                Research more about the {flower.name} </a>
+                                                <br></br>
+                                                <br></br>
+                                                <br></br>
+                                                <Button basic color='green' href={flower.amazon} target="_blank">
+                                                Click to buy from Amazon </Button> 
                                         </Modal.Description>
                                     </Modal.Content>
                                 </Modal>
