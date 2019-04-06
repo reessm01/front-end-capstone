@@ -8,7 +8,8 @@ import  FlowerSearch from "./FlowerSearch.js";
 import RegistrationPage from './RegistrationPage'
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
-// import { PageHeader as Title } from './PageHeader'
+import {AmazonAds } from './Amazon'
+import  '../App.css'
 
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
           <Route exact path="/profile" render={() => <ProfilePage />} />
           <Route exact path="/register" render={() => <RegistrationPage /> } />
           <Route exact path="/flowers" render={() => <FlowerSearch />} />
+          <Route exact path="/amazonAds" render={() => <AmazonAds />} />
         </Switch>
     );
   }
