@@ -17,7 +17,7 @@ export class Picture extends Component {
       overflow: "scroll"
     };
     return (
-      <div  data-name={this.props.name}
+      <div  id="static" data-name={this.props.name}
         draggable="true"
         style={pictureStyle}
         onDragStart={this.props.handleDragStart}
