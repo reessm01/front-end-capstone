@@ -32,13 +32,16 @@ class Login2 extends Component {
 
     return (
       <React.Fragment> 
+        
         <Grid
-         textAlign="center"
-         style={{ height: "100%" }}
-         verticalAlign="middle"
+        //  textAlign="center"
+        //  style={{ height: "100%" }}
+        //  verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-              <Header as="h1" textAlign="center">
+              <Header 
+              style = {{fontFamily: "Just Another Hand"}}
+               as="h1" textAlign="center">
                 Flower Power
               </Header>
             <Image src={picture} size="medium" centered />
@@ -46,10 +49,11 @@ class Login2 extends Component {
               Login
             </Header>
             <div style={{padding: '5%'}}></div>
-          </Grid.Column>
+           
+          </Grid.Column> 
         </Grid>
-        <div className="formDiv">
-          <Form  onSubmit={handleLogin} size="large">
+        <div className="pageDiv">
+          <Form className="formDiv" onSubmit={handleLogin} size="large">
             <Segment stacked color="grey">
               <Form.Field
                 label="Username:"
@@ -91,6 +95,7 @@ class Login2 extends Component {
             </Segment>
           </Form>
         </div>
+     
       </React.Fragment>
     )
   }
