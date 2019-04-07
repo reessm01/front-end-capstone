@@ -79,7 +79,7 @@ const register = registerData => dispatch => {
             return Promise.reject(
                 dispatch({
                     type: REGISTER_FAIL,
-                    payload: err.alert(
+                    payload: alert(
                         "That username has been taken. Please choose a different username."
                     )
                 })

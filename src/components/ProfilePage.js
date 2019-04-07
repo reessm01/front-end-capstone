@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-//import { Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { NavBar } from "./NavBar"
 import { connect } from 'react-redux'
 import { updateThenNavToProfile as update } from '../actions/users.js'
 import { PageHeader } from './PageHeader'
-// import UserImage from "./UserImage.js"
 // import DeleteUserAccount from "./DeleteUserAccount.js"
 import { AmazonAds } from './Amazon'
 import  UserImage  from './UserImage'
@@ -40,11 +39,11 @@ export class ProfilePage extends Component {
                     <PageHeader />
                     <NavBar />
                     <AmazonAds />
-                    {/* <Link to="/feed"></Link> */}
-                    <div className = "profilePageDiv">
+                   <Link to="/feed"></Link> 
+                    <div className = "pageDiv">
                         <div className="userCard">
                             <Card >
-                             <UserImage />
+                            <UserImage /> 
                                 <Card.Header>Display Name: {this.props.displayName}</Card.Header>
                                 <Card.Content>User Name: {this.props.username}</Card.Content>
                                 <Card.Description>All About You: {this.props.about}</Card.Description>
