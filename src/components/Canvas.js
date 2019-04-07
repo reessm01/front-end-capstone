@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import { Grid } from "./Grid/Grid";
-import { ToolBar } from "./ToolBar";
-import { PictureList } from "./PictureList";
+import React, { Component } from "react"
+import { Grid } from "./Grid/Grid"
+import { ToolBar } from "./ToolBar"
+// import { CanvasToolBar }
+import { PictureList } from "./PictureList"
 import { OverlayTrigger } from "react-bootstrap"
 import { Button } from "semantic-ui-react"
 import { toolTip } from "./ToolTip"
@@ -14,8 +15,9 @@ import {
   dropPlant,
   removePlant
 } from "../actions"
+import MainMenu from "./MainMenu/MainMenu";
 
-export class Canvas extends Component {
+class Canvas extends Component {
   state = {
     pictures: [
       { pictureId: 1, bgColor: "red" },
@@ -110,10 +112,7 @@ export class Canvas extends Component {
 
     return (
       <div>
-        <div>
-          <ToolBar
-          />
-        </div>
+        <MainMenu width={this.props.width}/>
         <br />
         <div>
           <PictureList pictures={this.state.pictures} handleDragStart={this.handleDragStart} />
@@ -171,10 +170,11 @@ export class Canvas extends Component {
   }
 }
 
-function mapStateToProps({ grid }) {
+function mapStateToProps({ grid, auth }) {
   return {
     grid: grid.grid,
-    width: grid.canvasWidth
+    width: grid.canvasWidth,
+    auth: auth.login
   }
 }
 

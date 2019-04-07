@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import '../App.css';
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 //import { Link } from 'react-router-dom';
-// import { registerNavToProfile as register } from '../../actions/auth';
+import { registerThenNavToProfile as register } from '../actions/auth';
 import {
+    Form,
     Button,
-    Form
+    Input
 } from "semantic-ui-react";
+import { NavBar } from './NavBar'
+import { PageHeader } from './PageHeader'
 export class RegistrationPage extends Component {
 
     state = {
@@ -15,64 +18,68 @@ export class RegistrationPage extends Component {
         displayName: ""
     }
 
-    handleUserRegistration = e => {
+    handleRegister = e => {
         e.preventDefault();
-        this.props.userRegistration(this.state)
-    }
+        this.props.register(this.state);
+    };
 
     handleChange = e => {
-        this.setState({ [e.target.name]: e.target.value })
-    }
+        this.setState({ [e.target.name]: e.target.value });
+    };
 
     render() {
-        //const { isLoading } = this.props
+        const { handleRegister, handleChange } = this
+        //const { isLoading, err } = this.props
 
         return (
-            <div className="RegistrationPage">
-                <Form className="RegistrationForm" onSubmit={this.handleUserRegistration}>
-                <Form.Field
-                        label="Username:"
-                        required
-                        placeholder="Username"
-                        type="text"
-                        //control={Input}
-                        autoFocus
-                        onChange={this.handleChange}
-                        name="username"
-                    />
+            <React.Fragment> 
+                <PageHeader />
+            <NavBar />
+
+            <div className="pageDiv">
+                <Form className="formDiv" onSubmit={handleRegister} >
                     <Form.Field
-                        label="Password:"
-                        required
-                        placeholder="Password"
-                        type="password"
-                        //control={Input}
-                        onChange={this.handleChange}
-                        name="password"
-                    />
-                    <Form.Field
-                        label="Display Name:"
-                        required
-                        placeholder="Choose a Display Name"
-                        type="text"
-                        //control={Input}
-                        onChange={this.handleChange}
-                        name="displayName"
-                    />
-                    <Button variant="primary" type="submit">
-                        Start Gardening!
+                            label="Username:"
+                            required
+                            placeholder="Username"
+                            type="text"
+                            control={Input}
+                            autoFocus
+                            onChange={handleChange}
+                            name="username"
+                        />
+                        <Form.Field
+                            label="Password:"
+                            required
+                            placeholder="Password"
+                            type="password"
+                            control={Input}
+                            onChange={handleChange}
+                            name="password"
+                        />
+                        <Form.Field
+                            label="Display Name:"
+                            required
+                            placeholder="Choose a Display Name"
+                            type="text"
+                            control={Input}
+                            onChange={handleChange}
+                            name="displayName"
+                        />
+                        <Button variant="primary" type="submit">
+                            Start Gardening!
                      </Button>
-                </Form>;
-       </div>
+                    </Form>
+                </div>
+            </React.Fragment>
         )
     }
 }
 
-// export default connect(
-//     ({ auth }) => ({
-//         isLoading: auth.registerLoading,
-//         err: auth.registerError
-//         }),
-//         { register }
-//     )(userRegistration);
-
-export default RegistrationPage
+export default connect(
+    ({ auth }) => ({
+        isLoading: auth.registerLoading,
+        err: auth.registerError
+    }),
+    { register }
+)(RegistrationPage);

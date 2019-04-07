@@ -1,82 +1,86 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import { connect } from "react-redux";
-
+import { connect } from "react-redux";
+import { loginThenNavToProfile as login } from '../actions/auth';
 import {
   Button,
   Form,
-  Grid,
-  Header,
-  Image,
   Input,
-  Segment
+  Segment, Grid, Image, Header
 } from "semantic-ui-react";
+//import  '../App.css'
 import picture from "./Images/Header.png"
-export class Login2 extends Component {
+class Login2 extends Component {
   state = {
     username: "",
     password: ""
   };
 
-  handleUsernameChange = event => {
-    this.setState({
-      username: event.target.value
-    });
+  handleLogin = e => {
+    e.preventDefault()
+    this.props.login({ ...this.state });
   };
-  handlePasswordChange = event => {
-    this.setState({
-      password: event.target.value
-    });
-  };
-  handleLogin = event => {
-    this.props.login({
-      username: this.state.username,
-      password: this.state.password
-    });
+
+  handleChange = e => {
+    this.setState({ ...this.state, [e.target.name]: e.target.value })
   };
 
   render() {
+
+    const { handleLogin, handleChange } = this
+    const { isLoading } = this.props
+
     return (
-      <Grid
-        textAlign="center"
-        style={{ height: "100%" }}
-        verticalAlign="middle"
-      >
-        <Grid.Column style={{ maxWidth: 450 }}>
-          <div />
-          <Header as="h1" color="teal" textAlign="center">
-            Flower Power
-          </Header>
-          <Image src={picture} size="medium" centered />
-          <Header as="h2" color="grey" textAlign="center">
-            Login
-          </Header>
-          <Form onSubmit={this.handleLogin} size="large">
+      <React.Fragment> 
+        
+        <Grid
+        //  textAlign="center"
+        //  style={{ height: "100%" }}
+        //  verticalAlign="middle"
+        >
+          <Grid.Column style={{ maxWidth: 450 }}>
+              <Header 
+              style = {{fontFamily: "Just Another Hand"}}
+               as="h1" textAlign="center">
+                Flower Power
+              </Header>
+            <Image src={picture} size="medium" centered />
+            <Header as="h2" color="grey" textAlign="center">
+              Login
+            </Header>
+            <div style={{padding: '5%'}}></div>
+           
+          </Grid.Column> 
+        </Grid>
+        <div className="pageDiv">
+          <Form className="formDiv" onSubmit={handleLogin} size="large">
             <Segment stacked color="grey">
               <Form.Field
                 label="Username:"
+                name="username"
                 required
                 placeholder="Username"
                 type="text"
                 control={Input}
                 autoFocus
-                onChange={this.handleUsernameChange}
+                onChange={handleChange}
               />
               <Form.Field
                 label="Password:"
+                name="password"
                 required
                 placeholder="Password"
                 type="password"
                 control={Input}
-                onChange={this.handlePasswordChange}
+                onChange={handleChange}
               />
               <Button.Group>
-                <Button 
+                <Button
                   type="submit"
                   positive
                   size="large"
                   to="/profile"
-                  
+                  disabled={isLoading}
                 >
                   Login to Your Account!
                 </Button>
@@ -90,24 +94,24 @@ export class Login2 extends Component {
               <div>{this.props.result}</div>
             </Segment>
           </Form>
-        </Grid.Column>
-      </Grid>
-    );
+        </div>
+     
+      </React.Fragment>
+    )
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     result: state.loginResult
-//   };
-// };
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     login: loginData => dispatch(login(loginData))
-//   };
-// };
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Login2);
-export default Login2
+const mapStateToProps = state => {
+  return {
+    result: state.loginResult
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    login: loginData => dispatch(login(loginData))
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login2);
