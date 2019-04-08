@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Spinner from "react-spinkit";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginThenNavToProfile as login } from '../actions/auth';
@@ -8,7 +9,7 @@ import {
   Input,
   Segment, Grid, Image, Header
 } from "semantic-ui-react";
-//import  '../App.css'
+import  '../App.css'
 import picture from "./Images/Header.png"
 
 // export class Login2 extends Component {
@@ -30,28 +31,29 @@ class Login2 extends Component {
   render() {
 
     const { handleLogin, handleChange } = this
-    const { isLoading } = this.props
+    const { isLoading, err } = this.props
 
     return (
       <React.Fragment> 
-        <Grid
-         textAlign="center"
-         style={{ height: "100%" }}
-         verticalAlign="middle"
-        >
-          <Grid.Column style={{ maxWidth: 450 }}>
-              <Header as="h1" textAlign="center">
+        
+        <Grid>
+          <Grid.Column >
+          <div>
+              <Header 
+              style={{fontSize: "100px", fontFamily: "Just Another Hand", color: "#78A9BB" }}
+               as="h1" textAlign="center">
                 Flower Power
               </Header>
             <Image src={picture} size="medium" centered />
             <Header as="h2" color="grey" textAlign="center">
               Login
             </Header>
+            </div>
             <div style={{padding: '5%'}}></div>
-          </Grid.Column>
+          </Grid.Column> 
         </Grid>
-        <div className="formDiv">
-          <Form  onSubmit={handleLogin} size="large">
+        <div className="pageDiv">
+          <Form className="formDiv" onSubmit={handleLogin} size="large">
             <Segment stacked color="grey">
               <Form.Field
                 label="Username:"
@@ -92,6 +94,8 @@ class Login2 extends Component {
               <div>{this.props.result}</div>
             </Segment>
           </Form>
+           {isLoading && <Spinner name="circle" color="blue" />}
+            {err && <p style={{ color: "red" }}>{err}</p>}
         </div>
       </React.Fragment>
     )

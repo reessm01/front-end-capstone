@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 // import Logout from "../Logout.js"
 import '../App.css';
-// import { connect } from 'react-redux'
+//import { connect } from 'react-redux'
 import { Menu } from 'semantic-ui-react'
-// import  largeSucculent  from '../components/Images/side.jpg'
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 export class NavBar extends Component {
     state = { activeItem: 'home' }
@@ -18,41 +17,31 @@ export class NavBar extends Component {
         <React.Fragment>
           <Menu stackable pointing secondary color='pink'
           style={{fontSize:"20px", fontFamily:'Raleway'}}>
-            <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
-            <Menu.Item name='feed' active={activeItem === 'feed'} onClick={this.handleItemClick} />
-            <Menu.Item
-            as={Link}
-            name="feed"
-            active={activeItem === "feed"}
+            <Menu.Item 
+            name='home' 
+            active={activeItem === 'login'} 
+            to ='/'
             onClick={this.handleItemClick}
-            to="/feed"
-          />
-          <Menu.Item
-            as={Link}
-            name="planning"
-            active={activeItem === "planning"}
+            as={Link} 
+            />
+            <Menu.Item 
+            name='feed' 
+            active={activeItem === 'feed'} 
+            to ='/feed'
             onClick={this.handleItemClick}
-            to="/"
-          />
+            as={Link} />
             <Menu.Item
-              name="profile"
+              name='profile'
+              active={activeItem === 'profile'}
               as={Link}
-              active={activeItem === "profile"}
-              onClick={this.handleItemClick}
               to="/profile"
-            />
-             <Menu.Item
-              name="flowers"
-              as={Link}
-              active={activeItem === "flowers"}
               onClick={this.handleItemClick}
-              to="/flowers"
             />
-            
             <Menu.Item
-              name="veggies"
+              name='garden planner'
+              active={activeItem === 'garden planner'}
               as={Link}
-              active={activeItem === "veggies"}
+              to="/canvas"
               onClick={this.handleItemClick}
               to="/veggies"
             />

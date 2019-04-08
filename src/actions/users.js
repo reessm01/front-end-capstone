@@ -1,7 +1,7 @@
 import { domain, handleJsonResponse } from "./constants";
 import { push } from "connected-react-router";
-//import {getMessages} from "."
-//import {auth} from "../reducers/auth.js"
+// import {getMessages} from "."
+import {auth} from "../reducers/auth.js"
 
 export const SETCURRENTUSER = "SETCURRENTUSER";
 export const GETUSERS = "GETUSERS"
@@ -20,8 +20,8 @@ export const UPDATE_FAIL = "UPDATE_FAIL";
  export const DELETEUSER="DELETEUSER"
  export const DELETEUSER_SUCCESS="DELETEUSER_SUCCESS"
 
-//  export const GETUSERSANDMESSAGES="GETUSERSANDMESSAGES"
-//  export const GETUSERSANDMESSAGES_SUCCESS="GETUSERSANDMESSAGES_SUCCESS"
+//export const GETUSERSANDMESSAGES="GETUSERSANDMESSAGES"
+//export const GETUSERSANDMESSAGES_SUCCESS="GETUSERSANDMESSAGES_SUCCESS"
 
 const url = domain + "/users/";
 
@@ -51,19 +51,19 @@ export const user = id => dispatch => {
       })
   };
 
-//   export const getMessagesAndUserPics = ()=> (dispatch,getState) => {
-//     dispatch(getMessages())
-//     .then(()=>{
-//       const messages=getState().messages.list
-//       const usersImages=getState().users.usersImages
-//       messages.forEach(message=>{
-//         const id=message.userId
-//         if(usersImages[id] === undefined){
-//             dispatch(downloadUserImage(id))
-//         }
-//       })
-//     })
-//   }
+  //  export const getMessagesAndUserPics = ()=> (dispatch,getState) => {
+  //    dispatch(getMessages())
+  //    .then(()=>{
+  //      const messages=getState().messages.list
+  //      const usersImages=getState().users.usersImages
+  //      messages.forEach(message=>{
+  //        const id=message.userId
+  //        if(usersImages[id] === undefined){
+  //            dispatch(downloadUserImage(id))
+  //        }
+  //      })
+  //    })
+  //  }
 
   const userUpdate = newUserData => dispatch => {
         const token = newUserData.loginInfo.token
