@@ -55,7 +55,7 @@
  export default connect(
    ({ users, auth }) => ({
      //image: users.usersImages[auth.login.id],
-     //userimage: users.usersImages[auth.login.id]
+    //userimage: users.usersImages[auth.login.id]
    }),
    { uploadImage }
  )(UserImage);

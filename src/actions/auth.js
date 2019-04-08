@@ -54,7 +54,11 @@ const login = loginData => dispatch => {
 
 export const loginThenNavToProfile = loginData => dispatch => {
     dispatch(login(loginData))
+<<<<<<< HEAD
     history.push('/Canvas')
+=======
+    history.push('/canvas')
+>>>>>>> c13257b4af5253bffff2e1307d1116cd9d976c87
 }
 
 const register = registerData => dispatch => {
