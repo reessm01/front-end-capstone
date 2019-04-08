@@ -13,28 +13,25 @@ import {
   subtractGrid,
   dropPlant,
   removePlant,
-  saveLayout
+  saveLayout,
+  filterFlowers
 } from "../actions";
 
 class Canvas extends Component {
   state = {
     prevElement: null,
     name: "",
-    filterflowers: this.props.flowers, 
-    value: ""
+    value: "",
+    selectedState: "all"
   }
-  
-  
 
   componentWillMount() {
     this.props.getFlowerData();
-    
-    
   }
-  componentDidMount(){
+  componentDidMount() {
     this.setState((state, props) => ({
       filterflowers: props.flowers
-    }));
+    }))
   }
 
   contextMenu = e => {
@@ -44,32 +41,28 @@ class Canvas extends Component {
     } else {
       this.props.removePlant(e.target.dataset.i, e.target.dataset.j)
     }
-  };
+  }
+
   handleFilter = (e) => {
     let value = e.target.textContent
-    console.log(e.target.textContent)
-    this.setState({
-      filterflowers: this.filterState(
-        value,
-        this.props.flowers
-      ),
-      value
-    });
-    console.log(this.state)
-    
+    console.log(this.props.flowers)
+    this.props.filterFlowers(this.filterState(value, [...this.props.flowers]))
+    this.setState({...this.state, selectedState: null})
   }
 
   filterState(stateValue, flowers) {
-    
-    if (stateValue === "") return flowers;
-    
-    return flowers.filter(flower => {
-      
-      return flower.states
-        .split(",")
-        .map(word => word.trim())
-        .includes(stateValue);
-    });
+    if (stateValue === "") return flowers
+    else {
+      let filteredFlowers = flowers.filter(flower => {
+
+        return flower.states
+          .split(",")
+          .map(word => word.trim())
+          .includes(stateValue);
+      })
+      return filteredFlowers
+    }
+
   }
 
 
@@ -98,24 +91,23 @@ class Canvas extends Component {
       });
     }
     let name = event.target.dataset.name
-    if(name){
-      event.dataTransfer.setData("name",name)
+    if (name) {
+      event.dataTransfer.setData("name", name)
     }
   };
 
   handleDrop = e => {
     e.preventDefault();
-    
+
     let name = e.dataTransfer.getData("name")
-    if(name){
-      let curflower = this.props.flowers.find(flower => flower.name===name)
+    if (name) {
+      let curflower = this.props.flowers.find(flower => flower.name === name)
       this.props.dropPlant(
         this.state.targetRow,
         this.state.targetCol,
         curflower.image
-      );
-    }
-    else{
+      )
+    } else {
       this.props.dropPlant(
         this.state.targetRow,
         this.state.targetCol,
@@ -127,7 +119,7 @@ class Canvas extends Component {
         stateCopy.style.opacity = 1.0;
       }
     }
-    
+
 
     this.setState({
       ...this.state,
@@ -141,21 +133,21 @@ class Canvas extends Component {
 
   handleSave = e => {
     e.preventDefault()
-    for(let object in this.props.grid){
-      if(this.state.name === "") {
-        this.setState({...this.state, errorMessage: true})
+    for (let object in this.props.grid) {
+      if (this.state.name === "") {
+        this.setState({ ...this.state, errorMessage: true })
         break
       }
-        else if(object.pictureLink !== null) {
-          if(this.props.hasId === true) {
-            this.props.patchLayout(this.props.hasId, this.state.name, this.props.grid)
-            break
-          }
-          else {
-            this.props.saveLayout(this.state.name, this.props.grid) 
-            break
-          }
+      else if (object.pictureLink !== null) {
+        if (this.props.hasId === true) {
+          this.props.patchLayout(this.props.hasId, this.state.name, this.props.grid)
+          break
         }
+        else {
+          this.props.saveLayout(this.state.name, this.props.grid)
+          break
+        }
+      }
     }
   }
 
@@ -184,11 +176,11 @@ class Canvas extends Component {
       }
       store.push(row);
     }
-    
+
 
     return (
       <div>
-        <MainMenu width={this.props.width} handleSave={this.handleSave} handleChange={this.handleChange} chooseState={this.handleFilter} value={this.state.stateValue}/>
+        <MainMenu width={this.props.width} handleSave={this.handleSave} handleChange={this.handleChange} chooseState={this.handleFilter} value={this.state.stateValue} />
         <br />
         <div
           style={{
@@ -200,7 +192,7 @@ class Canvas extends Component {
           }}
         >
           <PictureList
-            images={this.props.flowers}
+            images={this.state.selectedState==="all" ? this.props.flowers:this.props.filteredFlowers}
             handleDragStart={this.handleDragStart}
           />
         </div>
@@ -282,6 +274,7 @@ const mapStateToProps = state => {
     width: state.grid.canvasWidth,
     layoutHasId: state.grid.layoutHasId,
     flowers: state.flowers.flower,
+    filteredFlowers: state.flowers.filteredFlowers,
     error: state.error
   };
 };
@@ -293,7 +286,8 @@ const mapDispatchToProps = {
   dropPlant,
   removePlant,
   getFlowerData,
-  saveLayout
+  saveLayout,
+  filterFlowers
 };
 
 export default connect(
