@@ -4,7 +4,8 @@ import {
     SUBTRACT_GRID,
     DROP_PLANT, 
     REMOVE_PLANT,
-    SAVE_LAYOUT
+    SAVE_SUCCESS,
+    SAVE_ERROR
 } from '../actions/';
 import { width } from "../components/Grid/styles"
 
@@ -14,8 +15,10 @@ const initialState = {
     grid: Array(10).fill(null).map(() => Array(10).fill(null).map(entry =>
         entry = { pictureLink: null })),
     canvasWidth: 10 * width,
-    layoutHasId: false,
-    layouts: null
+    id: null,
+    layouts: null,
+    saveMessage: null,
+    errorMessage: null
 }
 
 export default (state = initialState, action) => {
@@ -24,7 +27,9 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 grid: action.grid,
-                canvasWidth: action.canvasWidth
+                canvasWidth: action.canvasWidth,
+                saveMessage: false,
+                errorMessage: false
             }
         case EXPAND_GRID:
         case SUBTRACT_GRID:
@@ -33,16 +38,32 @@ export default (state = initialState, action) => {
                 numRows: action.numRows,
                 numCols: action.numCols,
                 canvasWidth: action.canvasWidth,
-                grid: action.grid
+                grid: action.grid,
+                saveMessage: false,
+                errorMessage: false
             }
         case DROP_PLANT:
         case REMOVE_PLANT:
             return {
                 ...state,
-                grid: action.grid
+                grid: action.grid,
+                saveMessage: false,
+                errorMessage: false
             }
-        case SAVE_LAYOUT:
-            return state
+        case SAVE_SUCCESS:
+            return {
+                ...state,
+                grid: action.layout,
+                id: action.id,
+                saveMessage: true,
+                errorMessage: false
+            }
+        case SAVE_ERROR:
+            return{
+                ...state,
+                errorMessage: true,
+                saveMessage: false
+            }
         default:
             return state
     }
