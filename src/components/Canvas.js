@@ -1,24 +1,25 @@
-import React, { Component } from "react";
-import { Grid } from "./Grid/Grid";
-// import { CanvasToolBar }
-import { PictureList } from "./PictureList";
-import { OverlayTrigger } from "react-bootstrap";
-import { Button } from "semantic-ui-react";
-import { toolTip } from "./ToolTip";
-import { connect } from "react-redux";
-import { getFlowerData } from "../actions/getFlowerData";
-import MainMenu from "./MainMenu/MainMenu";
+import React, { Component } from "react"
+import { Grid } from "./Grid/Grid"
+import { PictureList } from "./PictureList"
+import { OverlayTrigger } from "react-bootstrap"
+import { Button } from "semantic-ui-react"
+import { toolTip } from "./ToolTip"
+import { getFlowerData } from "../actions/getFlowerData"
+import { connect } from "react-redux"
+import MainMenu from "./MainMenu/MainMenu"
 import {
   initGrid,
   expandGrid,
   subtractGrid,
   dropPlant,
-  removePlant
+  removePlant,
+  saveLayout
 } from "../actions";
 
 class Canvas extends Component {
   state = {
-    prevElement: null
+    prevElement: null,
+    name: ""
   };
 
   componentWillMount() {
@@ -100,6 +101,31 @@ class Canvas extends Component {
     });
   };
 
+  handleSave = e => {
+    e.preventDefault()
+    for(let object in this.props.grid){
+      if(this.state.name === "") {
+        this.setState({...this.state, errorMessage: true})
+        break
+      }
+        else if(object.pictureLink !== null) {
+          if(this.props.hasId === true) {
+            this.props.patchLayout(this.props.hasId, this.state.name, this.props.grid)
+            break
+          }
+          else {
+            this.props.saveLayout(this.state.name, this.props.grid) 
+            break
+          }
+        }
+    }
+  }
+
+  handleChange = e => {
+    console.log(e.target.value)
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
   render() {
     const { grid } = this.props;
     const store = [];
@@ -125,10 +151,7 @@ class Canvas extends Component {
 
     return (
       <div>
-        <MainMenu
-          layoutHasId={this.props.layoutHasId}
-          width={this.props.width}
-        />
+        <MainMenu width={this.props.width} handleSave={this.handleSave} handleChange={this.handleChange}/>
         <br />
         <div
           style={{
@@ -232,7 +255,8 @@ const mapDispatchToProps = {
   subtractGrid,
   dropPlant,
   removePlant,
-  getFlowerData
+  getFlowerData,
+  saveLayout
 };
 
 export default connect(
