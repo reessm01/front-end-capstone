@@ -4,8 +4,8 @@ import { Picture } from "./Picture/Picture"
 export class PictureList extends Component {
     render() {
         return (
-            this.props.pictures.map(picture =>(
-               <Picture key={picture.id} pictureId={picture.id} bgColor={picture.bgColor} handleDragStart={this.props.handleDragStart} />
+            this.props.images.map(image =>(
+               <Picture key={image.name} color={image.color} name={image.name} image={image.image} handleDragStart={this.props.handleDragStart} />
             ))
         );
     }
