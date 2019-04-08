@@ -4,11 +4,15 @@ import '../App.css';
 //import { connect } from 'react-redux'
 import { Menu } from 'semantic-ui-react'
 <<<<<<< HEAD
+<<<<<<< HEAD
 // import  largeSucculent  from '../components/Images/side.jpg'
 import { Link } from "react-router-dom";
 =======
 import { Link } from "react-router-dom"
 >>>>>>> f5295d92d8ef248aecb87f20c9844bbca1858c4f
+=======
+import { Link } from "react-router-dom"
+>>>>>>> 894e0c92ed4a4dbbcbf6fd819518b1c6afcfc3a9
 
 export class NavBar extends Component {
     state = { activeItem: 'home' }
@@ -35,6 +39,7 @@ export class NavBar extends Component {
             to ='/feed'
             onClick={this.handleItemClick}
             as={Link} />
+<<<<<<< HEAD
             <Menu.Item
 <<<<<<< HEAD
             as={Link}
@@ -65,6 +70,8 @@ export class NavBar extends Component {
               to="/flowers"
             />
             
+=======
+>>>>>>> 894e0c92ed4a4dbbcbf6fd819518b1c6afcfc3a9
             <Menu.Item
               name="veggies"
               as={Link}
@@ -81,7 +88,10 @@ export class NavBar extends Component {
               active={activeItem === 'garden planner'}
               as={Link}
               to="/canvas"
+<<<<<<< HEAD
 >>>>>>> f5295d92d8ef248aecb87f20c9844bbca1858c4f
+=======
+>>>>>>> 894e0c92ed4a4dbbcbf6fd819518b1c6afcfc3a9
               onClick={this.handleItemClick}
               to="/veggies"
             />

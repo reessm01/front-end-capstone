@@ -8,6 +8,7 @@
      active: false,
      file: null
    };
+<<<<<<< HEAD
    imageFileChangeHandler = event => {
      const imageFile = event.target.imageFiles[0];
      this.setState({
@@ -52,6 +53,53 @@
    }
  }
 
+=======
+
+   imageFileChangeHandler = event => {
+     const imageFile = event.target.imageFiles[0];
+     this.setState({
+       imageFile
+     });
+   };
+
+   imageFileUploadHandler = event => {
+     const imageFile = event.this.state.imageFile;
+     this.handleToggle();
+     this.props.uploadUserPic({ picture: imageFile });
+   };
+
+   handleUploadImage = event => {
+     event.preventDefault();
+     const formData = new FormData(event.target);
+     this.props.uploadImage(formData);
+   };
+
+   handleToggle = () => {
+     this.setState(prevState => ({
+       active: !prevState.active
+     }));
+   };
+
+   render() {
+     return (
+       <div>
+         <Form onSubmit={this.handleUploadImage}>
+           <Image
+             alt=""
+             src={this.props.userimage}
+             className="userImage"
+           />
+           <Input type="file" name="picture" required />
+           <Button  type="submit" color="blue" size="small">
+             Upload a Photo
+           </Button>
+         </Form>
+       </div>
+     );
+   }
+ }
+
+>>>>>>> 894e0c92ed4a4dbbcbf6fd819518b1c6afcfc3a9
  export default connect(
    ({ users, auth }) => ({
      //image: users.usersImages[auth.login.id],
