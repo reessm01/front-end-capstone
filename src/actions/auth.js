@@ -1,34 +1,34 @@
-import { domain, jsonHeaders, handleJsonResponse } from "./constants";
-import { push } from "connected-react-router";
+import { domain, jsonHeaders, handleJsonResponse } from "./constants"
+import { push } from "connected-react-router"
 import { history } from '../configureStore'
+import { getUserLayoutData } from './getUserLayoutData'
 // import { downloadUserImage } from "."
 
 // action types
-export const LOGIN = "LOGIN";
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOGIN = "LOGIN"
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
+export const LOGIN_FAIL = "LOGIN_FAIL"
 
-export const REGISTER = "REGISTER";
-export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
-export const REGISTER_FAIL = "REGISTER_FAIL";
+export const REGISTER = "REGISTER"
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS"
+export const REGISTER_FAIL = "REGISTER_FAIL"
 
 // const for logout
-export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
-export const LOGOUT = "LOGOUT";
-export const LOGOUT_FAIL = "LOGOUT_FAIL";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS"
+export const LOGOUT = "LOGOUT"
+export const LOGOUT_FAIL = "LOGOUT_FAIL"
 
 export const LOGOUTCURRENTUSER = "LOGOUTCURRENTUSER"
 
 
-const url = domain + "/auth";
+const url = domain + "/auth"
 
 const login = loginData => dispatch => {
-    console.log(loginData)
     dispatch({
         type: LOGIN
-    });
+    })
 
-    return fetch(url + "/login", {
+    fetch(url + "/login", {
         method: "POST",
         headers: jsonHeaders,
         body: JSON.stringify(loginData)
@@ -36,21 +36,22 @@ const login = loginData => dispatch => {
         .then(handleJsonResponse)
         .then(result => {
             localStorage.setItem("id", result.token)
-
+            dispatch(getUserLayoutData(result))
             return dispatch({
                 type: LOGIN_SUCCESS,
                 payload: result
-            });
+            })
         })
         .catch(err => {
+            console.log(err)
             return Promise.reject(
                 dispatch({
                     type: LOGIN_FAIL,
                     payload: alert("Incorrect login or password.")
                 })
-            );
-        });
-};
+            )
+        })
+}
 
 export const loginThenNavToProfile = loginData => dispatch => {
     dispatch(login(loginData))
@@ -60,7 +61,7 @@ export const loginThenNavToProfile = loginData => dispatch => {
 const register = registerData => dispatch => {
     dispatch({
         type: REGISTER
-    });
+    })
 
     return fetch(url + "/register", {
         method: "POST",
@@ -89,14 +90,14 @@ const register = registerData => dispatch => {
 
 export const registerThenNavToProfile = registerData => dispatch => {
     return dispatch(register(registerData))
-        .then(() => dispatch(login(registerData))).then(()=>history.push("/"));
-};
+        .then(() => dispatch(login(registerData))).then(()=>history.push("/"))
+}
 
 export const logout = logoutData => (dispatch, getState) => {
     const token = getState().auth.login.token
     dispatch({
         type: LOGOUT
-    });
+    })
 
     fetch(url + "/logout", {
         method: "GET",
@@ -114,5 +115,5 @@ export const logout = logoutData => (dispatch, getState) => {
 
             })
         })
-};
-export const logoutThenGoToLogin = logoutData => dispatch => { return dispatch(logout(logoutData)).then(() => dispatch(push("/feed"))); };
+}
+export const logoutThenGoToLogin = logoutData => dispatch => { return dispatch(logout(logoutData)).then(() => dispatch(push("/feed"))) }
