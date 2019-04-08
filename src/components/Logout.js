@@ -5,7 +5,6 @@ import { Button, Dimmer, Divider, Header, Menu } from "semantic-ui-react";
 
 class Logout extends Component {
   state = {};
-
   handleLogout = event => {
     this.props.logout();
     this.setState({ active: false });

@@ -4,7 +4,7 @@ import { NavBar } from "./NavBar"
 import { connect } from 'react-redux'
 import { updateThenNavToProfile as update } from '../actions/users.js'
 import { PageHeader } from './PageHeader'
-// import DeleteUserAccount from "./DeleteUserAccount.js"
+import { DeleteAccount } from "./DeleteAccount"
 import { AmazonAds } from './Amazon'
 import  UserImage  from './UserImage'
 
@@ -20,6 +20,7 @@ export class ProfilePage extends Component {
         username: "",
         password: "",
         displayName: "",
+        region: "",
         about: this.props.about
     }
 
@@ -37,12 +38,11 @@ export class ProfilePage extends Component {
         return (
             <React.Fragment>
                     <PageHeader />
-                    <NavBar />
                     <AmazonAds />
                    <Link to="/feed"></Link> 
                     <div className = "pageDiv">
                         <div className="userCard">
-                            <Card >
+                            <Card style={{ width:"100%"}} >
                             <UserImage /> 
                                 <Card.Header>Display Name: {this.props.displayName}</Card.Header>
                                 <Card.Content>User Name: {this.props.username}</Card.Content>
@@ -51,8 +51,8 @@ export class ProfilePage extends Component {
                         </div>
                         <div className="formDiv">
                             <Form onSubmit={this.handleUserUpdate} align="center"
-                                style={{ fontSize: "16px", color: "#5B5F50" }}>
-                                <label>Make Changes to Your Account</label>
+                                style={{ fontSize: "16px", color: "#5B5F50"}}>
+                                <label style={{padding: "20px", fontSize: "18px"}}>Make Changes to Your Account</label>
                                 <Form.Field
                                     placeholder="Change Your Display Name"
                                     type="text"
@@ -63,14 +63,21 @@ export class ProfilePage extends Component {
                                 />
                                 <Form.Field>
                                     <Input
-
                                         placeholder="Change Password"
                                         type="password"
                                         defaultValue={this.props.passwordValue}
                                         name="password"
                                         onChange={this.handleChange}
-                                    // control={Input}
-                                    />
+                                        control={Input}
+                                    />  
+                                <Form.Field
+                                    placeholder='Change Your Region'
+                                    type="text"
+                                    defaultValue={this.props.region}
+                                    name="region"
+                                    onChange={this.handleChange}
+                                    control={Input}
+                                />
                                 </Form.Field>
                                 <Form.TextArea
                                     placeholder='Change Your "About Me" Section And Tell the World Who You Are...'
@@ -78,20 +85,24 @@ export class ProfilePage extends Component {
                                     defaultValue={this.props.about}
                                     name="about"
                                     onChange={this.handleChange}
-                                // control={Input}
+                                    control={Input}
                                 />
+                               
                                 <Button
                                     type="submit"
-                                    size="large"
+                                    size="medium"
                                     color="green"
                                     onSubmit={this.handleUpdate}>
                                     Submit Changes
-                    </Button>
+                                 </Button>
                             </Form>
-                            {/* <DeleteAccount /> */}
-                        </div>
+                           
+                        </div> 
                     </div>
-             
+                    <div className="deleteAccountDiv" >
+                    <h3>Delete your account with us</h3>
+                            <DeleteAccount />
+                            </div>
             </React.Fragment>
         )
     }
@@ -106,5 +117,3 @@ export default connect(
         passwordValue: users.currentPassword
     }), { update }
 )(ProfilePage)
-
-//export default ProfilePage;

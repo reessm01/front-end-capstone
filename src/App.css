@@ -23,11 +23,24 @@ body {
   color: white;
 }  
 */
+.App-link {
+  color: #61dafb;
+}
 
-.title {
-  border: 1px solid black;
-  max-width: 450px;
-  font-family: "Just Another Hand";
+
+
+.formDiv {
+  width: 40%; 
+  border:  9px solid rgb(131, 137, 114);
+  border-radius: 20px;
+  padding: 1%; 
+  /* background-color: #ACC9AC; */
+}
+
+.userImage {
+  margin: auto;
+  object-fit: contain;
+  border: 1px solid;
 }
 
 .pageDiv {
@@ -37,14 +50,10 @@ body {
   margin-top: 2%;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
 .userCard {
-  display: flex;
-  flex-direction: column;
-  width: 20%;
+  margin-left: -25%;
+  margin-right: 5%;
+  width: 30%;
   height: 10%;
   /* background-color: #ACC9AC; */
   border:  9px solid rgb(131, 137, 114);
@@ -61,3 +70,19 @@ body {
   padding: 1%; 
   /* background-color: #ACC9AC; */
 } 
+
+.thumbnail {
+  width: 220px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.deleteAccountDiv {
+display: flex;
+align-self: center;
+align-items: center;
+  padding: 20px;
+  width: 20%;
+
+}
+

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 // import { connect } from 'react-redux'
 //import Message from "./Message.js"
-import { Button, Form } from 'react-bootstrap/Button';
+import { NavBar } from "./NavBar"
+<NavBar /> 
 
 // class userFeed extends Component {
 

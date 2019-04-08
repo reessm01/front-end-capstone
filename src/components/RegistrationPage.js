@@ -32,13 +32,13 @@ export class RegistrationPage extends Component {
         //const { isLoading, err } = this.props
 
         return (
-            <React.Fragment> 
+            <React.Fragment>
                 <PageHeader />
-            <NavBar />
+                <NavBar />
 
-            <div className="pageDiv">
-                <Form className="formDiv" onSubmit={handleRegister} >
-                    <Form.Field
+                <div className="pageDiv">
+                    <Form className="formDiv" onSubmit={handleRegister} >
+                        <Form.Field
                             label="Username:"
                             required
                             placeholder="Username"
@@ -65,6 +65,16 @@ export class RegistrationPage extends Component {
                             control={Input}
                             onChange={handleChange}
                             name="displayName"
+                        />
+
+                        <Form.Field
+                            label="Region:"
+                            required
+                            placeholder="Choose a Region for Your Garden"
+                            type="text"
+                            control={Input}
+                            onChange={handleChange}
+                            name="region"
                         />
                         <Button variant="primary" type="submit">
                             Start Gardening!

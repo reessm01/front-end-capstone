@@ -11,6 +11,8 @@ import {
 } from "semantic-ui-react";
 import  '../App.css'
 import picture from "./Images/Header.png"
+
+// export class Login2 extends Component {
 class Login2 extends Component {
   state = {
     username: "",
@@ -34,15 +36,11 @@ class Login2 extends Component {
     return (
       <React.Fragment> 
         
-        <Grid
-        //  textAlign="center"
-        //  style={{ height: "100%" }}
-        //  verticalAlign="middle"
-        >
+        <Grid>
           <Grid.Column >
-          <div >
-              <Header className="title"
-              style = {{fontFamily: "Just Another Hand"}}
+          <div>
+              <Header 
+              style={{fontSize: "100px", fontFamily: "Just Another Hand", color: "#78A9BB" }}
                as="h1" textAlign="center">
                 Flower Power
               </Header>
@@ -52,7 +50,6 @@ class Login2 extends Component {
             </Header>
             </div>
             <div style={{padding: '5%'}}></div>
-           
           </Grid.Column> 
         </Grid>
         <div className="pageDiv">
@@ -97,7 +94,7 @@ class Login2 extends Component {
               <div>{this.props.result}</div>
             </Segment>
           </Form>
-            {isLoading && <Spinner name="circle" color="blue" />}
+           {isLoading && <Spinner name="circle" color="blue" />}
             {err && <p style={{ color: "red" }}>{err}</p>}
         </div>
       </React.Fragment>
