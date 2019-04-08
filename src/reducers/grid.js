@@ -3,7 +3,8 @@ import {
     INIT_GRID,
     SUBTRACT_GRID,
     DROP_PLANT, 
-    REMOVE_PLANT
+    REMOVE_PLANT,
+    SAVE_LAYOUT
 } from '../actions/';
 import { width } from "../components/Grid/styles"
 
@@ -14,7 +15,6 @@ const initialState = {
         entry = { pictureLink: null })),
     canvasWidth: 10 * width,
     layoutHasId: false,
-    selectedLayout: null,
     layouts: null
 }
 
@@ -41,6 +41,8 @@ export default (state = initialState, action) => {
                 ...state,
                 grid: action.grid
             }
+        case SAVE_LAYOUT:
+            return state
         default:
             return state
     }

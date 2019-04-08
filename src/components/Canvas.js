@@ -1,7 +1,5 @@
 import React, { Component } from "react"
 import { Grid } from "./Grid/Grid"
-import { ToolBar } from "./ToolBar"
-// import { CanvasToolBar }
 import { PictureList } from "./PictureList"
 import { OverlayTrigger } from "react-bootstrap"
 import { Button } from "semantic-ui-react"
@@ -13,7 +11,8 @@ import {
   expandGrid,
   subtractGrid,
   dropPlant,
-  removePlant
+  removePlant,
+  saveLayout
 } from "../actions"
 import MainMenu from "./MainMenu/MainMenu";
 
@@ -24,7 +23,8 @@ class Canvas extends Component {
       { pictureId: 2, bgColor: "blue" }
     ],
     attachedPictures: [],
-    prevElement: null
+    prevElement: null,
+    name: ""
   }
 
   contextMenu = e => {
@@ -80,6 +80,31 @@ class Canvas extends Component {
     })
   }
 
+  handleSave = e => {
+    e.preventDefault()
+    for(let object in this.props.grid){
+      if(this.state.name === "") {
+        this.setState({...this.state, errorMessage: true})
+        break
+      }
+        else if(object.pictureLink !== null) {
+          if(this.props.hasId === true) {
+            this.props.patchLayout(this.props.hasId, this.state.name, this.props.grid)
+            break
+          }
+          else {
+            this.props.saveLayout(this.state.name, this.props.grid) 
+            break
+          }
+        }
+    }
+  }
+
+  handleChange = e => {
+    console.log(e.target.value)
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
   render() {
     const { grid } = this.props
     const store = [];
@@ -112,7 +137,7 @@ class Canvas extends Component {
 
     return (
       <div>
-        <MainMenu width={this.props.width}/>
+        <MainMenu width={this.props.width} handleSave={this.handleSave} handleChange={this.handleChange}/>
         <br />
         <div>
           <PictureList pictures={this.state.pictures} handleDragStart={this.handleDragStart} />
@@ -183,7 +208,8 @@ const mapDispatchToProps = {
   expandGrid,
   subtractGrid,
   dropPlant,
-  removePlant
+  removePlant,
+  saveLayout
 }
 
 export default connect(
