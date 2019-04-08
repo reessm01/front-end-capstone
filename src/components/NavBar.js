@@ -44,8 +44,8 @@ export class NavBar extends Component {
               name='garden planner'
               //active={activeItem === 'profile'}
               as={Link}
-              active={this.props.path==="/grid"}
-              to="/grid"
+              active={this.props.path==="/Canvas"}
+              to="/Canvas"
               onClick={this.handleItemClick}
             />
             <Menu.Menu position='right'>

@@ -34,15 +34,11 @@ class Login2 extends Component {
     return (
       <React.Fragment> 
         
-        <Grid
-        //  textAlign="center"
-        //  style={{ height: "100%" }}
-        //  verticalAlign="middle"
-        >
+        <Grid>
           <Grid.Column >
-          <div >
-              <Header className="title"
-              style = {{fontFamily: "Just Another Hand"}}
+          <div>
+              <Header 
+              style={{fontSize: "100px", fontFamily: "Just Another Hand", color: "#78A9BB" }}
                as="h1" textAlign="center">
                 Flower Power
               </Header>
@@ -52,7 +48,6 @@ class Login2 extends Component {
             </Header>
             </div>
             <div style={{padding: '5%'}}></div>
-           
           </Grid.Column> 
         </Grid>
         <div className="pageDiv">
