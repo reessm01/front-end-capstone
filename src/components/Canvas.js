@@ -49,15 +49,15 @@ class Canvas extends Component {
   };
 
   handleDragStart = event => {
-    // if (event.target.id !== "static") {
-    //   event.target.style.opacity = 0.3;
-    //   this.setState({
-    //     ...this.state,
-    //     originRow: event.target.dataset.i,
-    //     originCol: event.target.dataset.j,
-    //     prevElement: event.target
-    //   });
-    // }
+    if (event.target.id !== "static") {
+      event.target.style.opacity = 0.3;
+      this.setState({
+        ...this.state,
+        originRow: event.target.dataset.i,
+        originCol: event.target.dataset.j,
+        prevElement: event.target
+      });
+    }
     let name = event.target.dataset.name
     if(name){
       event.dataTransfer.setData("name",name)
@@ -66,11 +66,7 @@ class Canvas extends Component {
 
   handleDrop = e => {
     e.preventDefault();
-    let stateCopy = this.state.prevElement;
-    if (this.state.prevElement !== null) {
-      this.props.removePlant(this.state.originRow, this.state.originCol);
-      stateCopy.style.opacity = 1.0;
-    }
+    
     let name = e.dataTransfer.getData("name")
     if(name){
       let curflower = this.props.flowers.find(flower => flower.name===name)
@@ -84,8 +80,13 @@ class Canvas extends Component {
       this.props.dropPlant(
         this.state.targetRow,
         this.state.targetCol,
-        this.props.flowers.image
+        this.props.grid[this.state.originRow][this.state.originCol].pictureLink
       );
+      let stateCopy = this.state.prevElement;
+      if (this.state.prevElement !== null) {
+        this.props.removePlant(this.state.originRow, this.state.originCol);
+        stateCopy.style.opacity = 1.0;
+      }
     }
     
 
