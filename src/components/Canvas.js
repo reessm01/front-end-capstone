@@ -15,17 +15,25 @@ import {
   subtractGrid,
   dropPlant,
   removePlant,
-  saveLayout
-} from "../actions"
+  saveLayout,
+  filterFlowers
+} from "../actions";
 
 class Canvas extends Component {
   state = {
     prevElement: null,
-    name: ""
+    name: "",
+    value: "",
+    selectedState: "all"
   }
 
   componentWillMount() {
     this.props.getFlowerData()
+  }
+  componentDidMount() {
+    this.setState((state, props) => ({
+      filterflowers: props.flowers
+    }))
   }
 
   contextMenu = e => {
@@ -36,6 +44,29 @@ class Canvas extends Component {
       this.props.removePlant(e.target.dataset.i, e.target.dataset.j)
     }
   }
+
+  handleFilter = (e) => {
+    let value = e.target.textContent
+    console.log(this.props.flowers)
+    this.props.filterFlowers(this.filterState(value, [...this.props.flowers]))
+    this.setState({ ...this.state, selectedState: null })
+  }
+
+  filterState(stateValue, flowers) {
+    if (stateValue === "") return flowers
+    else {
+      let filteredFlowers = flowers.filter(flower => {
+
+        return flower.states
+          .split(",")
+          .map(word => word.trim())
+          .includes(stateValue);
+      })
+      return filteredFlowers
+    }
+
+  }
+
 
   handleDragOver = e => {
     e.preventDefault()
@@ -118,125 +149,131 @@ handleChange = e => {
   this.setState({ [e.target.name]: e.target.value })
 }
 
-render() {
-  const { grid } = this.props
-  const store = []
+  render() {
+    const { grid } = this.props
+    const store = []
 
-  for (let i = 0; i < grid.length; i++) {
-    let row = []
-    for (let j = 0; j < grid[0].length; j++) {
-      row.push(
-        <Grid
-          key={i + "," + j}
-          i={i}
-          j={j}
-          image={grid[i][j].pictureLink}
-          handleDragStart={this.handleDragStart}
-          onContextMenu={this.contextMenu}
-        />
-      )
+    for (let i = 0; i < grid.length; i++) {
+      let row = []
+      for (let j = 0; j < grid[0].length; j++) {
+        row.push(
+          <Grid
+            key={i + "," + j}
+            i={i}
+            j={j}
+            image={grid[i][j].pictureLink}
+            handleDragStart={this.handleDragStart}
+            onContextMenu={this.contextMenu}
+          />
+        )
+      }
+      store.push(row)
     }
-    store.push(row)
-  }
 
-  return (
-    <div>
-      <PageHeader />
-      <NavBar />
-      <MainMenu
-        width={this.props.width}
-        userLayouts={this.props.userLayouts}
-        userHasLayouts={this.props.userHasLayouts}
-        saveMessage={this.props.saveMessage}
-        handleSave={this.handleSave}
-        handleChange={this.handleChange}
-        errorMessage={this.props.errorMessage}
-      />
-      <br />
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          width: "510px",
-          height: "110px",
-          overflow: "scroll"
-        }}
-      >
-        <PictureList
-          images={this.props.flowers}
-          handleDragStart={this.handleDragStart}
-        />
-      </div>
-      <div style={{ display: "block" }}>
-        <div style={{ display: "flex" }}>
+
+    return (
+      <div>
+        <PageHeader/>
+        <NavBar/>
+        <MainMenu
+            width={this.props.width}
+            handleSave={this.handleSave}
+            handleChange={this.handleChange}
+            userLayouts={this.props.userLayouts}
+            userHasLayouts={this.props.userHasLayouts}
+            saveMessage={this.props.saveMessage}
+            chooseState={this.handleFilter}
+            value={this.state.stateValue}
+            width={this.props.width}
+            saveMessage={this.props.saveMessage}
+            errorMessage={this.props.errorMessage}
+          />
+          <br />
           <div
-            onDragOverCapture={this.handleDragOver}
-            onDrop={this.handleDrop}
             style={{
               display: "flex",
-              width: this.props.width + "px",
               flexWrap: "wrap",
-              margin: "0px"
+              width: "510px",
+              height: "110px",
+              overflow: "scroll"
             }}
-            onContextMenu={this.contextMenu}
           >
-            {store}
+            <PictureList
+              images={this.state.selectedState === "all" ? this.props.flowers : this.props.filteredFlowers}
+              handleDragStart={this.handleDragStart}
+            />
+          </div>
+          <div style={{ display: "block" }}>
+            <div style={{ display: "flex" }}>
+              <div
+                onDragOverCapture={this.handleDragOver}
+                onDrop={this.handleDrop}
+                style={{
+                  display: "flex",
+                  width: this.props.width + "px",
+                  flexWrap: "wrap",
+                  margin: "0px"
+                }}
+                onContextMenu={this.contextMenu}
+              >
+                {store}
+              </div>
+              <OverlayTrigger
+                placement="right"
+                delay={{ show: 250, hide: 400 }}
+                overlay={toolTip}
+              >
+                <Button
+                  id="col"
+                  onClick={e => this.props.expandGrid(e.target.id)}
+                  onContextMenu={this.contextMenu}
+                  style={{ width: "25px", margin: "0px", padding: "0px" }}
+                >
+                  <div
+                    id="col"
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      marginRight: "3px"
+                    }}
+                  >
+                    <i id="col" className="fas fa-chevron-right" />
+                  </div>
+                </Button>
+              </OverlayTrigger>
+            </div>
           </div>
           <OverlayTrigger
-            placement="right"
+            placement="bottom"
             delay={{ show: 250, hide: 400 }}
             overlay={toolTip}
           >
             <Button
-              id="col"
+              id="rows"
               onClick={e => this.props.expandGrid(e.target.id)}
               onContextMenu={this.contextMenu}
-              style={{ width: "25px", margin: "0px", padding: "0px" }}
+              style={{
+                height: "25px",
+                margin: "0px",
+                width: this.props.width + "px"
+              }}
             >
               <div
-                id="col"
+                id="rows"
                 style={{
                   display: "flex",
-                  justifyContent: "flex-end",
-                  marginRight: "3px"
+                  justifyContent: "center",
+                  width: "initial"
                 }}
               >
-                <i id="col" className="fas fa-chevron-right" />
+                <i id="rows" className="fas fa-chevron-down" />
               </div>
             </Button>
           </OverlayTrigger>
-        </div>
-        <OverlayTrigger
-          placement="bottom"
-          delay={{ show: 250, hide: 400 }}
-          overlay={toolTip}
-        >
-          <Button
-            id="rows"
-            onClick={e => this.props.expandGrid(e.target.id)}
-            onContextMenu={this.contextMenu}
-            style={{
-              height: "25px",
-              margin: "0px",
-              width: this.props.width + "px"
-            }}
-          >
-            <div
-              id="rows"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                width: "initial"
-              }}
-            >
-              <i id="rows" className="fas fa-chevron-down" />
-            </div>
-          </Button>
-        </OverlayTrigger>
+      
       </div>
-    </div>
-  )
-}
+    )
+  }
 }
 
 const mapStateToProps = state => {
@@ -245,6 +282,7 @@ const mapStateToProps = state => {
     width: state.grid.canvasWidth,
     id: state.grid.id,
     flowers: state.flowers.flower,
+    filteredFlowers: state.flowers.filteredFlowers,
     error: state.error,
     saveMessage: state.grid.saveMessage,
     errorMessage: state.grid.errorMessage,
@@ -260,8 +298,9 @@ const mapDispatchToProps = {
   dropPlant,
   removePlant,
   getFlowerData,
-  saveLayout
-}
+  saveLayout,
+  filterFlowers
+};
 
 export default connect(
   mapStateToProps,

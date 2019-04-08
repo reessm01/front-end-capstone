@@ -38,7 +38,6 @@ export class ProfilePage extends Component {
         return (
             <React.Fragment>
                     <PageHeader />
-                    <NavBar />
                     <AmazonAds />
                    <Link to="/feed"></Link> 
                     <div className = "pageDiv">

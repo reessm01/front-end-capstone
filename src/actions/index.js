@@ -6,6 +6,8 @@ export * from './subtractGrid'
 export * from './dropPlant'
 export * from './removePlant'
 export * from './saveLayout'
+export * from './getFlowerData'
+export * from './filterFlowers'
 export * from './getUserLayoutData'
 export * from './loadLayout'
 
