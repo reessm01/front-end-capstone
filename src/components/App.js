@@ -10,10 +10,6 @@ import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
 import {AmazonAds } from './Amazon'
 import { UserImage } from './UserImage'
-<<<<<<< HEAD
-=======
-
->>>>>>> abe97b19d332be2021b30051f459a4aebdc2fcc9
 import  '../App.css'
 
 
