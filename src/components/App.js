@@ -21,7 +21,7 @@ class App extends Component {
           <Route exact path="/" render={() => <Canvas />} />
           <Route exact path='/Grid' render={() => <Grid />} />
           <Route path="/toolbar" render={() => <ToolBar />} />
-          <Route exact path="/Login" render={() => <Login2 />} />
+          <Route exact path="/login" render={() => <Login2 />} />
           <Route exact path="/profile" render={() => <ProfilePage />} />
           <Route exact path="/register" render={() => <RegistrationPage /> } />
           <Route exact path="/flowers" render={() => <FlowerSearch />} />

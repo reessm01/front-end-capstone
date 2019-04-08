@@ -19,11 +19,22 @@ import {
 class Canvas extends Component {
   state = {
     prevElement: null,
-    name: ""
-  };
+    name: "",
+    filterflowers: this.props.flowers, 
+    value: ""
+  }
+  
+  
 
   componentWillMount() {
     this.props.getFlowerData();
+    
+    
+  }
+  componentDidMount(){
+    this.setState((state, props) => ({
+      filterflowers: props.flowers
+    }));
   }
 
   contextMenu = e => {
@@ -34,6 +45,33 @@ class Canvas extends Component {
       this.props.removePlant(e.target.dataset.i, e.target.dataset.j)
     }
   };
+  handleFilter = (e) => {
+    let value = e.target.textContent
+    console.log(e.target.textContent)
+    this.setState({
+      filterflowers: this.filterState(
+        value,
+        this.props.flowers
+      ),
+      value
+    });
+    console.log(this.state)
+    
+  }
+
+  filterState(stateValue, flowers) {
+    
+    if (stateValue === "") return flowers;
+    
+    return flowers.filter(flower => {
+      
+      return flower.states
+        .split(",")
+        .map(word => word.trim())
+        .includes(stateValue);
+    });
+  }
+
 
   handleDragOver = e => {
     e.preventDefault();
@@ -146,12 +184,11 @@ class Canvas extends Component {
       }
       store.push(row);
     }
-
     
 
     return (
       <div>
-        <MainMenu width={this.props.width} handleSave={this.handleSave} handleChange={this.handleChange}/>
+        <MainMenu width={this.props.width} handleSave={this.handleSave} handleChange={this.handleChange} chooseState={this.handleFilter} value={this.state.stateValue}/>
         <br />
         <div
           style={{

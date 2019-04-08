@@ -6,119 +6,145 @@ import { generalStyling, buttonStyling, tabStyling } from "./styles"
 export default class MainMenu extends Component {
     render() {
         const options = [{ key: 1, text: 'Choice 1', value: 1 }, { key: 2, text: 'Choice 2', value: 2 }]
-        const stateOptions = [
-          { key: 1, text: "All States", value: "allStates" },
-          { key: 2, text: "Alabama", value: "alabama" },
-          { key: 3, text: "Alaska", value: "alaska" },
-          { key: 4, text: "Arizona", value: "arizona" },
-          { key: 5, text: "Arkansas", value: "arkansas" },
-          { key: 6, text: "California", value: "california" },
-          { key: 7, text: "Colorado", value: "colorado" },
-          { key: 8, text: "Conneticut", value: "conneticut" },
-          { key: 9, text: "Delaware", value: "delaware" },
-          { key: 10, text: "Florida", value: "florida" },
-          { key: 11, text: "Georgia", value: "georgia" },
-          { key: 12, text: "Hawaii", value: "hawaii" },
-          { key: 13, text: "Idaho", value: "idaho" },
-          { key: 14, text: "Illinois", value: "illinois" },
-          { key: 15, text: "Indiana", value: "indiana" },
-          { key: 16, text: "Iowa", value: "iowa" },
-          { key: 17, text: "Kansas", value: "kansas" },
-          { key: 18, text: "Kentucky", value: "kentucky" },
-          { key: 19, text: "Louisiana", value: "lousiana" },
-          { key: 20, text: "Maine", value: "maine" },
-          { key: 21, text: "Maryland", value: "maryland" },
-          { key: 22, text: "Massachussettes", value: "massachussettes" },
-          { key: 23, text: "Michigan", value: "michigan" },
-          { key: 24, text: "Minnesota", value: "minnesota" },
-          { key: 25, text: "Mississippi", value: "mississippi" },
-          { key: 26, text: "Missouri", value: "missouri" },
-          { key: 27, text: "Montana", value: "montana" },
-          { key: 28, text: "Nebraska", value: "nebraska" },
-          { key: 29, text: "Nevada", value: "nevada" },
-          { key: 30, text: "New Hampshire", value: "newHampshire" },
-          { key: 31, text: "New Jersey", value: "newJersey" },
-          { key: 32, text: "New Mexico", value: "newMexico" },
-          { key: 33, text: "New York", value: "newYork" },
-          { key: 34, text: "North Carolina", value: "northCarolina" },
-          { key: 35, text: "North Dakota", value: "northDakota" },
-          { key: 36, text: "Ohio", value: "ohio" },
-          { key: 37, text: "Oklamaha", value: "oklamaha" },
-          { key: 38, text: "Oregon", value: "oregon" },
-          { key: 39, text: "Pennsylvania", value: "pennsylvania" },
-          { key: 40, text: "Rhode Island", value: "rhodeIsland" },
-          { key: 41, text: "South Carolina", value: "southCarolina" },
-          { key: 42, text: "South Dakota", value: "southDakota" },
-          { key: 43, text: "Tennessee", value: "tennessee" },
-          { key: 44, text: "Texas", value: "texas" },
-          { key: 45, text: "Utah", value: "utah" },
-          { key: 46, text: "Vermont", value: "vermont" },
-          { key: 47, text: "Virginia", value: "virginia" },
-          { key: 48, text: "Washington", value: "washington" },
-          { key: 49, text: "West Virginia", value: "westVirginia" },
-          { key: 50, text: "Wisconsin", value: "wisconsin" },
-          { key: 51, text: "Wyoming", value: "wyoming" },
+        
+          const stateOptions = [
+            { text: "Alabama", key: "AL", value: "AL" },
+            { text: "Alaska", key: "AK", value: "AK" },
+            { text: "Arizona", key: "AZ", value: "AZ" },
+            { text: "Arkansas", key: "AR", value: "AR" },
+            { text: "California", key: "CA", value: "CA" },
+            { text: "Colorado", key: "CO", value: "CO" },
+            { text: "Connecticut", key: "CT", value: "CT" },
+            { text: "Delaware", key: "DE", value: "DE" },
+            { text: "Florida", key: "FL", value: "FL" },
+            { text: "Georgia", key: "GA", value: "GA" },
+            { text: "Hawaii", key: "HI", value: "HI" },
+            { text: "Idaho", key: "ID", value: "ID" },
+            { text: "Illinois", key: "IL", value: "IL" },
+            { text: "Indiana", key: "IN", value: "IN" },
+            { text: "Iowa", key: "IA", value: "IA" },
+            { text: "Kansas", key: "KS", value: "KS" },
+            { text: "Kentucky", key: "KY", value: "KY" },
+            { text: "Louisiana", key: "LA", value: "LA" },
+            { text: "Maine", key: "ME", value: "ME" },
+            { text: "Maryland", key: "MD", value: "MD" },
+            { text: "Massachusetts", key: "MA", value: "MA" },
+            { text: "Michigan", key: "MI", value: "MI" },
+            { text: "Minnesota", key: "MN", value: "MN" },
+            { text: "Mississippi", key: "MS", value: "MS" },
+            { text: "Missouri", key: "MO", value: "MO" },
+            { text: "Montana", key: "MT", name: "MT", value: "MT" },
+            { text: "Nebraska", key: "NE", value: "NE" },
+            { text: "Nevada", key: "NV", value: "NV" },
+            { text: "New Hampshire", key: "NH", value: "NH" },
+            { text: "New Jersey", key: "NJ", value: "NJ" },
+            { text: "New Mexico", key: "NM", value: "NM" },
+            { text: "New York", key: "NY", value: "NY" },
+            { text: "North Carolina", key: "NC", value: "NC" },
+            { text: "North Dakota", key: "ND", value: "ND" },
+            { text: "Ohio", key: "OH", value: "OH" },
+            { text: "Oklahoma", key: "OK", value: "OK" },
+            { text: "Oregon", key: "OR", value: "OR" },
+            { text: "Pennsylvania", key: "PA", value: "PA" },
+            { text: "Rhode Island", key: "RI", value: "RI" },
+            { text: "South Carolina", key: "SC", value: "SC" },
+            { text: "South Dakota", key: "SD", value: "SD" },
+            { text: "Tennessee", key: "TN", value: "TN" },
+            { text: "Texas", key: "TX", value: "TX" },
+            { text: "Utah", key: "UT", value: "UT" },
+            { text: "Vermont", key: "VT", value: "VT" },
+            { text: "Virginia", key: "VA", value: "VA" },
+            { text: "Washington", key: "WA", value: "WA" },
+            { text: "West Virginia", key: "WV", value: "WV" },
+            { text: "Wisconsin", key: "WI", value: "WI" },
+            { text: "Wyoming", key: "WY", value: "WY" }
         ];
+
         const panes = [
-            {
-                menuItem: "Save",
-                render: () => (
-                    <div style={{ width: this.props.width + 25 + "px" }}>
-                        <Form onSubmit={this.props.handleSave}>
-                            <Tab.Pane style={tabStyling}>
-                                <Input 
-                                    style={generalStyling} 
-                                    placeholder="Layout name..." 
-                                    name="name"
-                                    onChange={this.props.handleChange}
-                                    />
-                                <Button style={buttonStyling}>Save</Button>
-                                <Message
-                                    success
-                                    header='Form Completed'
-                                    content="Layout saved." />
-                                <Message
-                                    error
-                                    header='Action Forbidden'
-                                    content='Name field required or the layout is empty'
-                                />
-                            </Tab.Pane>
-                        </Form>
-                    </div>
-                )
-            },
-            {
-                menuItem: "Load",
-                render: () => (
-                    <div style={{ width: this.props.width + 25 + "px" }}>
-                        <Form>
-                            <Tab.Pane style={tabStyling}>
-                                {this.props.layoutHasId ? (
-                                    <Dropdown
-                                        control={Select}
-                                        style={generalStyling}
-                                        placeholder="Skills"
-                                        multiple
-                                        selection
-                                        options={options}
-                                    />
-                                ) : (
-                                        <Dropdown
-                                            text="You have not saved a layout, yet..."
-                                            disabled
-                                        />
-                                    )}
-                                <Button style={buttonStyling} disabled>
-                                    Load
-                                </Button>
-                            </Tab.Pane>
-                        </Form>
-                    </div>
-                )
-            }
-        ]
+          {
+            menuItem: "Save",
+            render: () => (
+              <div style={{ width: this.props.width + 25 + "px" }}>
+                <Form onSubmit={this.props.handleSave}>
+                  <Tab.Pane style={tabStyling}>
+                    <Input
+                      style={generalStyling}
+                      placeholder="Layout name..."
+                      name="name"
+                      onChange={this.props.handleChange}
+                    />
+                    <Button style={buttonStyling}>Save</Button>
+                    <Message
+                      success
+                      header="Form Completed"
+                      content="Layout saved."
+                    />
+                    <Message
+                      error
+                      header="Action Forbidden"
+                      content="Name field required or the layout is empty"
+                    />
+                  </Tab.Pane>
+                </Form>
+              </div>
+            )
+          },
+          {
+            menuItem: "Load",
+            render: () => (
+              <div style={{ width: this.props.width + 25 + "px" }}>
+                <Form>
+                  <Tab.Pane style={tabStyling}>
+                    {this.props.layoutHasId ? (
+                      <Dropdown
+                        control={Select}
+                        style={generalStyling}
+                        placeholder="Skills"
+                        multiple
+                        selection
+                        options={options}
+                      />
+                    ) : (
+                      <Dropdown
+                        text="You have not saved a layout, yet..."
+                        disabled
+                      />
+                    )}
+                    <Button style={buttonStyling} disabled>
+                      Load
+                    </Button>
+                  </Tab.Pane>
+                </Form>
+              </div>
+            )
+          },
+          {
+            menuItem: "Choose Flowers",
+            render: () => (
+              <div
+                
+                style={{
+                  width: this.props.width + 25 + "px",
+                  zIndex: "2000"
+                }}
+              >
+                <Form style={{ zIndex: "2000" }}>
+                  <Tab.Pane style={tabStyling} >
+                    <Dropdown onChange={this.props.chooseState} 
+                      control={Select}
+                      style={generalStyling}
+                      placeholder="State"
+                      options={stateOptions} 
+                    />
+                  </Tab.Pane>
+                  
+                 </Form>
+              </div>
+            )
+          }
+        ];
         return (
-            <Tab
+            <Tab 
                 menu={{ borderless: true, attached: false, tabular: false }}
                 style={{ width: this.props.width + 25 + "px" }}
                 panes={panes}
