@@ -93,7 +93,7 @@ class Login2 extends Component {
             </Segment>
           </Form>
            {isLoading && <Spinner name="circle" color="blue" />}
-            {err && <p style={{ color: "red" }}>{err}</p>} */}
+            {err && <p style={{ color: "red" }}>{err}</p>}
         </div>
       </React.Fragment>
     )
