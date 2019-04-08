@@ -5,7 +5,9 @@ import {
     DROP_PLANT, 
     REMOVE_PLANT,
     SAVE_SUCCESS,
-    SAVE_ERROR
+    SAVE_ERROR,
+    GET_USER_LAYOUT_DATA,
+    LOAD_SUCCESS
 } from '../actions/';
 import { width } from "../components/Grid/styles"
 
@@ -15,10 +17,13 @@ const initialState = {
     grid: Array(10).fill(null).map(() => Array(10).fill(null).map(entry =>
         entry = { pictureLink: null })),
     canvasWidth: 10 * width,
+    userHasLayouts: false,
+    userLayouts: null,
     id: null,
     layouts: null,
     saveMessage: null,
-    errorMessage: null
+    errorMessage: null,
+    name: null
 }
 
 export default (state = initialState, action) => {
@@ -30,6 +35,13 @@ export default (state = initialState, action) => {
                 canvasWidth: action.canvasWidth,
                 saveMessage: false,
                 errorMessage: false
+            }
+        case GET_USER_LAYOUT_DATA:
+            let userHasLayouts = action.payload.length > 0 ? true : false
+            return{
+                ...state,
+                userHasLayouts: userHasLayouts,
+                userLayouts: action.payload
             }
         case EXPAND_GRID:
         case SUBTRACT_GRID:
@@ -63,6 +75,13 @@ export default (state = initialState, action) => {
                 ...state,
                 errorMessage: true,
                 saveMessage: false
+            }
+        case LOAD_SUCCESS:
+            return {
+                ...state,
+                grid: action.payload.layout,
+                id: action.payload.id,
+                name: action.payload.name
             }
         default:
             return state

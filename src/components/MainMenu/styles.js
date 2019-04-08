@@ -1,6 +1,7 @@
 export const generalStyling = {
     width: "70%", 
-    marginRight: "20px"
+    marginRight: "20px",
+    zIndex: 1000000,
 }
 
 export const buttonStyling = {

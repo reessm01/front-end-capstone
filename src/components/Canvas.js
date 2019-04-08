@@ -145,10 +145,9 @@ class Canvas extends Component {
   }
 
 
-  handleChange = e => {
-    console.log(e.target.value)
-    this.setState({ [e.target.name]: e.target.value })
-  }
+handleChange = e => {
+  this.setState({ [e.target.name]: e.target.value })
+}
 
   render() {
     const { grid } = this.props
@@ -174,12 +173,15 @@ class Canvas extends Component {
 
     return (
       <div>
+        <PageHeader/>
         <NavBar/>
-        <div>
-          <MainMenu
+        <MainMenu
             width={this.props.width}
             handleSave={this.handleSave}
             handleChange={this.handleChange}
+            userLayouts={this.props.userLayouts}
+            userHasLayouts={this.props.userHasLayouts}
+            saveMessage={this.props.saveMessage}
             chooseState={this.handleFilter}
             value={this.state.stateValue}
             width={this.props.width}
@@ -268,7 +270,7 @@ class Canvas extends Component {
               </div>
             </Button>
           </OverlayTrigger>
-        </div>
+      
       </div>
     )
   }
@@ -283,7 +285,9 @@ const mapStateToProps = state => {
     filteredFlowers: state.flowers.filteredFlowers,
     error: state.error,
     saveMessage: state.grid.saveMessage,
-    errorMessage: state.grid.errorMessage
+    errorMessage: state.grid.errorMessage,
+    userLayouts: state.grid.userLayouts,
+    userHasLayouts: state.grid.userHasLayouts
   }
 }
 
