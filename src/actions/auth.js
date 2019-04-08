@@ -54,7 +54,7 @@ const login = loginData => dispatch => {
 
 export const loginThenNavToProfile = loginData => dispatch => {
     dispatch(login(loginData))
-    history.push('/')
+    history.push('/Canvas')
 }
 
 const register = registerData => dispatch => {
