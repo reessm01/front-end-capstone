@@ -11,6 +11,8 @@ import {
 } from "semantic-ui-react";
 import  '../App.css'
 import picture from "./Images/Header.png"
+
+// export class Login2 extends Component {
 class Login2 extends Component {
   state = {
     username: "",

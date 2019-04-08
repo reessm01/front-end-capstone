@@ -4,6 +4,7 @@ import { ToolBar } from "./ToolBar"
 import Login2 from "./Login2"
 import { ProfilePage } from "./ProfilePage"
 import  FlowerSearch from "./FlowerSearch.js";
+import  VeggieSearch from "./VeggieSearch.js";
 import RegistrationPage from './RegistrationPage'
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
@@ -22,6 +23,7 @@ class App extends Component {
           <Route exact path="/profile" render={() => <ProfilePage />} />
           <Route exact path="/register" render={() => <RegistrationPage /> } />
           <Route exact path="/flowers" render={() => <FlowerSearch />} />
+          <Route exact path="/veggies" render={() => <VeggieSearch />} />
           <Route exact path="/amazonAds" render={() => <AmazonAds />} />
           <Route exact path="/userImage" render={() => <UserImage />} />
         </Switch>

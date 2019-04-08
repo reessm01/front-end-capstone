@@ -61,6 +61,22 @@ body {
   padding: 1%;
 } 
 
+.formDiv {
+  display: flex;
+  flex-direction: column;
+  width: 40%; 
+  border:  9px solid rgb(131, 137, 114);
+  border-radius: 20px;
+  padding: 1%; 
+  /* background-color: #ACC9AC; */
+} 
+
+.thumbnail {
+  width: 220px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
 .deleteAccountDiv {
 display: flex;
 align-self: center;

@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 //import { connect } from "react-redux";
 import { ButtonToolbar, ButtonGroup, Button } from "react-bootstrap";
+import { NavBar } from "./NavBar"
 export class ToolBar extends Component {
   render() {
     return (
       <ButtonToolbar aria-label="Toolbar with button groups">
+      <NavBar /> 
         <ButtonGroup className="mr-2" aria-label="First group">
           <Button onClick={this.props.handleAddGrid}>
             <i className="fas fa-plus-circle" />
