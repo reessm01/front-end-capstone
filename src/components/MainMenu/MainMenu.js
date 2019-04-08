@@ -6,10 +6,12 @@ import {
   Button,
   Dropdown,
   Form,
-  Select,
   Message
 } from "semantic-ui-react"
 import { generalStyling, buttonStyling, tabStyling } from "./styles"
+import {
+    loadLayout
+  } from "../../actions"
 import { stateOptions } from "./constants"
 
 class MainMenu extends Component {
@@ -25,6 +27,11 @@ class MainMenu extends Component {
     this.setState({ ...this.state, value: data.value, id: key }, () =>
       console.log(this.state)
     )
+  }
+
+  handleLoad = e =>{
+      e.preventDefault()
+      this.props.loadLayout(this.state.id)
   }
 
   render() {
@@ -73,7 +80,7 @@ class MainMenu extends Component {
         menuItem: "Load",
         render: () => (
           <div style={{ width: this.props.width + 25 + "px" }}>
-            <Form>
+            <Form onSubmit={e => this.handleLoad(e)}>
               <Tab.Pane style={tabStyling}>
                 {this.props.userHasLayouts ? (
                   <Dropdown
@@ -121,12 +128,12 @@ class MainMenu extends Component {
 
 const mapStateToProps = state => {
     return {
-
+        
     }
   }
   
   const mapDispatchToProps = {
-
+    loadLayout,
   }
   
   export default connect(

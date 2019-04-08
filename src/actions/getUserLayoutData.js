@@ -12,7 +12,7 @@ export const getUserLayoutData = res => dispatch => {
         .then(handleJsonResponse)
         .then(result => {
             let layoutById = result.layouts.map(element => {
-                return { id: element.id, name: element.name }
+                return { id: element.id, name: element.name, layout:element.layout }
             })
             return dispatch({
                 type: GET_USER_LAYOUT_DATA,

@@ -6,7 +6,8 @@ import {
     REMOVE_PLANT,
     SAVE_SUCCESS,
     SAVE_ERROR,
-    GET_USER_LAYOUT_DATA
+    GET_USER_LAYOUT_DATA,
+    LOAD_SUCCESS
 } from '../actions/';
 import { width } from "../components/Grid/styles"
 
@@ -21,7 +22,8 @@ const initialState = {
     id: null,
     layouts: null,
     saveMessage: null,
-    errorMessage: null
+    errorMessage: null,
+    name: null
 }
 
 export default (state = initialState, action) => {
@@ -73,6 +75,13 @@ export default (state = initialState, action) => {
                 ...state,
                 errorMessage: true,
                 saveMessage: false
+            }
+        case LOAD_SUCCESS:
+            return {
+                ...state,
+                grid: action.payload.layout,
+                id: action.payload.id,
+                name: action.payload.name
             }
         default:
             return state
