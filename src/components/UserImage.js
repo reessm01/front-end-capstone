@@ -8,6 +8,7 @@
      active: false,
      file: null
    };
+
    imageFileChangeHandler = event => {
      const imageFile = event.target.imageFiles[0];
      this.setState({
@@ -16,14 +17,14 @@
    };
 
    imageFileUploadHandler = event => {
-     const imageFile = this.state.imageFile;
+     const imageFile = event.this.state.imageFile;
      this.handleToggle();
      this.props.uploadUserPic({ picture: imageFile });
    };
 
-   handleUploadImage = e => {
-     e.preventDefault();
-     const formData = new FormData(e.target);
+   handleUploadImage = event => {
+     event.preventDefault();
+     const formData = new FormData(event.target);
      this.props.uploadImage(formData);
    };
 
@@ -40,10 +41,10 @@
            <Image
              alt=""
              src={this.props.userimage}
-             className="profile-user-pic"
+             className="userImage"
            />
            <Input type="file" name="picture" required />
-           <Button  type="submit" color="blue">
+           <Button  type="submit" color="blue" size="small">
              Upload a Photo
            </Button>
          </Form>
