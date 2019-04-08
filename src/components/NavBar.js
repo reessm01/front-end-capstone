@@ -20,8 +20,8 @@ export class NavBar extends Component {
             <Menu.Item 
             name='home' 
             //active={activeItem === 'home'} 
-            active={this.props.path==='/Login'} 
-            to ='/Login'
+            active={this.props.path==='/login'} 
+            to ='/login'
             onClick={this.handleItemClick}
             as={Link} 
             />
