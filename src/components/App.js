@@ -10,7 +10,10 @@ import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
 import {AmazonAds } from './Amazon'
 import { UserImage } from './UserImage'
+<<<<<<< HEAD
+=======
 
+>>>>>>> abe97b19d332be2021b30051f459a4aebdc2fcc9
 import  '../App.css'
 
 
@@ -19,9 +22,8 @@ class App extends Component {
     return (
         <Switch>
           <Route exact path="/" render={() => <Login2 />} />
-          <Route exact path="/Canvas" render={() => <Canvas />} />
+          <Route exact path="/canvas" render={() => <Canvas />} />
           <Route path="/toolbar" render={() => <ToolBar />} />
-        
           <Route exact path="/profile" render={() => <ProfilePage />} />
           <Route exact path="/register" render={() => <RegistrationPage /> } />
           <Route exact path="/flowers" render={() => <FlowerSearch />} />
