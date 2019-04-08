@@ -23,6 +23,13 @@ body {
   color: white;
 }  
 */
+
+.title {
+  border: 1px solid black;
+  max-width: 450px;
+  font-family: "Just Another Hand";
+}
+
 .pageDiv {
   display: flex;
   flex-direction: row;

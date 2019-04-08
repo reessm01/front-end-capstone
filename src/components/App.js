@@ -10,6 +10,7 @@ import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
 import {AmazonAds } from './Amazon'
 import { UserImage } from './UserImage'
+import { Grid } from './Grid'
 import  '../App.css'
 
 
@@ -18,6 +19,7 @@ class App extends Component {
     return (
         <Switch>
           <Route exact path="/" render={() => <Canvas />} />
+          <Route exact path='/Grid' render={() => <Grid />} />
           <Route path="/toolbar" render={() => <ToolBar />} />
           <Route exact path="/Login" render={() => <Login2 />} />
           <Route exact path="/profile" render={() => <ProfilePage />} />
