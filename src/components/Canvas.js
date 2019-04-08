@@ -16,7 +16,7 @@ import {
   removePlant
 } from "../actions";
 
-export class Canvas extends Component {
+class Canvas extends Component {
   state = {
     prevElement: null
   };

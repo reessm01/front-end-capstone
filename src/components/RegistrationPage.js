@@ -8,6 +8,8 @@ import {
     Button,
     Input
 } from "semantic-ui-react";
+import { NavBar } from './NavBar'
+import { PageHeader } from './PageHeader'
 export class RegistrationPage extends Component {
 
     state = {
@@ -19,54 +21,57 @@ export class RegistrationPage extends Component {
     handleRegister = e => {
         e.preventDefault();
         this.props.register(this.state);
-      };
-    
-      handleChange = e => {
+    };
+
+    handleChange = e => {
         this.setState({ [e.target.name]: e.target.value });
-      };
+    };
 
     render() {
-        const {handleRegister, handleChange } = this
+        const { handleRegister, handleChange } = this
         //const { isLoading, err } = this.props
 
         return (
-            <React.Fragment>
-            <div className="RegistrationPage">
-                <Form onSubmit={handleRegister} >
+            <React.Fragment> 
+                <PageHeader />
+            <NavBar />
+
+            <div className="pageDiv">
+                <Form className="formDiv" onSubmit={handleRegister} >
                     <Form.Field
                             label="Username:"
                             required
                             placeholder="Username"
                             type="text"
-                            control={ Input }
+                            control={Input}
                             autoFocus
                             onChange={handleChange}
                             name="username"
                         />
-                    <Form.Field
-                        label="Password:"
-                        required
-                        placeholder="Password"
-                        type="password"
-                        control={ Input }
-                        onChange={handleChange}
-                        name="password"
-                    />
-                    <Form.Field
-                        label="Display Name:"
-                        required
-                        placeholder="Choose a Display Name"
-                        type="text"
-                        control={Input}
-                        onChange={handleChange}
-                        name="displayName"
-                    />
-                    <Button variant="primary" type="submit">
-                        Start Gardening!
+                        <Form.Field
+                            label="Password:"
+                            required
+                            placeholder="Password"
+                            type="password"
+                            control={Input}
+                            onChange={handleChange}
+                            name="password"
+                        />
+                        <Form.Field
+                            label="Display Name:"
+                            required
+                            placeholder="Choose a Display Name"
+                            type="text"
+                            control={Input}
+                            onChange={handleChange}
+                            name="displayName"
+                        />
+                        <Button variant="primary" type="submit">
+                            Start Gardening!
                      </Button>
-                </Form>
-       </div>
-       </React.Fragment>
+                    </Form>
+                </div>
+            </React.Fragment>
         )
     }
 }
@@ -78,5 +83,3 @@ export default connect(
     }),
     { register }
 )(RegistrationPage);
-
-//export default RegistrationPage

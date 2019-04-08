@@ -2,18 +2,20 @@ import React, { Component } from "react";
 //import "./App.css";
 import Canvas from "./Canvas";
 import { ToolBar } from "./ToolBar"
-import { Login2 } from "./Login2"
+import Login2 from "./Login2"
 import { ProfilePage } from "./ProfilePage"
 import  FlowerSearch from "./FlowerSearch.js";
-import { RegistrationPage } from './RegistrationPage'
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import RegistrationPage from './RegistrationPage'
+import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
+import {AmazonAds } from './Amazon'
+import { UserImage } from './UserImage'
+import  '../App.css'
 
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
         <Switch>
           <Route exact path="/" render={() => <Canvas />} />
           <Route path="/toolbar" render={() => <ToolBar />} />
@@ -21,9 +23,9 @@ class App extends Component {
           <Route exact path="/profile" render={() => <ProfilePage />} />
           <Route exact path="/register" render={() => <RegistrationPage /> } />
           <Route exact path="/flowers" render={() => <FlowerSearch />} />
+          <Route exact path="/amazonAds" render={() => <AmazonAds />} />
+          <Route exact path="/userImage" render={() => <UserImage />} />
         </Switch>
-      </BrowserRouter>
-
     );
   }
 }
