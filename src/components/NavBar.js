@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 // import Logout from "../Logout.js"
 import '../App.css';
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { Menu } from 'semantic-ui-react'
+import { Link } from "react-router-dom"
 
 export class NavBar extends Component {
     state = { activeItem: 'home' }
@@ -16,11 +17,35 @@ export class NavBar extends Component {
         <React.Fragment>
           <Menu stackable pointing secondary color='pink'
           style={{fontSize:"20px", fontFamily:'Raleway'}}>
-            <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
-            <Menu.Item name='feed' active={activeItem === 'feed'} onClick={this.handleItemClick} />
+            <Menu.Item 
+            name='home' 
+            //active={activeItem === 'home'} 
+            active={this.props.path==='/Login'} 
+            to ='/Login'
+            onClick={this.handleItemClick}
+            as={Link} 
+            />
+            <Menu.Item 
+            name='feed' 
+            // active={activeItem === 'feed'} 
+            active={this.props.path==='/feed'} 
+            to ='/feed'
+            onClick={this.handleItemClick}
+            as={Link} />
             <Menu.Item
               name='profile'
-              active={activeItem === 'profile'}
+              //active={activeItem === 'profile'}
+              as={Link}
+              active={this.props.path==="/profile"}
+              to="/profile"
+              onClick={this.handleItemClick}
+            />
+            <Menu.Item
+              name='garden planner'
+              //active={activeItem === 'profile'}
+              as={Link}
+              active={this.props.path==="/grid"}
+              to="/grid"
               onClick={this.handleItemClick}
             />
             <Menu.Menu position='right'>
