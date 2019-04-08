@@ -10,7 +10,7 @@ import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
 import {AmazonAds } from './Amazon'
 import { UserImage } from './UserImage'
-import { Grid } from './Grid'
+import { Grid } from "./Grid/Grid"
 import  '../App.css'
 
 
