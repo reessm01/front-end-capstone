@@ -63,13 +63,12 @@ export class ProfilePage extends Component {
                                 />
                                 <Form.Field>
                                     <Input
-
                                         placeholder="Change Password"
                                         type="password"
                                         defaultValue={this.props.passwordValue}
                                         name="password"
                                         onChange={this.handleChange}
-                                    // control={Input}
+                                        control={Input}
                                     />
                                 </Form.Field>
                                 <Form.TextArea
@@ -78,7 +77,7 @@ export class ProfilePage extends Component {
                                     defaultValue={this.props.about}
                                     name="about"
                                     onChange={this.handleChange}
-                                // control={Input}
+                                    control={Input}
                                 />
                                 <Button
                                     type="submit"
@@ -106,5 +105,3 @@ export default connect(
         passwordValue: users.currentPassword
     }), { update }
 )(ProfilePage)
-
-//export default ProfilePage;

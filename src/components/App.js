@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import "./App.css";
 import Canvas from "./Canvas";
 import { ToolBar } from "./ToolBar"
 import Login2 from "./Login2"
@@ -32,7 +31,7 @@ class App extends Component {
 
 export default connect(
   ({ auth }) => ({
-    // login: auth.login
+    login: auth.login
   }),
   null
 )(App);
