@@ -115,7 +115,6 @@ class Canvas extends Component {
 
 
 handleChange = e => {
-  console.log(e.target.value)
   this.setState({ [e.target.name]: e.target.value })
 }
 
@@ -140,14 +139,14 @@ render() {
     store.push(row)
   }
 
-
-
   return (
     <div>
       <PageHeader />
       <NavBar />
       <MainMenu
         width={this.props.width}
+        userLayouts={this.props.userLayouts}
+        userHasLayouts={this.props.userHasLayouts}
         saveMessage={this.props.saveMessage}
         handleSave={this.handleSave}
         handleChange={this.handleChange}
@@ -248,7 +247,9 @@ const mapStateToProps = state => {
     flowers: state.flowers.flower,
     error: state.error,
     saveMessage: state.grid.saveMessage,
-    errorMessage: state.grid.errorMessage
+    errorMessage: state.grid.errorMessage,
+    userLayouts: state.grid.userLayouts,
+    userHasLayouts: state.grid.userHasLayouts
   }
 }
 
