@@ -4,7 +4,7 @@ export const DROP_PLANT = 'DROP_PLANT';
 
 export const dropPlant = (row, col, pictureLink) => dispatch => {
     let newGrid = Array.from(store.getState().grid.grid)
-    pictureLink = pictureLink !== undefined ? pictureLink:"https://proflowers.wpengine.com/wp-content/plugins/pf-flowertypes/image/winter-aconite-720790.jpg"
+    pictureLink = pictureLink !== undefined ? pictureLink:pictureLink
     newGrid[row][col].pictureLink = pictureLink
    
     return dispatch({

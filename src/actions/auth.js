@@ -54,7 +54,7 @@ const login = loginData => dispatch => {
 
 export const loginThenNavToProfile = loginData => dispatch => {
     dispatch(login(loginData))
-    history.push('/')
+    history.push('/canvas')
 }
 
 const register = registerData => dispatch => {
@@ -79,7 +79,7 @@ const register = registerData => dispatch => {
             return Promise.reject(
                 dispatch({
                     type: REGISTER_FAIL,
-                    payload: err.alert(
+                    payload: alert(
                         "That username has been taken. Please choose a different username."
                     )
                 })

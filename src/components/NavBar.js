@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 // import Logout from "../Logout.js"
 import '../App.css';
-// import { connect } from 'react-redux'
+//import { connect } from 'react-redux'
 import { Menu } from 'semantic-ui-react'
+<<<<<<< HEAD
 // import  largeSucculent  from '../components/Images/side.jpg'
 import { Link } from "react-router-dom";
+=======
+import { Link } from "react-router-dom"
+>>>>>>> f5295d92d8ef248aecb87f20c9844bbca1858c4f
 
 export class NavBar extends Component {
     state = { activeItem: 'home' }
@@ -18,9 +22,21 @@ export class NavBar extends Component {
         <React.Fragment>
           <Menu stackable pointing secondary color='pink'
           style={{fontSize:"20px", fontFamily:'Raleway'}}>
-            <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
-            <Menu.Item name='feed' active={activeItem === 'feed'} onClick={this.handleItemClick} />
+            <Menu.Item 
+            name='home' 
+            active={activeItem === 'login'} 
+            to ='/'
+            onClick={this.handleItemClick}
+            as={Link} 
+            />
+            <Menu.Item 
+            name='feed' 
+            active={activeItem === 'feed'} 
+            to ='/feed'
+            onClick={this.handleItemClick}
+            as={Link} />
             <Menu.Item
+<<<<<<< HEAD
             as={Link}
             name="feed"
             active={activeItem === "feed"}
@@ -53,6 +69,19 @@ export class NavBar extends Component {
               name="veggies"
               as={Link}
               active={activeItem === "veggies"}
+=======
+              name='profile'
+              active={activeItem === 'profile'}
+              as={Link}
+              to="/profile"
+              onClick={this.handleItemClick}
+            />
+            <Menu.Item
+              name='garden planner'
+              active={activeItem === 'garden planner'}
+              as={Link}
+              to="/canvas"
+>>>>>>> f5295d92d8ef248aecb87f20c9844bbca1858c4f
               onClick={this.handleItemClick}
               to="/veggies"
             />

@@ -13,8 +13,7 @@ export class AmazonAds extends Component {
     
         return (
             <React.Fragment>
-                <NavBar /> 
-                <div id="amzn-assoc-ad-70379cea-d047-4fb0-93c9-b6ac3e6e968b"></div>
+                {/* <div id="amzn-assoc-ad-70379cea-d047-4fb0-93c9-b6ac3e6e968b"></div> */}
 
             </React.Fragment>
         )

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-//import { Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { NavBar } from "./NavBar"
 import { connect } from 'react-redux'
 import { updateThenNavToProfile as update } from '../actions/users.js'
 import { PageHeader } from './PageHeader'
-// import UserImage from "./UserImage.js"
 // import DeleteUserAccount from "./DeleteUserAccount.js"
 import { AmazonAds } from './Amazon'
 import  UserImage  from './UserImage'
@@ -40,11 +39,11 @@ export class ProfilePage extends Component {
                     <PageHeader />
                     <NavBar />
                     <AmazonAds />
-                    {/* <Link to="/feed"></Link> */}
-                    <div className = "profilePageDiv">
+                   <Link to="/feed"></Link> 
+                    <div className = "pageDiv">
                         <div className="userCard">
                             <Card >
-                             <UserImage />
+                            <UserImage /> 
                                 <Card.Header>Display Name: {this.props.displayName}</Card.Header>
                                 <Card.Content>User Name: {this.props.username}</Card.Content>
                                 <Card.Description>All About You: {this.props.about}</Card.Description>
@@ -64,13 +63,12 @@ export class ProfilePage extends Component {
                                 />
                                 <Form.Field>
                                     <Input
-
                                         placeholder="Change Password"
                                         type="password"
                                         defaultValue={this.props.passwordValue}
                                         name="password"
                                         onChange={this.handleChange}
-                                    // control={Input}
+                                        control={Input}
                                     />
                                 </Form.Field>
                                 <Form.TextArea
@@ -79,7 +77,7 @@ export class ProfilePage extends Component {
                                     defaultValue={this.props.about}
                                     name="about"
                                     onChange={this.handleChange}
-                                // control={Input}
+                                    control={Input}
                                 />
                                 <Button
                                     type="submit"
@@ -107,5 +105,3 @@ export default connect(
         passwordValue: users.currentPassword
     }), { update }
 )(ProfilePage)
-
-//export default ProfilePage;

@@ -23,9 +23,11 @@ body {
   color: white;
 }  
 */
-.profilePageDiv {
+
+.pageDiv {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   margin-top: 2%;
 }
 
@@ -36,6 +38,8 @@ body {
 .userCard {
   display: flex;
   flex-direction: column;
+  justify-self: flex-end;
+  
   width: 20%;
   height: 10%;
   /* background-color: #ACC9AC; */
@@ -45,8 +49,6 @@ body {
 } 
 
 .formDiv {
-  display: flex;
-  flex-direction: column;
   width: 40%; 
   border:  9px solid rgb(131, 137, 114);
   border-radius: 20px;
