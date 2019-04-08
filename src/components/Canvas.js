@@ -6,6 +6,8 @@ import { Button } from "semantic-ui-react"
 import { toolTip } from "./ToolTip"
 import { getFlowerData } from "../actions/getFlowerData"
 import { connect } from "react-redux"
+import { NavBar } from "./NavBar"
+import { PageHeader } from './PageHeader'
 import MainMenu from "./MainMenu/MainMenu"
 import {
   initGrid,
@@ -151,6 +153,8 @@ class Canvas extends Component {
 
     return (
       <div>
+        <PageHeader />
+        <NavBar />
         <MainMenu width={this.props.width} handleSave={this.handleSave} handleChange={this.handleChange}/>
         <br />
         <div
