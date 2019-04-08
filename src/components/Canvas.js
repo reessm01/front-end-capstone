@@ -1,30 +1,29 @@
 import React, { Component } from "react"
 import { Grid } from "./Grid/Grid"
-import { ToolBar } from "./ToolBar"
-// import { CanvasToolBar }
 import { PictureList } from "./PictureList"
 import { OverlayTrigger } from "react-bootstrap"
 import { Button } from "semantic-ui-react"
 import { toolTip } from "./ToolTip"
-import { AttachedPic } from "./AttachedPic"
+import { getFlowerData } from "../actions/getFlowerData"
 import { connect } from "react-redux"
+import MainMenu from "./MainMenu/MainMenu"
 import {
   initGrid,
   expandGrid,
   subtractGrid,
   dropPlant,
-  removePlant
-} from "../actions"
-import MainMenu from "./MainMenu/MainMenu";
+  removePlant,
+  saveLayout
+} from "../actions";
 
 class Canvas extends Component {
   state = {
-    pictures: [
-      { pictureId: 1, bgColor: "red" },
-      { pictureId: 2, bgColor: "blue" }
-    ],
-    attachedPictures: [],
-    prevElement: null
+    prevElement: null,
+    name: ""
+  };
+
+  componentWillMount() {
+    this.props.getFlowerData();
   }
 
   contextMenu = e => {
@@ -34,41 +33,63 @@ class Canvas extends Component {
     } else {
       this.props.removePlant(e.target.dataset.i, e.target.dataset.j)
     }
+  };
 
-  }
-
-  handleDragOver = (e) => {
-    e.preventDefault()
-    if (e.target.dataset.i !== this.state.targetRow || e.target.dataset.j !== this.state.targetCol) {
+  handleDragOver = e => {
+    e.preventDefault();
+    if (
+      e.target.dataset.i !== this.state.targetRow ||
+      e.target.dataset.j !== this.state.targetCol
+    ) {
       this.setState({
         ...this.state,
         targetRow: e.target.dataset.i,
         targetCol: e.target.dataset.j
-      })
+      });
     }
-  }
+  };
 
   handleDragStart = event => {
     if (event.target.id !== "static") {
-      event.target.style.opacity = 0.3
+      event.target.style.opacity = 0.3;
       this.setState({
         ...this.state,
         originRow: event.target.dataset.i,
         originCol: event.target.dataset.j,
         prevElement: event.target
-      })
-
+      });
     }
-  }
+    let name = event.target.dataset.name
+    if(name){
+      event.dataTransfer.setData("name",name)
+    }
+  };
 
   handleDrop = e => {
-    e.preventDefault()
-    let stateCopy = this.state.prevElement
-    if (this.state.prevElement !== null) {
-      this.props.removePlant(this.state.originRow, this.state.originCol)
-      stateCopy.style.opacity = 1.0
+    e.preventDefault();
+    
+    let name = e.dataTransfer.getData("name")
+    if(name){
+      let curflower = this.props.flowers.find(flower => flower.name===name)
+      this.props.dropPlant(
+        this.state.targetRow,
+        this.state.targetCol,
+        curflower.image
+      );
     }
-    this.props.dropPlant(this.state.targetRow, this.state.targetCol)
+    else{
+      this.props.dropPlant(
+        this.state.targetRow,
+        this.state.targetCol,
+        this.props.grid[this.state.originRow][this.state.originCol].pictureLink
+      );
+      let stateCopy = this.state.prevElement;
+      if (this.state.prevElement !== null) {
+        this.props.removePlant(this.state.originRow, this.state.originCol);
+        stateCopy.style.opacity = 1.0;
+      }
+    }
+    
 
     this.setState({
       ...this.state,
@@ -77,11 +98,36 @@ class Canvas extends Component {
       targetRow: null,
       targetCol: null,
       prevElement: null
-    })
+    });
+  };
+
+  handleSave = e => {
+    e.preventDefault()
+    for(let object in this.props.grid){
+      if(this.state.name === "") {
+        this.setState({...this.state, errorMessage: true})
+        break
+      }
+        else if(object.pictureLink !== null) {
+          if(this.props.hasId === true) {
+            this.props.patchLayout(this.props.hasId, this.state.name, this.props.grid)
+            break
+          }
+          else {
+            this.props.saveLayout(this.state.name, this.props.grid) 
+            break
+          }
+        }
+    }
+  }
+
+  handleChange = e => {
+    console.log(e.target.value)
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   render() {
-    const { grid } = this.props
+    const { grid } = this.props;
     const store = [];
 
     for (let i = 0; i < grid.length; i++) {
@@ -95,27 +141,31 @@ class Canvas extends Component {
             image={grid[i][j].pictureLink}
             handleDragStart={this.handleDragStart}
             onContextMenu={this.contextMenu}
-          />);
+          />
+        );
       }
       store.push(row);
     }
 
-    const pictureHolder = []
-
-    if (this.state.attachedPictures.length !== 0) {
-      this.state.attachedPictures.map(curPic => (
-        pictureHolder.push(<AttachedPic top={curPic.yCoord} left={curPic.xCoord} bgColor="green"
-        />)
-
-      ))
-    }
+    
 
     return (
       <div>
-        <MainMenu width={this.props.width}/>
+        <MainMenu width={this.props.width} handleSave={this.handleSave} handleChange={this.handleChange}/>
         <br />
-        <div>
-          <PictureList pictures={this.state.pictures} handleDragStart={this.handleDragStart} />
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            width: "510px",
+            height: "110px",
+            overflow: "scroll"
+          }}
+        >
+          <PictureList
+            images={this.props.flowers}
+            handleDragStart={this.handleDragStart}
+          />
         </div>
         <div style={{ display: "block" }}>
           <div style={{ display: "flex" }}>
@@ -143,8 +193,15 @@ class Canvas extends Component {
                 onContextMenu={this.contextMenu}
                 style={{ width: "25px", margin: "0px", padding: "0px" }}
               >
-                <div id="col" style={{ display: "flex", justifyContent: "flex-end", marginRight: "3px" }}>
-                  <i id="col" class="fas fa-chevron-right" />
+                <div
+                  id="col"
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    marginRight: "3px"
+                  }}
+                >
+                  <i id="col" className="fas fa-chevron-right" />
                 </div>
               </Button>
             </OverlayTrigger>
@@ -158,9 +215,21 @@ class Canvas extends Component {
               id="rows"
               onClick={e => this.props.expandGrid(e.target.id)}
               onContextMenu={this.contextMenu}
-              style={{ height: "25px", margin: "0px", width: this.props.width + "px" }} >
-              <div id="rows" style={{ display: "flex", justifyContent: "center", width: "initial" }}>
-                <i id="rows" class="fas fa-chevron-down" />
+              style={{
+                height: "25px",
+                margin: "0px",
+                width: this.props.width + "px"
+              }}
+            >
+              <div
+                id="rows"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "initial"
+                }}
+              >
+                <i id="rows" className="fas fa-chevron-down" />
               </div>
             </Button>
           </OverlayTrigger>
@@ -170,23 +239,27 @@ class Canvas extends Component {
   }
 }
 
-function mapStateToProps({ grid, auth }) {
+const mapStateToProps = state => {
   return {
-    grid: grid.grid,
-    width: grid.canvasWidth,
-    auth: auth.login
-  }
-}
+    grid: state.grid.grid,
+    width: state.grid.canvasWidth,
+    layoutHasId: state.grid.layoutHasId,
+    flowers: state.flowers.flower,
+    error: state.error
+  };
+};
 
 const mapDispatchToProps = {
   initGrid,
   expandGrid,
   subtractGrid,
   dropPlant,
-  removePlant
-}
+  removePlant,
+  getFlowerData,
+  saveLayout
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Canvas)
+)(Canvas);
