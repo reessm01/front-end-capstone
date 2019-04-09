@@ -5,10 +5,12 @@ import { OverlayTrigger } from "react-bootstrap"
 import { Button } from "semantic-ui-react"
 import { toolTip } from "./ToolTip"
 import { getFlowerData } from "../actions/getFlowerData"
+import {getVeggieData} from "../actions/getVeggieData.js"
 import { connect } from "react-redux"
 import { NavBar } from "./NavBar"
 import { PageHeader } from "./PageHeader"
 import MainMenu from "./MainMenu/MainMenu"
+// import SubMenu from "./MainMenu/SubMenu"
 import {
   initGrid,
   expandGrid,
@@ -24,11 +26,13 @@ class Canvas extends Component {
     prevElement: null,
     name: "",
     value: "",
-    selectedState: "all"
+    selectedState: "all",
+    selectedCategory:"Choose Flowers"
   }
 
   componentWillMount() {
     this.props.getFlowerData()
+    this.props.getVeggieData()
   }
   componentDidMount() {
     this.setState((state, props) => ({
@@ -181,7 +185,11 @@ class Canvas extends Component {
           saveMessage={this.props.saveMessage}
           errorMessage={this.props.errorMessage}
         />
+        
+
         <br />
+        
+
         <div
           style={{
             display: "flex",
@@ -268,7 +276,7 @@ class Canvas extends Component {
           </Button>
         </OverlayTrigger>
       </div>
-    )
+    );
   }
 }
 
@@ -283,7 +291,9 @@ const mapStateToProps = state => {
     saveMessage: state.grid.saveMessage,
     errorMessage: state.grid.errorMessage,
     userLayouts: state.grid.userLayouts,
-    userHasLayouts: state.grid.userHasLayouts
+    userHasLayouts: state.grid.userHasLayouts,
+    veggies:state.veggies.veggie,
+    filteredVeggies:state.veggies.filteredVeggies
   }
 }
 
@@ -294,8 +304,10 @@ const mapDispatchToProps = {
   dropPlant,
   removePlant,
   getFlowerData,
+  getVeggieData,
   saveLayout,
-  filterFlowers
+  filterFlowers,
+  filterVeggies
 }
 
 export default connect(
