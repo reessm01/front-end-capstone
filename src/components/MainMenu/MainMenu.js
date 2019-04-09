@@ -3,43 +3,95 @@ import { Tab, Select } from "semantic-ui-react"
 import { connect } from "react-redux"
 import { Input, Button, Dropdown, Form, Message } from "semantic-ui-react"
 import { generalStyling, buttonStyling, tabStyling } from "./styles"
-import { loadLayout } from "../../actions"
+import { 
+    loadLayout, 
+    newLayout,
+    saveLayout,
+    getUserLayoutData,
+    patchLayout
+} from "../../actions"
 import { stateOptions } from "./constants"
 
 class MainMenu extends Component {
   state = {
     id: null,
-    value: null
+    value: null,
+    name: ""
   }
 
-  handleChange = (e, data) => {
+  handleLoadChange = (e, data) => {
     let key
     for (let element of data.options)
       if (element.value === data.value) key = element.key
     this.setState({ ...this.state, value: data.value, id: key })
   }
 
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
+  handleSave = e => {
+    e.preventDefault()
+    console.log(this.state.name + " " + this.props.grid)
+    if (this.props.id !== null) {
+      this.props.patchLayout(this.props.grid, this.props.id)
+    } else {
+      this.props.saveLayout(this.state.name, this.props.grid).then(()=>this.props.getUserLayoutData(this.props.userId))
+    }
+  }
+
   handleLoad = e => {
     e.preventDefault()
     this.props.loadLayout(this.state.id)
+    this.setState({...this.state, name: this.props.name})
+  }
+
+  handleNewLayOut = e => {
+      e.preventDefault()
+      this.props.newLayout()
   }
 
   render() {
     const panes = [
+        
+      {
+        menuItem: "New",
+        render: () => (
+          <div style={{ width: this.props.width + 25 + "px" }}>
+            <Form onSubmit={this.handleNewLayOut}>
+              <Tab.Pane style={tabStyling}>
+                <Button
+                  style={{width:"50%"}}
+                  disabled={this.props.userHasLayouts ? false : true}
+                >
+                  New Layout
+                </Button>
+              </Tab.Pane>
+            </Form>
+          </div>
+        )
+      },
       {
         menuItem: "Save",
         render: () => (
           <div style={{ maxWidth: this.props.width + 25 + "px" }}>
-            <Form onSubmit={this.props.handleSave}>
+            <Form onSubmit={this.handleSave}>
               <Tab.Pane style={tabStyling}>
                 <Input
                   style={generalStyling}
                   placeholder="Layout name..."
                   name="name"
                   required
-                  onChange={this.props.handleChange}
+                  onChange={this.handleChange}
+                  value={this.props.id===null ? this.state.name:this.props.name}
+                  disabled={this.props.id!==null ? true:false}
                 />
-                <Button style={buttonStyling}>Save</Button>
+                <Button
+                  style={buttonStyling}
+                  disabled={this.props.token === null ? true : false}
+                >
+                  Save
+                </Button>
                 {this.props.saveMessage && (
                   <Message positive>
                     <Message.Header>Success!</Message.Header>
@@ -73,7 +125,7 @@ class MainMenu extends Component {
                     required
                     placeholder={"Select a layout..."}
                     style={generalStyling}
-                    onChange={this.handleChange}
+                    onChange={this.handleLoadChange}
                     selection
                     options={this.props.userLayouts.map(object => {
                       return {
@@ -159,11 +211,24 @@ class MainMenu extends Component {
 }
 
 const mapStateToProps = state => {
-  return {}
+  return {
+    token: state.auth.login.token !== null ? state.auth.login.token : null,
+    userId: state.auth.login.id,
+    id: state.grid.id,
+    name: state.grid.name,
+    userLayouts: state.grid.userLayouts,
+    userHasLayouts: state.grid.userHasLayouts,
+    saveMessage: state.grid.saveMessage,
+    errorMessage: state.grid.errorMessage,
+  }
 }
 
 const mapDispatchToProps = {
-  loadLayout
+  loadLayout,
+  newLayout,
+  saveLayout,
+  getUserLayoutData,
+  patchLayout
 }
 
 export default connect(

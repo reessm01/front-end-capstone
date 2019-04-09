@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Grid } from "./Grid/Grid"
-import { PictureList } from "./PictureList"
+import PictureList from "./PictureList"
 import { OverlayTrigger } from "react-bootstrap"
 import { Button } from "semantic-ui-react"
 import { toolTip } from "./ToolTip"
@@ -10,7 +10,7 @@ import { connect } from "react-redux"
 import { NavBar } from "./NavBar"
 import { PageHeader } from "./PageHeader"
 import MainMenu from "./MainMenu/MainMenu"
-// import SubMenu from "./MainMenu/SubMenu"
+import SideInfo from "./SideInfo"
 import {
   initGrid,
   expandGrid,
@@ -19,7 +19,8 @@ import {
   removePlant,
   saveLayout,
   filterFlowers,
-  filterVeggies
+  filterVeggies,
+  patchLayout
 } from "../actions"
 
 class Canvas extends Component {
@@ -152,19 +153,6 @@ class Canvas extends Component {
     })
   }
 
-  handleSave = e => {
-    e.preventDefault()
-    if (this.props.id !== null) {
-      this.props.patchLayout(this.props.id, this.state.name, this.props.grid)
-    } else {
-      this.props.saveLayout(this.state.name, this.props.grid)
-    }
-  }
-
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
   render() {
     const { grid } = this.props
     const store = []
@@ -194,16 +182,8 @@ class Canvas extends Component {
         <NavBar />
         <MainMenu
           width={this.props.width}
-          handleSave={this.handleSave}
-          handleChange={this.handleChange}
-          userLayouts={this.props.userLayouts}
-          userHasLayouts={this.props.userHasLayouts}
-          saveMessage={this.props.saveMessage}
           chooseState={this.handleFilter}
-          value={this.state.stateValue}
-          width={this.props.width}
-          saveMessage={this.props.saveMessage}
-          errorMessage={this.props.errorMessage}
+          grid={this.props.grid}
         />
         
 
@@ -313,6 +293,7 @@ class Canvas extends Component {
             >
               <i id="rows" className="fas fa-chevron-down" />
             </div>
+            <SideInfo/>
           </Button>
         </OverlayTrigger>
       </div>
@@ -347,7 +328,8 @@ const mapDispatchToProps = {
   getVeggieData,
   saveLayout,
   filterFlowers,
-  filterVeggies
+  filterVeggies,
+  patchLayout
 }
 
 export default connect(

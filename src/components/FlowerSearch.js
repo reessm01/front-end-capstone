@@ -235,7 +235,7 @@ class FlowerSearch extends Component {
                         </Accordion>
                         
                         <Dropdown
-                            placeholder="-- U.S. State --"
+                            placeholder=" Pick your state "
                             selection
                             options={stateOptions}
                             onChange={this.handleFilter2}
