@@ -77,15 +77,25 @@ export class RegistrationPage extends Component {
                             onChange={this.handleChange}
                             name="region"
                         />
-                        <Link to='/'>
-                        <Button 
-                        variant="primary" 
-                        type="submit"
-                        onClick={this.handleRegister}
-                        disabled={isLoading}>
-                            Start Gardening!
-                     </Button>
-                     </Link>
+            <Button.Group>
+                <Button
+                  type="submit"
+                  positive
+                  size="large"
+                  to="/profile"
+                  disabled={isLoading}
+                  onClick={this.handleRegister}
+                > 
+                  Start Gardening!
+                </Button>
+                <Button.Or />
+                <Link to="/">
+                  <Button size="large" color="teal">
+                    Change Your Mind? Go Back Here!
+                  </Button>
+                </Link>
+              </Button.Group>
+                     
                     </Form>
                 </div>
             </React.Fragment>
