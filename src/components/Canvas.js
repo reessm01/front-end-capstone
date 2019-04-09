@@ -16,15 +16,15 @@ import {
   subtractGrid,
   dropPlant,
   removePlant,
-  saveLayout,
-  filterFlowers
+  filterFlowers,
+  patchLayout,
+  saveLayout
 } from "../actions"
 
 class Canvas extends Component {
   state = {
     prevElement: null,
     name: "",
-    value: "",
     selectedState: "all"
   }
 
@@ -134,14 +134,10 @@ class Canvas extends Component {
   handleSave = e => {
     e.preventDefault()
     if (this.props.id !== null) {
-      this.props.patchLayout(this.props.id, this.state.name, this.props.grid)
+      this.props.patchLayout(this.props.grid, this.props.id)
     } else {
       this.props.saveLayout(this.state.name, this.props.grid)
     }
-  }
-
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
   }
 
   render() {
@@ -171,16 +167,8 @@ class Canvas extends Component {
         <NavBar />
         <MainMenu
           width={this.props.width}
-          handleSave={this.handleSave}
-          handleChange={this.handleChange}
-          userLayouts={this.props.userLayouts}
-          userHasLayouts={this.props.userHasLayouts}
-          saveMessage={this.props.saveMessage}
           chooseState={this.handleFilter}
-          value={this.state.stateValue}
-          width={this.props.width}
-          saveMessage={this.props.saveMessage}
-          errorMessage={this.props.errorMessage}
+          handleSave={this.handleSave}
         />
         <br />
         <div
@@ -285,7 +273,7 @@ const mapStateToProps = state => {
     saveMessage: state.grid.saveMessage,
     errorMessage: state.grid.errorMessage,
     userLayouts: state.grid.userLayouts,
-    userHasLayouts: state.grid.userHasLayouts
+    userHasLayouts: state.grid.userHasLayouts,
   }
 }
 
@@ -297,7 +285,8 @@ const mapDispatchToProps = {
   removePlant,
   getFlowerData,
   saveLayout,
-  filterFlowers
+  filterFlowers,
+  patchLayout
 }
 
 export default connect(

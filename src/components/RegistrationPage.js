@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import '../App.css';
 import { connect } from 'react-redux'
-//import { Link } from 'react-router-dom';
-import { registerThenNavToProfile as register } from '../actions/auth';
+import { Link } from 'react-router-dom';
+import { registerThenNavToLogin as register } from '../actions/auth';
 import {
     Form,
     Button,
@@ -15,21 +14,23 @@ export class RegistrationPage extends Component {
     state = {
         username: "",
         password: "",
-        displayName: ""
+        displayName: "",
+        region: ""
     }
 
     handleRegister = e => {
         e.preventDefault();
-        this.props.register(this.state);
+        // this.props.register(this.state);
+        this.props.register({ ...this.state });
     };
 
     handleChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
+        // this.setState({ [e.target.name]: e.target.value });
+        this.setState({ ...this.state, [e.target.name]: e.target.value })
     };
 
     render() {
-        const { handleRegister, handleChange } = this
-        //const { isLoading, err } = this.props
+      const { isLoading, err } = this.props
 
         return (
             <React.Fragment>
@@ -37,7 +38,7 @@ export class RegistrationPage extends Component {
                 <NavBar />
 
                 <div className="pageDiv">
-                    <Form className="formDiv" onSubmit={handleRegister} >
+                    <Form className="formDiv" onSubmit={this.handleRegister} >
                         <Form.Field
                             label="Username:"
                             required
@@ -45,7 +46,7 @@ export class RegistrationPage extends Component {
                             type="text"
                             control={Input}
                             autoFocus
-                            onChange={handleChange}
+                            onChange={this.handleChange}
                             name="username"
                         />
                         <Form.Field
@@ -54,7 +55,7 @@ export class RegistrationPage extends Component {
                             placeholder="Password"
                             type="password"
                             control={Input}
-                            onChange={handleChange}
+                            onChange={this.handleChange}
                             name="password"
                         />
                         <Form.Field
@@ -63,22 +64,27 @@ export class RegistrationPage extends Component {
                             placeholder="Choose a Display Name"
                             type="text"
                             control={Input}
-                            onChange={handleChange}
+                            onChange={this.handleChange}
                             name="displayName"
                         />
-
-                        <Form.Field
-                            label="Region:"
-                            required
-                            placeholder="Choose a Region for Your Garden"
-                            type="text"
-                            control={Input}
-                            onChange={handleChange}
-                            name="region"
-                        />
-                        <Button variant="primary" type="submit">
-                            Start Gardening!
-                     </Button>
+            <Button.Group>
+                <Button
+                  type="submit"
+                  positive
+                  size="large"
+                  to="/profile"
+                  disabled={isLoading}
+                  onClick={this.handleRegister}
+                > 
+                  Start Gardening!
+                </Button>
+                <Button.Or />
+                <Link to="/">
+                  <Button size="large" color="teal">
+                    Change Your Mind? Go Back Here!
+                  </Button>
+                </Link>
+              </Button.Group>
                     </Form>
                 </div>
             </React.Fragment>

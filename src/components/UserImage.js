@@ -9,19 +9,6 @@
      file: null
    };
 
-   imageFileChangeHandler = event => {
-     const imageFile = event.target.imageFiles[0];
-     this.setState({
-       imageFile
-     });
-   };
-
-   imageFileUploadHandler = event => {
-     const imageFile = event.this.state.imageFile;
-     this.handleToggle();
-     this.props.uploadUserPic({ picture: imageFile });
-   };
-
    handleUploadImage = event => {
      event.preventDefault();
      const formData = new FormData(event.target);

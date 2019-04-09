@@ -12,6 +12,7 @@ export * from './getUserLayoutData'
 export * from './loadLayout'
 export * from './setCurrentFlower'
 
+export * from './patchLayout'
 
 //If we use the feed, maybe post images as messages to share?//
 //export * from './messages'
