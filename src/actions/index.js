@@ -10,6 +10,8 @@ export * from './getFlowerData'
 export * from './filterFlowers'
 export * from './getUserLayoutData'
 export * from './loadLayout'
+export * from './setCurrentFlower'
+
 
 //If we use the feed, maybe post images as messages to share?//
 //export * from './messages'
