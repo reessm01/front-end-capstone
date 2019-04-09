@@ -1,12 +1,6 @@
-import React, { Component } from "react";
-import { SideInfo } from "../SideInfo"
-//import { pictureStyles } from "./style"
-//import { connect } from "react-redux";
+import React, { Component } from "react"
+
 export class Picture extends Component {
-  // handleDragStart = (pictureId)=>(event)=>{
-  //    console.log("pictureId:"+ pictureId)
-  //    event.dataTransfer.setData("pictureId",pictureId)
-  // }
   render() {
     const pictureStyle = {
       width: "100px",
@@ -14,9 +8,8 @@ export class Picture extends Component {
       backgroundImage: "url(" + this.props.image + ")",
       backgroundSize: "cover",
       backgrounPosition: "center",
-      zIndex: "1000",
-      overflow: "scroll"
-    };
+      zIndex: "1000"
+    }
     return (
       <div id="static" data-name={this.props.name}
         draggable="true"
@@ -24,10 +17,8 @@ export class Picture extends Component {
         onDragStart={this.props.handleDragStart}
         onClick={this.props.onClick}
       >
-    
-        {/* <img src={this.props.image} alt="" style={{width:"200px",height:"200px"}} /> */}
       </div>
 
-    );
+    )
   }
 }
