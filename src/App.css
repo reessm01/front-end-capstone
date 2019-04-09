@@ -23,8 +23,6 @@ body {
   color: white;
 }  
 */
-<<<<<<< HEAD
-=======
 .App-link {
   color: #61dafb;
 }
@@ -44,7 +42,6 @@ body {
   object-fit: contain;
   border: 1px solid;
 }
->>>>>>> 894e0c92ed4a4dbbcbf6fd819518b1c6afcfc3a9
 
 .pageDiv {
   display: flex;
@@ -54,17 +51,9 @@ body {
 }
 
 .userCard {
-<<<<<<< HEAD
-  display: flex;
-  flex-direction: column;
-  justify-self: flex-end;
-  
-  width: 20%;
-=======
   margin-left: -25%;
   margin-right: 5%;
   width: 30%;
->>>>>>> 894e0c92ed4a4dbbcbf6fd819518b1c6afcfc3a9
   height: 10%;
   /* background-color: #ACC9AC; */
   border:  9px solid rgb(131, 137, 114);
@@ -72,7 +61,6 @@ body {
   padding: 1%;
 } 
 
-<<<<<<< HEAD
 .formDiv {
   width: 40%; 
   border:  9px solid rgb(131, 137, 114);
@@ -87,7 +75,7 @@ body {
   justify-content: center;
   margin-bottom: 20px;
 }
-=======
+
 .deleteAccountDiv {
 display: flex;
 align-self: center;
@@ -96,5 +84,3 @@ align-items: center;
   width: 20%;
 
 }
-
->>>>>>> 894e0c92ed4a4dbbcbf6fd819518b1c6afcfc3a9
