@@ -54,19 +54,19 @@ const login = loginData => dispatch => {
         })
 }
 
-// export const loginThenNavToPlanner = loginData => dispatch => {
-//     dispatch(login(loginData))
-//     history.push('/canvas')
-// }
+ export const loginThenNavToPlanner = loginData => dispatch => {
+     dispatch(login(loginData))
+     history.push('/canvas')
+ }
 
-export const loginThenNavToPlanner = loginData => (dispatch, getState) => {
-    return dispatch(login(loginData))
-    .then(() => {
-        const id = getState().auth.login.id
-        return dispatch(downloadUserImage(id))
-    })
-    .then(() => dispatch(history.push('/canvas')))
-}
+// export const loginThenNavToPlanner = loginData => (dispatch, getState) => {
+//     return dispatch(login(loginData))
+//     .then(() => {
+//         const id = getState().auth.login.id
+//         return dispatch(downloadUserImage(id))
+//     })
+//     .then(() => dispatch(history.push('/canvas')))
+// }
 
 const register = registerData => dispatch => {
     dispatch({
