@@ -30,9 +30,16 @@ export class NavBar extends Component {
             as={Link}
           />
           <Menu.Item
-            name="feed"
-            active={activeItem === "feed"}
-            to="/feed"
+            name="flowers"
+            active={activeItem === "flowers"}
+            to="/flowers"
+            onClick={this.handleItemClick}
+            as={Link}
+          />
+          <Menu.Item
+            name="veggies"
+            active={activeItem === "veggies"}
+            to="/veggies"
             onClick={this.handleItemClick}
             as={Link}
           />
