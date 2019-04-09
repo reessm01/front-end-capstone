@@ -2,7 +2,7 @@ import { domain, jsonHeaders, handleJsonResponse } from "./constants"
 import { push } from "connected-react-router"
 import { history } from '../configureStore'
 import { getUserLayoutData } from './getUserLayoutData'
-// import { downloadUserImage } from "."
+ import { downloadUserImage } from "."
 
 // action types
 export const LOGIN = "LOGIN"
@@ -23,15 +23,16 @@ export const LOGOUTCURRENTUSER = "LOGOUTCURRENTUSER"
 
 const url = domain + "/auth"
 
+
 const login = loginData => dispatch => {
     dispatch({
         type: LOGIN
     })
-
-    fetch(url + "/login", {
+   return fetch(url + "/login", {
         method: "POST",
         headers: jsonHeaders,
         body: JSON.stringify(loginData)
+        
     })
         .then(handleJsonResponse)
         .then(result => {
@@ -53,9 +54,18 @@ const login = loginData => dispatch => {
         })
 }
 
-export const loginThenNavToProfile = loginData => dispatch => {
-    dispatch(login(loginData))
-    history.push('/canvas')
+// export const loginThenNavToPlanner = loginData => dispatch => {
+//     dispatch(login(loginData))
+//     history.push('/canvas')
+// }
+
+export const loginThenNavToPlanner = loginData => (dispatch, getState) => {
+    return dispatch(login(loginData))
+    .then(() => {
+        const id = getState().auth.login.id
+        return dispatch(downloadUserImage(id))
+    })
+    .then(() => dispatch(history.push('/canvas')))
 }
 
 const register = registerData => dispatch => {
@@ -88,9 +98,10 @@ const register = registerData => dispatch => {
         })
 }
 
-export const registerThenNavToProfile = registerData => dispatch => {
+export const registerThenNavToLogin = registerData => dispatch => {
     return dispatch(register(registerData))
-        .then(() => dispatch(login(registerData))).then(()=>history.push("/"))
+        .then(() => dispatch(login(registerData)))
+        .then(()=> history.push("/"))
 }
 
 export const logout = logoutData => (dispatch, getState) => {
@@ -116,4 +127,4 @@ export const logout = logoutData => (dispatch, getState) => {
             })
         })
 }
-export const logoutThenGoToLogin = logoutData => dispatch => { return dispatch(logout(logoutData)).then(() => dispatch(push("/feed"))) }
+export const logoutThenGoToLogin = logoutData => dispatch => { return dispatch(logout(logoutData)).then(() => dispatch(push("/"))) }

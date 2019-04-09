@@ -1,7 +1,7 @@
 import { domain, handleJsonResponse } from "./constants";
 import { push } from "connected-react-router";
-// import {getMessages} from "."
-import {auth} from "../reducers/auth.js"
+//import {getMessages} from "."
+//import {auth} from "../reducers/auth.js"
 
 export const SETCURRENTUSER = "SETCURRENTUSER";
 export const GETUSERS = "GETUSERS"
@@ -20,8 +20,8 @@ export const UPDATE_FAIL = "UPDATE_FAIL";
  export const DELETEUSER="DELETEUSER"
  export const DELETEUSER_SUCCESS="DELETEUSER_SUCCESS"
 
-//export const GETUSERSANDMESSAGES="GETUSERSANDMESSAGES"
-//export const GETUSERSANDMESSAGES_SUCCESS="GETUSERSANDMESSAGES_SUCCESS"
+export const GETUSERSANDMESSAGES="GETUSERSANDMESSAGES"
+export const GETUSERSANDMESSAGES_SUCCESS="GETUSERSANDMESSAGES_SUCCESS"
 
 const url = domain + "/users/";
 
@@ -92,9 +92,9 @@ export const user = id => dispatch => {
         console.log(result)
         dispatch({
           type: UPDATE_SUCCESS,
-          dpayload: result//data.user.displayName
+          payload: result   //data.user.displayName
         });
-        dispatch(push("/feed"));
+        dispatch(push("/canvas"));
       })
       .catch(err => {
         dispatch({
@@ -108,7 +108,7 @@ export const user = id => dispatch => {
     return dispatch(userUpdate(newUserData))
   };
     
-    export const downloadUserImage=id=>(dispatch,getState)=>{
+    export const downloadUserImage = id => (dispatch,getState) => {
       dispatch({
         type:DOWNLOAD_USER_IMAGE
       })
@@ -125,11 +125,10 @@ export const user = id => dispatch => {
           type: DOWNLOAD_USER_IMAGE_SUCCESS,
           payload: result,id
         })
-        
       })
     }
     
-export const uploadImage =  imageData => (dispatch,getState)=>{
+export const uploadImage =  imageData => (dispatch,getState) => {
   const token = getState().auth.login.token
   dispatch({
     type:UPLOADIMAGE
@@ -137,10 +136,9 @@ export const uploadImage =  imageData => (dispatch,getState)=>{
   return fetch(url + "picture", {
     method: "PUT",
     headers: {
-      Authorization: "Bearer " + token,
-      //  "Content-Type": "multipart/form-data",
+      Authorization: "Bearer " + token
      }, 
-     body:imageData
+     body: imageData
   })
   .then(res=>{
     if(res.status===500){
@@ -154,12 +152,12 @@ export const uploadImage =  imageData => (dispatch,getState)=>{
     })
 })
 }
-export const updateUserImage =  imageData => (dispatch,getState) => {
+export const updateUserImage = imageData => (dispatch, getState) => {
   return dispatch(uploadImage(imageData))
   .then(() => dispatch(downloadUserImage(getState().auth.login.id)))
 };
 
-   export const deleteUser = () => (dispatch,getState)=>{
+   export const deleteUser = () => (dispatch, getState) => {
     const token = getState().auth.login.token
     dispatch({
       type:DELETEUSER
