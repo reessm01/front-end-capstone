@@ -194,8 +194,8 @@ class Canvas extends Component {
                 style={{
                   display: "flex",
                   flexWrap: "wrap",
-                  width: "510px",
-                  height: "110px",
+                  width: "auto",
+                  height: "210px",
                   overflow: "scroll"
                 }}
               >

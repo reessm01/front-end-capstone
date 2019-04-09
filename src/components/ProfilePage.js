@@ -12,7 +12,7 @@ import {
     Card,
     Button,
     Form,
-    Input
+    Input, Header
 } from "semantic-ui-react";
 export class ProfilePage extends Component {
 
@@ -42,14 +42,14 @@ export class ProfilePage extends Component {
                     {/* <AmazonAds /> */}
                    <Link to="/canvas"></Link> 
                     <div className = "pageDiv">
-                        <div className="userCard">
+                        {/* <div className="userCard">
                             <Card style={{ width:"100%"}} >
                             <UserImage /> 
                                 <Card.Header>Display Name: {this.props.displayName}</Card.Header>
                                 <Card.Content>User Name: {this.props.username}</Card.Content>
                                 <Card.Description>All About You: {this.props.about}</Card.Description>
                             </Card>
-                        </div>
+                        </div> */}
                         <div className="formDiv">
                             <Form onSubmit={this.handleUserUpdate} align="center"
                                 style={{ fontSize: "16px", color: "#5B5F50"}}>
@@ -70,23 +70,14 @@ export class ProfilePage extends Component {
                                         onChange={this.handleChange}
                                         control={Input}
                                     />  
-                                <Form.Field
-                                    placeholder='Change Your Region'
-                                    type="text"
-                                    defaultValue={this.props.region}
-                                    name="region"
-                                    onChange={this.handleChange}
-                                    control={Input}
-                                />
-                                <Form.TextArea
+                                {/* <Form.TextArea
                                     placeholder='Change Your "About Me" Section And Tell the World Who You Are...'
                                     type="text"
                                     defaultValue={this.props.about}
                                     name="about"
                                     onChange={this.handleChange}
                                     control={Input}
-                                />
-                               
+                                /> */}
                                 <Button
                                     type="submit"
                                     size="medium"
@@ -95,11 +86,10 @@ export class ProfilePage extends Component {
                                     Submit Changes
                                  </Button>
                             </Form>
-                           
                         </div> 
                     </div>
                     <div className="deleteAccountDiv" >
-                    <h3>Delete your account with us</h3>
+                    <Header as='h3'>Delete your account with us</Header>
                             <DeleteAccount />
                             </div>
             </React.Fragment>

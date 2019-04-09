@@ -1,10 +1,7 @@
 import React, { Component } from "react"
-// import Logout from "../Logout.js"
-import "../App.css"
-//import { connect } from 'react-redux'
 import { Menu } from "semantic-ui-react"
 import { Link } from "react-router-dom"
-
+import { Logout } from './Logout'
 export class NavBar extends Component {
   state = { activeItem: "home" }
 
@@ -57,13 +54,7 @@ export class NavBar extends Component {
             to="/canvas"
             onClick={this.handleItemClick}
           />
-          <Menu.Menu position="right">
-            <Menu.Item
-              name="logout"
-              active={activeItem === "logout"}
-              onClick={this.handleItemClick}
-            />
-          </Menu.Menu>
+
         </Menu>
       </React.Fragment>
     )
