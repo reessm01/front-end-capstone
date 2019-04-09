@@ -3,25 +3,33 @@ import { Tab, Select } from "semantic-ui-react"
 import { connect } from "react-redux"
 import { Input, Button, Dropdown, Form, Message } from "semantic-ui-react"
 import { generalStyling, buttonStyling, tabStyling } from "./styles"
-import { loadLayout } from "../../actions"
+import { 
+    loadLayout, 
+} from "../../actions"
 import { stateOptions } from "./constants"
 
 class MainMenu extends Component {
   state = {
     id: null,
-    value: null
+    value: null,
+    name: ""
   }
 
-  handleChange = (e, data) => {
+  handleLoadChange = (e, data) => {
     let key
     for (let element of data.options)
       if (element.value === data.value) key = element.key
     this.setState({ ...this.state, value: data.value, id: key })
   }
 
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
   handleLoad = e => {
     e.preventDefault()
     this.props.loadLayout(this.state.id)
+    this.setState({...this.state, name: this.props.name})
   }
 
   render() {
@@ -37,7 +45,9 @@ class MainMenu extends Component {
                   placeholder="Layout name..."
                   name="name"
                   required
-                  onChange={this.props.handleChange}
+                  onChange={this.handleChange}
+                  value={this.props.id===null ? this.state.name:this.props.name}
+                  disabled={this.props.id!==null ? true:false}
                 />
                 <Button
                   style={buttonStyling}
@@ -78,7 +88,7 @@ class MainMenu extends Component {
                     required
                     placeholder={"Select a layout..."}
                     style={generalStyling}
-                    onChange={this.handleChange}
+                    onChange={this.handleLoadChange}
                     selection
                     options={this.props.userLayouts.map(object => {
                       return {
@@ -142,12 +152,18 @@ class MainMenu extends Component {
 
 const mapStateToProps = state => {
   return {
-    token: state.auth.login.token !== null ? state.auth.login.token : null
+    token: state.auth.login.token !== null ? state.auth.login.token : null,
+    id: state.grid.id,
+    name: state.grid.name,
+    userLayouts: state.grid.userLayouts,
+    userHasLayouts: state.grid.userHasLayouts,
+    saveMessage: state.grid.saveMessage,
+    errorMessage: state.grid.errorMessage,
   }
 }
 
 const mapDispatchToProps = {
-  loadLayout
+  loadLayout,
 }
 
 export default connect(

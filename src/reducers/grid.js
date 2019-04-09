@@ -10,7 +10,6 @@ import {
   LOAD_SUCCESS,
   PATCH_SUCCESS
 } from "../actions/"
-import { loadLayout } from "../actions"
 import { width } from "../components/Grid/styles"
 
 const initialState = {
@@ -24,7 +23,7 @@ const initialState = {
   layouts: null,
   saveMessage: null,
   errorMessage: null,
-  name: null
+  name: ""
 }
 
 export default (state = initialState, action)  => {

@@ -15,17 +15,15 @@ import {
   subtractGrid,
   dropPlant,
   removePlant,
-  saveLayout,
   filterFlowers,
-  loadLayout,
-  patchLayout
+  patchLayout,
+  saveLayout
 } from "../actions"
 
 class Canvas extends Component {
   state = {
     prevElement: null,
     name: "",
-    value: "",
     selectedState: "all"
   }
 
@@ -141,10 +139,6 @@ class Canvas extends Component {
     }
   }
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
   render() {
     const { grid } = this.props
     const store = []
@@ -172,16 +166,8 @@ class Canvas extends Component {
         <NavBar />
         <MainMenu
           width={this.props.width}
-          handleSave={this.handleSave}
-          handleChange={this.handleChange}
-          userLayouts={this.props.userLayouts}
-          userHasLayouts={this.props.userHasLayouts}
-          saveMessage={this.props.saveMessage}
           chooseState={this.handleFilter}
-          value={this.state.stateValue}
-          width={this.props.width}
-          saveMessage={this.props.saveMessage}
-          errorMessage={this.props.errorMessage}
+          handleSave={this.handleSave}
         />
         <br />
         <div
@@ -298,7 +284,6 @@ const mapDispatchToProps = {
   getFlowerData,
   saveLayout,
   filterFlowers,
-  loadLayout,
   patchLayout
 }
 

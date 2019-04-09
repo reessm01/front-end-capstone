@@ -1,5 +1,5 @@
 import { store } from "../index"
-import { jsonHeaders, domain, handleJsonResponse } from "./constants";
+import { jsonHeaders, domain } from "./constants";
 import { getUserLayoutData } from "./getUserLayoutData";
 
 export const PATCH_SUCCESS = 'PATCH SUCCESS'
@@ -17,9 +17,9 @@ export const patchLayout = (layout, id) => dispatch => {
             Authorization: `Bearer ${token}`
         }
     })  
-        .then(handleJsonResponse)
         .then(result => {
-            dispatch(getUserLayoutData(userId))
+            console.log(result)
+            if(result.status === 200) dispatch(getUserLayoutData(userId))
             // return dispatch({
             //     // type: PATCH_SUCCESS,
             //     // layout: result.layout.layout,
