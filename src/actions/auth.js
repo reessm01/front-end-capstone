@@ -1,8 +1,8 @@
 import { domain, jsonHeaders, handleJsonResponse } from "./constants"
 import { push } from "connected-react-router"
-import { history } from "../configureStore"
-import { getUserLayoutData } from "./getUserLayoutData"
-// import { downloadUserImage } from "."
+import { history } from '../configureStore'
+import { getUserLayoutData } from './getUserLayoutData'
+ import { downloadUserImage } from "."
 
 // action types
 export const LOGIN = "LOGIN"
@@ -21,6 +21,7 @@ export const LOGOUT_FAIL = "LOGOUT_FAIL"
 export const LOGOUTCURRENTUSER = "LOGOUTCURRENTUSER"
 
 const url = domain + "/auth"
+
 
 const login = loginData => dispatch => {
   dispatch({
@@ -52,7 +53,7 @@ const login = loginData => dispatch => {
     })
 }
 
-export const loginThenNavToProfile = loginData => dispatch => {
+export const loginThenNavToPlanner = loginData => dispatch => {
     
   dispatch(login(loginData))
   history.push("/canvas")
@@ -88,7 +89,7 @@ const register = registerData => dispatch => {
     })
 }
 
-export const registerThenNavToProfile = registerData => dispatch => {
+export const registerThenNavToLogin = registerData => dispatch => {
   return dispatch(register(registerData))
     .then(() => dispatch(login(registerData)))
     .then(() => history.push("/"))
@@ -116,6 +117,4 @@ export const logout = logoutData => (dispatch, getState) => {
       })
     })
 }
-export const logoutThenGoToLogin = logoutData => dispatch => {
-  return dispatch(logout(logoutData)).then(() => dispatch(push("/feed")))
-}
+export const logoutThenGoToLogin = logoutData => dispatch => { return dispatch(logout(logoutData)).then(() => dispatch(push("/"))) }

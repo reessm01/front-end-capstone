@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { updateThenNavToProfile as update } from '../actions/users.js'
 import { PageHeader } from './PageHeader'
 import { DeleteAccount } from "./DeleteAccount"
-import { AmazonAds } from './Amazon'
+// import { AmazonAds } from './Amazon'
 import  UserImage  from './UserImage'
 
 import {
@@ -38,8 +38,9 @@ export class ProfilePage extends Component {
         return (
             <React.Fragment>
                     <PageHeader />
-                    <AmazonAds />
-                   <Link to="/feed"></Link> 
+                    <NavBar />
+                    {/* <AmazonAds /> */}
+                   <Link to="/canvas"></Link> 
                     <div className = "pageDiv">
                         <div className="userCard">
                             <Card style={{ width:"100%"}} >
@@ -61,8 +62,7 @@ export class ProfilePage extends Component {
                                     onChange={this.handleUserChange}
                                     control={Input}
                                 />
-                                <Form.Field>
-                                    <Input
+                                <Form.Field
                                         placeholder="Change Password"
                                         type="password"
                                         defaultValue={this.props.passwordValue}
@@ -78,7 +78,6 @@ export class ProfilePage extends Component {
                                     onChange={this.handleChange}
                                     control={Input}
                                 />
-                                </Form.Field>
                                 <Form.TextArea
                                     placeholder='Change Your "About Me" Section And Tell the World Who You Are...'
                                     type="text"
