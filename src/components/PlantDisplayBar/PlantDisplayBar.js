@@ -24,7 +24,7 @@ class PlantDisplayBar extends Component {
                   ? this.props.flowers
                   : this.props.filteredFlowers
               }
-              handleDragStart={this.handleDragStart}
+              handleDragStart={this.props.handleDragStart}
             />
           </div>
         )
@@ -43,7 +43,7 @@ class PlantDisplayBar extends Component {
           >
             <PictureList
               images={this.props.veggies}
-              handleDragStart={this.handleDragStart}
+              handleDragStart={this.props.handleDragStart}
             />
           </div>
         )
