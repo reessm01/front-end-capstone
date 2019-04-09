@@ -7,7 +7,7 @@ import { toolTip } from "./ToolTip"
 import { getFlowerData } from "../actions/getFlowerData"
 import { connect } from "react-redux"
 import { NavBar } from "./NavBar"
-import { PageHeader } from './PageHeader'
+import { PageHeader } from "./PageHeader"
 import MainMenu from "./MainMenu/MainMenu"
 import {
   initGrid,
@@ -17,7 +17,7 @@ import {
   removePlant,
   saveLayout,
   filterFlowers
-} from "../actions";
+} from "../actions"
 
 class Canvas extends Component {
   state = {
@@ -45,28 +45,26 @@ class Canvas extends Component {
     }
   }
 
-  handleFilter = (e) => {
+  handleFilter = e => {
     let value = e.target.textContent
-    console.log(this.props.flowers)
-    this.props.filterFlowers(this.filterState(value, [...this.props.flowers]))
-    this.setState({ ...this.state, selectedState: null })
+    if (value !== "All States") {
+      this.props.filterFlowers(this.filterState(value, [...this.props.flowers]))
+      this.setState({ ...this.state, selectedState: null })
+    } else this.setState({...this.state, selectedState: "all"})
   }
 
   filterState(stateValue, flowers) {
     if (stateValue === "") return flowers
     else {
       let filteredFlowers = flowers.filter(flower => {
-
         return flower.states
           .split(",")
           .map(word => word.trim())
-          .includes(stateValue);
+          .includes(stateValue)
       })
       return filteredFlowers
     }
-
   }
-
 
   handleDragOver = e => {
     e.preventDefault()
@@ -109,8 +107,7 @@ class Canvas extends Component {
         this.state.targetCol,
         curflower.image
       )
-    }
-    else {
+    } else {
       this.props.dropPlant(
         this.state.targetRow,
         this.state.targetCol,
@@ -122,7 +119,6 @@ class Canvas extends Component {
         stateCopy.style.opacity = 1.0
       }
     }
-
 
     this.setState({
       ...this.state,
@@ -138,16 +134,14 @@ class Canvas extends Component {
     e.preventDefault()
     if (this.props.id !== null) {
       this.props.patchLayout(this.props.id, this.state.name, this.props.grid)
-    }
-    else {
+    } else {
       this.props.saveLayout(this.state.name, this.props.grid)
     }
   }
 
-
-handleChange = e => {
-  this.setState({ [e.target.name]: e.target.value })
-}
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
 
   render() {
     const { grid } = this.props
@@ -170,107 +164,109 @@ handleChange = e => {
       store.push(row)
     }
 
-
     return (
       <div>
-        <PageHeader/>
-        <NavBar/>
+        <PageHeader />
+        <NavBar />
         <MainMenu
-            width={this.props.width}
-            handleSave={this.handleSave}
-            handleChange={this.handleChange}
-            userLayouts={this.props.userLayouts}
-            userHasLayouts={this.props.userHasLayouts}
-            saveMessage={this.props.saveMessage}
-            chooseState={this.handleFilter}
-            value={this.state.stateValue}
-            width={this.props.width}
-            saveMessage={this.props.saveMessage}
-            errorMessage={this.props.errorMessage}
+          width={this.props.width}
+          handleSave={this.handleSave}
+          handleChange={this.handleChange}
+          userLayouts={this.props.userLayouts}
+          userHasLayouts={this.props.userHasLayouts}
+          saveMessage={this.props.saveMessage}
+          chooseState={this.handleFilter}
+          value={this.state.stateValue}
+          width={this.props.width}
+          saveMessage={this.props.saveMessage}
+          errorMessage={this.props.errorMessage}
+        />
+        <br />
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            width: "510px",
+            height: "110px",
+            overflow: "scroll"
+          }}
+        >
+          <PictureList
+            images={
+              this.state.selectedState === "all"
+                ? this.props.flowers
+                : this.props.filteredFlowers
+            }
+            handleDragStart={this.handleDragStart}
           />
-          <br />
-          <div
+        </div>
+        <div style={{ display: "block" }}>
+          <div style={{ display: "flex" }}>
+            <div
+              onDragOverCapture={this.handleDragOver}
+              onDrop={this.handleDrop}
+              style={{
+                display: "flex",
+                width: this.props.width + "px",
+                flexWrap: "wrap",
+                margin: "0px"
+              }}
+              onContextMenu={this.contextMenu}
+            >
+              {store}
+            </div>
+            <OverlayTrigger
+              placement="right"
+              delay={{ show: 250, hide: 400 }}
+              overlay={toolTip}
+            >
+              <Button
+                id="col"
+                onClick={e => this.props.expandGrid(e.target.id)}
+                onContextMenu={this.contextMenu}
+                style={{ width: "25px", margin: "0px", padding: "0px" }}
+              >
+                <div
+                  id="col"
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    marginRight: "3px"
+                  }}
+                >
+                  <i id="col" className="fas fa-chevron-right" />
+                </div>
+              </Button>
+            </OverlayTrigger>
+          </div>
+        </div>
+        <OverlayTrigger
+          placement="bottom"
+          delay={{ show: 250, hide: 400 }}
+          overlay={toolTip}
+        >
+          <Button
+            id="rows"
+            onClick={e => this.props.expandGrid(e.target.id)}
+            onContextMenu={this.contextMenu}
             style={{
-              display: "flex",
-              flexWrap: "wrap",
-              width: "510px",
-              height: "110px",
-              overflow: "scroll"
+              height: "25px",
+              margin: "0px",
+              width: this.props.width + "px"
             }}
           >
-            <PictureList
-              images={this.state.selectedState === "all" ? this.props.flowers : this.props.filteredFlowers}
-              handleDragStart={this.handleDragStart}
-            />
-          </div>
-          <div style={{ display: "block" }}>
-            <div style={{ display: "flex" }}>
-              <div
-                onDragOverCapture={this.handleDragOver}
-                onDrop={this.handleDrop}
-                style={{
-                  display: "flex",
-                  width: this.props.width + "px",
-                  flexWrap: "wrap",
-                  margin: "0px"
-                }}
-                onContextMenu={this.contextMenu}
-              >
-                {store}
-              </div>
-              <OverlayTrigger
-                placement="right"
-                delay={{ show: 250, hide: 400 }}
-                overlay={toolTip}
-              >
-                <Button
-                  id="col"
-                  onClick={e => this.props.expandGrid(e.target.id)}
-                  onContextMenu={this.contextMenu}
-                  style={{ width: "25px", margin: "0px", padding: "0px" }}
-                >
-                  <div
-                    id="col"
-                    style={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      marginRight: "3px"
-                    }}
-                  >
-                    <i id="col" className="fas fa-chevron-right" />
-                  </div>
-                </Button>
-              </OverlayTrigger>
-            </div>
-          </div>
-          <OverlayTrigger
-            placement="bottom"
-            delay={{ show: 250, hide: 400 }}
-            overlay={toolTip}
-          >
-            <Button
+            <div
               id="rows"
-              onClick={e => this.props.expandGrid(e.target.id)}
-              onContextMenu={this.contextMenu}
               style={{
-                height: "25px",
-                margin: "0px",
-                width: this.props.width + "px"
+                display: "flex",
+                justifyContent: "center",
+                width: "initial"
               }}
             >
-              <div
-                id="rows"
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  width: "initial"
-                }}
-              >
-                <i id="rows" className="fas fa-chevron-down" />
-              </div>
-            </Button>
-          </OverlayTrigger>
-      
+              <i id="rows" className="fas fa-chevron-down" />
+            </div>
+          </Button>
+        </OverlayTrigger>
       </div>
     )
   }
@@ -300,7 +296,7 @@ const mapDispatchToProps = {
   getFlowerData,
   saveLayout,
   filterFlowers
-};
+}
 
 export default connect(
   mapStateToProps,
