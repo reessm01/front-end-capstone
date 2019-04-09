@@ -39,7 +39,12 @@ class MainMenu extends Component {
                   required
                   onChange={this.props.handleChange}
                 />
-                <Button style={buttonStyling}>Save</Button>
+                <Button
+                  style={buttonStyling}
+                  disabled={this.props.token === null ? true : false}
+                >
+                  Save
+                </Button>
                 {this.props.saveMessage && (
                   <Message positive>
                     <Message.Header>Success!</Message.Header>
@@ -136,7 +141,9 @@ class MainMenu extends Component {
 }
 
 const mapStateToProps = state => {
-  return {}
+  return {
+    token: state.auth.login.token !== null ? state.auth.login.token : null
+  }
 }
 
 const mapDispatchToProps = {

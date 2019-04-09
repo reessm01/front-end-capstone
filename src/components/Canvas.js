@@ -16,7 +16,9 @@ import {
   dropPlant,
   removePlant,
   saveLayout,
-  filterFlowers
+  filterFlowers,
+  loadLayout,
+  patchLayout
 } from "../actions"
 
 class Canvas extends Component {
@@ -133,7 +135,7 @@ class Canvas extends Component {
   handleSave = e => {
     e.preventDefault()
     if (this.props.id !== null) {
-      this.props.patchLayout(this.props.id, this.state.name, this.props.grid)
+      this.props.patchLayout(this.props.grid, this.props.id)
     } else {
       this.props.saveLayout(this.state.name, this.props.grid)
     }
@@ -283,7 +285,7 @@ const mapStateToProps = state => {
     saveMessage: state.grid.saveMessage,
     errorMessage: state.grid.errorMessage,
     userLayouts: state.grid.userLayouts,
-    userHasLayouts: state.grid.userHasLayouts
+    userHasLayouts: state.grid.userHasLayouts,
   }
 }
 
@@ -295,7 +297,9 @@ const mapDispatchToProps = {
   removePlant,
   getFlowerData,
   saveLayout,
-  filterFlowers
+  filterFlowers,
+  loadLayout,
+  patchLayout
 }
 
 export default connect(
