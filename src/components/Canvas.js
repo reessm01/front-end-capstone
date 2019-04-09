@@ -130,15 +130,6 @@ class Canvas extends Component {
     })
   }
 
-  handleSave = e => {
-    e.preventDefault()
-    if (this.props.id !== null) {
-      this.props.patchLayout(this.props.grid, this.props.id)
-    } else {
-      this.props.saveLayout(this.state.name, this.props.grid)
-    }
-  }
-
   render() {
     const { grid } = this.props
     const store = []
@@ -167,7 +158,7 @@ class Canvas extends Component {
         <MainMenu
           width={this.props.width}
           chooseState={this.handleFilter}
-          handleSave={this.handleSave}
+          grid={this.props.grid}
         />
         <br />
         <div

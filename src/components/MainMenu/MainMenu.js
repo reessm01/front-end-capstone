@@ -5,6 +5,10 @@ import { Input, Button, Dropdown, Form, Message } from "semantic-ui-react"
 import { generalStyling, buttonStyling, tabStyling } from "./styles"
 import { 
     loadLayout, 
+    newLayout,
+    saveLayout,
+    getUserLayoutData,
+    patchLayout
 } from "../../actions"
 import { stateOptions } from "./constants"
 
@@ -26,19 +30,52 @@ class MainMenu extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  handleSave = e => {
+    e.preventDefault()
+    console.log(this.state.name + " " + this.props.grid)
+    if (this.props.id !== null) {
+      this.props.patchLayout(this.props.grid, this.props.id)
+    } else {
+      this.props.saveLayout(this.state.name, this.props.grid).then(()=>this.props.getUserLayoutData(this.props.userId))
+    }
+  }
+
   handleLoad = e => {
     e.preventDefault()
     this.props.loadLayout(this.state.id)
     this.setState({...this.state, name: this.props.name})
   }
 
+  handleNewLayOut = e => {
+      e.preventDefault()
+      this.props.newLayout()
+  }
+
   render() {
     const panes = [
+        
+      {
+        menuItem: "New",
+        render: () => (
+          <div style={{ width: this.props.width + 25 + "px" }}>
+            <Form onSubmit={this.handleNewLayOut}>
+              <Tab.Pane style={tabStyling}>
+                <Button
+                  style={{width:"50%"}}
+                  disabled={this.props.userHasLayouts ? false : true}
+                >
+                  New Layout
+                </Button>
+              </Tab.Pane>
+            </Form>
+          </div>
+        )
+      },
       {
         menuItem: "Save",
         render: () => (
           <div style={{ maxWidth: this.props.width + 25 + "px" }}>
-            <Form onSubmit={this.props.handleSave}>
+            <Form onSubmit={this.handleSave}>
               <Tab.Pane style={tabStyling}>
                 <Input
                   style={generalStyling}
@@ -153,6 +190,7 @@ class MainMenu extends Component {
 const mapStateToProps = state => {
   return {
     token: state.auth.login.token !== null ? state.auth.login.token : null,
+    userId: state.auth.login.id,
     id: state.grid.id,
     name: state.grid.name,
     userLayouts: state.grid.userLayouts,
@@ -164,6 +202,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   loadLayout,
+  newLayout,
+  saveLayout,
+  getUserLayoutData,
+  patchLayout
 }
 
 export default connect(
