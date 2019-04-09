@@ -192,6 +192,7 @@ class Canvas extends Component {
         <PlantDisplayBar
           selectedState={this.state.selectedState}
           veggies={this.props.veggies}
+          handleDragStart={this.handleDragStart}
         />
         <div style={{ display: "block" }}>
           <div style={{ display: "flex" }}>
