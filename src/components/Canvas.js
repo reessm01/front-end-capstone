@@ -5,12 +5,13 @@ import { OverlayTrigger } from "react-bootstrap"
 import { Button } from "semantic-ui-react"
 import { toolTip } from "./ToolTip"
 import { getFlowerData } from "../actions/getFlowerData"
-import {getVeggieData} from "../actions/getVeggieData.js"
+import { getVeggieData } from "../actions/getVeggieData.js"
 import { connect } from "react-redux"
 import { NavBar } from "./NavBar"
 import { PageHeader } from "./PageHeader"
 import MainMenu from "./MainMenu/MainMenu"
 import SideInfo from "./SideInfo"
+import PlantDisplayBar from "./PlantDisplayBar/PlantDisplayBar"
 import {
   initGrid,
   expandGrid,
@@ -188,46 +189,10 @@ class Canvas extends Component {
         
 
         <br />
-       <React.Fragment>
-        {this.state.selectedCategory === "Choose Veggies"?(
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  width: "auto",
-                  height: "210px",
-                  overflow: "scroll"
-                }}
-              >
-              <PictureList
-                images={this.props.veggies}
-                handleDragStart={this.handleDragStart}
-              />
-          
-          </div>
-        ): (
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  width: "510px",
-                  height: "110px",
-                  overflow: "scroll"
-                }}
-              >
-                <PictureList
-                  images={
-                    this.state.selectedState === "all"
-                      ? this.props.flowers
-                      : this.props.filteredFlowers
-                  }
-                  handleDragStart={this.handleDragStart}
-                />
-              </div>
-        )}
-        </React.Fragment> 
-        
-        
+        <PlantDisplayBar
+          selectedState={this.state.selectedState}
+          veggies={this.props.veggies}
+        />
         <div style={{ display: "block" }}>
           <div style={{ display: "flex" }}>
             <div
