@@ -43,7 +43,7 @@ import largeSucculent from "../components/Images/side.jpg"
                <Image src={largeSucculent} style={{ height: "13%", width: "13%" }} />
                 Flower Power
               </Header>
-            <Header as="h2" color="grey" textAlign="center" fontFamiy="Raleway">
+            <Header as="h2" color="grey" textAlign="center" fontFamily="Raleway">
               Plan Your Garden With Us!
             </Header>
             <div 

@@ -67,16 +67,6 @@ export class RegistrationPage extends Component {
                             onChange={this.handleChange}
                             name="displayName"
                         />
-
-                        <Form.Field
-                            label="Region:"
-                            required
-                            placeholder="Choose a Region for Your Garden"
-                            type="text"
-                            control={Input}
-                            onChange={this.handleChange}
-                            name="region"
-                        />
             <Button.Group>
                 <Button
                   type="submit"
@@ -95,7 +85,6 @@ export class RegistrationPage extends Component {
                   </Button>
                 </Link>
               </Button.Group>
-                     
                     </Form>
                 </div>
             </React.Fragment>
