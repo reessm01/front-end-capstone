@@ -5,6 +5,7 @@ import { OverlayTrigger } from "react-bootstrap"
 import { Button } from "semantic-ui-react"
 import { toolTip } from "./ToolTip"
 import { getFlowerData } from "../actions/getFlowerData"
+import {getVeggieData} from "../actions/getVeggieData.js"
 import { connect } from "react-redux"
 import { NavBar } from "./NavBar"
 import { PageHeader } from "./PageHeader"
@@ -16,20 +17,24 @@ import {
   subtractGrid,
   dropPlant,
   removePlant,
+  saveLayout,
   filterFlowers,
-  patchLayout,
-  saveLayout
+  filterVeggies,
+  patchLayout
 } from "../actions"
 
 class Canvas extends Component {
   state = {
     prevElement: null,
     name: "",
-    selectedState: "all"
+    value: "",
+    selectedState: "all",
+    selectedCategory:"Choose Flowers"
   }
 
   componentWillMount() {
     this.props.getFlowerData()
+    this.props.getVeggieData()
   }
   componentDidMount() {
     this.setState((state, props) => ({
@@ -47,11 +52,17 @@ class Canvas extends Component {
   }
 
   handleFilter = e => {
+    let curCategory = document.querySelector("a.active").textContent
     let value = e.target.textContent
-    if (value !== "All States") {
+    if(curCategory === "Choose Flowers"){
+     if (value !== "All States") {
       this.props.filterFlowers(this.filterState(value, [...this.props.flowers]))
-      this.setState({ ...this.state, selectedState: null })
-    } else this.setState({...this.state, selectedState: "all"})
+      this.setState({ ...this.state, selectedState: null ,selectedCategory:curCategory})
+    } else this.setState({...this.state, selectedState: "all", selectedCategory:curCategory})
+  }
+    if (curCategory === "Choose Veggies") {
+      this.setState({ ...this.state, selectedState: "all", selectedCategory: curCategory })
+    }
   }
 
   filterState(stateValue, flowers) {
@@ -102,12 +113,23 @@ class Canvas extends Component {
 
     let name = e.dataTransfer.getData("name")
     if (name) {
-      let curflower = this.props.flowers.find(flower => flower.name === name)
-      this.props.dropPlant(
-        this.state.targetRow,
-        this.state.targetCol,
-        curflower.image
-      )
+      if(this.state.selectedCategory === "Choose Veggies"){
+        let curflower = this.props.veggies.find(flower => flower.name === name)
+        this.props.dropPlant(
+          this.state.targetRow,
+          this.state.targetCol,
+          curflower.image
+        )
+      }
+      else{
+        let curflower = this.props.flowers.find(flower => flower.name === name)
+        this.props.dropPlant(
+          this.state.targetRow,
+          this.state.targetCol,
+          curflower.image
+        )
+      }
+      
     } else {
       this.props.dropPlant(
         this.state.targetRow,
@@ -151,6 +173,8 @@ class Canvas extends Component {
       }
       store.push(row)
     }
+    
+    
 
     return (
       <div>
@@ -161,25 +185,49 @@ class Canvas extends Component {
           chooseState={this.handleFilter}
           grid={this.props.grid}
         />
+        
+
         <br />
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            width: "510px",
-            height: "110px",
-            overflow: "scroll"
-          }}
-        >
-          <PictureList
-            images={
-              this.state.selectedState === "all"
-                ? this.props.flowers
-                : this.props.filteredFlowers
-            }
-            handleDragStart={this.handleDragStart}
-          />
-        </div>
+       <React.Fragment>
+        {this.state.selectedCategory === "Choose Veggies"?(
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  width: "510px",
+                  height: "110px",
+                  overflow: "scroll"
+                }}
+              >
+              <PictureList
+                images={this.props.veggies}
+                handleDragStart={this.handleDragStart}
+              />
+          
+          </div>
+        ): (
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  width: "510px",
+                  height: "110px",
+                  overflow: "scroll"
+                }}
+              >
+                <PictureList
+                  images={
+                    this.state.selectedState === "all"
+                      ? this.props.flowers
+                      : this.props.filteredFlowers
+                  }
+                  handleDragStart={this.handleDragStart}
+                />
+              </div>
+        )}
+        </React.Fragment> 
+        
+        
         <div style={{ display: "block" }}>
           <div style={{ display: "flex" }}>
             <div
@@ -249,7 +297,7 @@ class Canvas extends Component {
           </Button>
         </OverlayTrigger>
       </div>
-    )
+    );
   }
 }
 
@@ -265,6 +313,8 @@ const mapStateToProps = state => {
     errorMessage: state.grid.errorMessage,
     userLayouts: state.grid.userLayouts,
     userHasLayouts: state.grid.userHasLayouts,
+    veggies:state.veggies.veggie,
+    filteredVeggies:state.veggies.filteredVeggies
   }
 }
 
@@ -275,8 +325,10 @@ const mapDispatchToProps = {
   dropPlant,
   removePlant,
   getFlowerData,
+  getVeggieData,
   saveLayout,
   filterFlowers,
+  filterVeggies,
   patchLayout
 }
 
