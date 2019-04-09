@@ -34,71 +34,84 @@ class Login2 extends Component {
     const { isLoading, err } = this.props
 
     return (
-      <React.Fragment> 
-        
+      <React.Fragment>
         <Grid>
-          <Grid.Column >
-          <div>
-              <Header 
-              style={{fontSize: "100px", fontFamily: "Just Another Hand", color: "#78A9BB" }}
-               as="h1" textAlign="center">
+          <Grid.Column>
+            <div>
+              <Header
+                style={{
+                  fontSize: "100px",
+                  fontFamily: "Just Another Hand",
+                  color: "#78A9BB"
+                }}
+                as="h1"
+                textAlign="center"
+              >
                 Flower Power
               </Header>
-            <Image src={picture} size="medium" centered />
-            <Header as="h2" color="grey" textAlign="center">
-              Login
-            </Header>
+              {/* <Header
+                as="h2"
+                color="grey"
+                textAlign="center"
+                style={{ fontFamily: "Open Sans Condensed", fontSize: "30px",}}
+              >
+                LOGIN FORM
+              </Header> */}
+              <Segment attached style={{ textAlign: "center", border: "none", fontFamily: "Open Sans Condensed:300", fontSize: "30px",color:"grey"}}>
+                Build Your Awesome Garden!
+    </Segment>
             </div>
-            <div style={{padding: '5%'}}></div>
-          </Grid.Column> 
+
+            <div className="pageDiv">
+              <Form onSubmit={handleLogin} size="large">
+                <Segment stacked color="grey">
+                  <Form.Field
+                    label="Username:"
+                    name="username"
+                    required
+                    placeholder="Username"
+                    type="text"
+                    control={Input}
+                    autoFocus
+                    onChange={handleChange}
+                  />
+                  <Form.Field
+                    label="Password:"
+                    name="password"
+                    required
+                    placeholder="Password"
+                    type="password"
+                    control={Input}
+                    onChange={handleChange}
+                  />
+                  <Button.Group>
+                    <Button
+                      type="submit"
+                      positive
+                      size="large"
+                      to="/profile"
+                      disabled={isLoading}
+                    >
+                      Login to Your Account!
+                    </Button>
+                    <Button.Or />
+                    <Link to="/register">
+                      <Button size="large" color="teal">
+                        Don't Have an Account? Register Here!
+                      </Button>
+                    </Link>
+                  </Button.Group>
+                  <div>{this.props.result}</div>
+                </Segment>
+              </Form>
+              {isLoading && <Spinner name="circle" color="blue" />}
+              {err && <p style={{ color: "red" }}>{err}</p>}
+            </div>
+            <Image src={picture} size="large" centered />
+          </Grid.Column>
         </Grid>
-        <div className="pageDiv">
-          <Form className="formDiv" onSubmit={handleLogin} size="large">
-            <Segment stacked color="grey">
-              <Form.Field
-                label="Username:"
-                name="username"
-                required
-                placeholder="Username"
-                type="text"
-                control={Input}
-                autoFocus
-                onChange={handleChange}
-              />
-              <Form.Field
-                label="Password:"
-                name="password"
-                required
-                placeholder="Password"
-                type="password"
-                control={Input}
-                onChange={handleChange}
-              />
-              <Button.Group>
-                <Button
-                  type="submit"
-                  positive
-                  size="large"
-                  to="/profile"
-                  disabled={isLoading}
-                >
-                  Login to Your Account!
-                </Button>
-                <Button.Or />
-                <Link to="/register">
-                  <Button size="large" color="teal">
-                    Don't Have an Account? Register Here!
-                  </Button>
-                </Link>
-              </Button.Group>
-              <div>{this.props.result}</div>
-            </Segment>
-          </Form>
-           {isLoading && <Spinner name="circle" color="blue" />}
-            {err && <p style={{ color: "red" }}>{err}</p>}
-        </div>
       </React.Fragment>
-    )
+    );
   }
 }
 
