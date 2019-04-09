@@ -8,14 +8,21 @@ import {
   SAVE_ERROR,
   GET_USER_LAYOUT_DATA,
   LOAD_SUCCESS,
-  PATCH_SUCCESS
+  PATCH_SUCCESS,
+  NEW_LAYOUT
 } from "../actions/"
 import { width } from "../components/Grid/styles"
 
 const initialState = {
   numRows: 10,
   numCols: 10,
-  grid: Array(10).fill(null).map(() => Array(10).fill(null).map(entry => (entry = { pictureLink: null }))),
+  grid: Array(10)
+    .fill(null)
+    .map(() =>
+      Array(10)
+        .fill(null)
+        .map(entry => (entry = { pictureLink: null }))
+    ),
   canvasWidth: 10 * width,
   userHasLayouts: false,
   userLayouts: null,
@@ -26,7 +33,7 @@ const initialState = {
   name: ""
 }
 
-export default (state = initialState, action)  => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case INIT_GRID:
       return {
@@ -38,11 +45,11 @@ export default (state = initialState, action)  => {
       }
     case GET_USER_LAYOUT_DATA:
       let userHasLayouts = action.payload.length > 0 ? true : false
-      return ({
+      return {
         ...state,
         userHasLayouts: userHasLayouts,
         userLayouts: action.payload
-      })
+      }
     case EXPAND_GRID:
     case SUBTRACT_GRID:
       return {
@@ -83,6 +90,19 @@ export default (state = initialState, action)  => {
         grid: action.payload.layout,
         id: action.payload.id,
         name: action.payload.name
+      }
+    case NEW_LAYOUT:
+      return {
+          ...state,
+          grid: Array(10)
+          .fill(null)
+          .map(() =>
+            Array(10)
+              .fill(null)
+              .map(entry => (entry = { pictureLink: null }))
+          ),
+          id: null,
+          name: null
       }
     default:
       return state

@@ -38,10 +38,15 @@ function deriveInt(postgresqlDate) {
   let sum = 0
   let dateSection1 = postgresqlDate.slice(0, 10).split("-")
   let dateSection2 = postgresqlDate
-    .slice(11, 23)
+    .slice(11, 16)
     .replace(".", ":")
     .split(":")
   dateSection1.forEach(entry => (sum = parseInt(entry, 10) + sum))
-  dateSection2.forEach(entry => (sum = parseInt(entry, 10) + sum))
+  dateSection2.forEach((entry, index) => {
+    if (index === 1) {
+      sum = parseInt(entry, 10) + sum
+    } else sum = parseInt(entry, 10)/100 + sum
+  })
+  console.log(dateSection1 + " " + dateSection2)
   return sum
 }
