@@ -2,18 +2,16 @@ import React, { Component } from "react";
 import Spinner from "react-spinkit";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { loginThenNavToProfile as login } from '../actions/auth';
+import { loginThenNavToPlanner as login } from '../actions/auth';
 import {
   Button,
   Form,
   Input,
   Segment, Grid, Image, Header
 } from "semantic-ui-react";
-import  '../App.css'
-import picture from "./Images/Header.png"
+import loginPicture from "./Images/Header.png"
 
-// export class Login2 extends Component {
-class Login2 extends Component {
+ class Login2 extends Component {
   state = {
     username: "",
     password: ""
@@ -30,7 +28,6 @@ class Login2 extends Component {
 
   render() {
 
-    const { handleLogin, handleChange } = this
     const { isLoading, err } = this.props
 
     return (
@@ -44,16 +41,20 @@ class Login2 extends Component {
                as="h1" textAlign="center">
                 Flower Power
               </Header>
-            <Image src={picture} size="medium" centered />
-            <Header as="h2" color="grey" textAlign="center">
-              Login
+            <Image src={loginPicture} size="medium" centered />
+           <Header as="h2" color="grey" textAlign="center" fontFamiy="Raleway">
+              Plan Your Garden With Us!
             </Header>
+            <div 
+            style={{color:"grey", textAlign:"center", fontFamiy:"Raleway"}}>
+              Register as a New User Or Login To Your Active Account.
+              </div>
             </div>
             <div style={{padding: '5%'}}></div>
           </Grid.Column> 
         </Grid>
         <div className="pageDiv">
-          <Form className="formDiv" onSubmit={handleLogin} size="large">
+          <Form className="formDiv" onSubmit={this.handleLogin} size="large">
             <Segment stacked color="grey">
               <Form.Field
                 label="Username:"
@@ -63,7 +64,7 @@ class Login2 extends Component {
                 type="text"
                 control={Input}
                 autoFocus
-                onChange={handleChange}
+                onChange={this.handleChange}
               />
               <Form.Field
                 label="Password:"
@@ -72,7 +73,7 @@ class Login2 extends Component {
                 placeholder="Password"
                 type="password"
                 control={Input}
-                onChange={handleChange}
+                onChange={this.handleChange}
               />
               <Button.Group>
                 <Button
@@ -91,7 +92,7 @@ class Login2 extends Component {
                   </Button>
                 </Link>
               </Button.Group>
-              <div>{this.props.result}</div>
+              {/* <div>{this.props.result}</div> */}
             </Segment>
           </Form>
            {isLoading && <Spinner name="circle" color="blue" />}
@@ -102,17 +103,24 @@ class Login2 extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    result: state.loginResult
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    login: loginData => dispatch(login(loginData))
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     result: state.loginResult
+//   };
+// };
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     login: loginData => dispatch(login(loginData))
+//   };
+// };
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(Login2);
+
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login2);
+  ({auth}) => ({
+    isLoading: auth.loginLoading,
+    err: auth.loginError
+  }), {login}
+)(Login2)
