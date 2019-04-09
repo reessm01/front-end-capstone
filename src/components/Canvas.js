@@ -18,7 +18,8 @@ import {
   dropPlant,
   removePlant,
   saveLayout,
-  filterFlowers
+  filterFlowers,
+  filterVeggies
 } from "../actions"
 
 class Canvas extends Component {
@@ -50,11 +51,17 @@ class Canvas extends Component {
   }
 
   handleFilter = e => {
+    let curCategory = document.querySelector("a.active").textContent
     let value = e.target.textContent
-    if (value !== "All States") {
+    if(curCategory === "Choose Flowers"){
+     if (value !== "All States") {
       this.props.filterFlowers(this.filterState(value, [...this.props.flowers]))
-      this.setState({ ...this.state, selectedState: null })
-    } else this.setState({...this.state, selectedState: "all"})
+      this.setState({ ...this.state, selectedState: null ,selectedCategory:curCategory})
+    } else this.setState({...this.state, selectedState: "all", selectedCategory:curCategory})
+  }
+    if (curCategory === "Choose Veggies") {
+      this.setState({ ...this.state, selectedState: "all", selectedCategory: curCategory })
+    }
   }
 
   filterState(stateValue, flowers) {
@@ -167,6 +174,8 @@ class Canvas extends Component {
       }
       store.push(row)
     }
+    
+    
 
     return (
       <div>
@@ -188,26 +197,46 @@ class Canvas extends Component {
         
 
         <br />
+       <React.Fragment>
+        {this.state.selectedCategory === "Choose Veggies"?(
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  width: "510px",
+                  height: "110px",
+                  overflow: "scroll"
+                }}
+              >
+              <PictureList
+                images={this.props.veggies}
+                handleDragStart={this.handleDragStart}
+              />
+          
+          </div>
+        ): (
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  width: "510px",
+                  height: "110px",
+                  overflow: "scroll"
+                }}
+              >
+                <PictureList
+                  images={
+                    this.state.selectedState === "all"
+                      ? this.props.flowers
+                      : this.props.filteredFlowers
+                  }
+                  handleDragStart={this.handleDragStart}
+                />
+              </div>
+        )}
+        </React.Fragment> 
         
-
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            width: "510px",
-            height: "110px",
-            overflow: "scroll"
-          }}
-        >
-          <PictureList
-            images={
-              this.state.selectedState === "all"
-                ? this.props.flowers
-                : this.props.filteredFlowers
-            }
-            handleDragStart={this.handleDragStart}
-          />
-        </div>
+        
         <div style={{ display: "block" }}>
           <div style={{ display: "flex" }}>
             <div
