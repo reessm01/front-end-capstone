@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Grid } from "./Grid/Grid"
-import { PictureList } from "./PictureList"
+import PictureList from "./PictureList"
 import { OverlayTrigger } from "react-bootstrap"
 import { Button } from "semantic-ui-react"
 import { toolTip } from "./ToolTip"
@@ -9,6 +9,7 @@ import { connect } from "react-redux"
 import { NavBar } from "./NavBar"
 import { PageHeader } from "./PageHeader"
 import MainMenu from "./MainMenu/MainMenu"
+import SideInfo from "./SideInfo"
 import {
   initGrid,
   expandGrid,
@@ -244,6 +245,7 @@ class Canvas extends Component {
             >
               <i id="rows" className="fas fa-chevron-down" />
             </div>
+            <SideInfo/>
           </Button>
         </OverlayTrigger>
       </div>

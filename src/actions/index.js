@@ -10,6 +10,8 @@ export * from './getFlowerData'
 export * from './filterFlowers'
 export * from './getUserLayoutData'
 export * from './loadLayout'
+export * from './setCurrentFlower'
+
 export * from './patchLayout'
 export * from './newLayout'
 
