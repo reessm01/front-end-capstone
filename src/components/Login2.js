@@ -10,7 +10,7 @@ import {
   Segment, Grid, Image, Header
 } from "semantic-ui-react";
 import loginPicture from "./Images/Header.png"
-
+import largeSucculent from "../components/Images/side.jpg"
  class Login2 extends Component {
   state = {
     username: "",
@@ -38,11 +38,12 @@ import loginPicture from "./Images/Header.png"
           <div>
               <Header 
               style={{fontSize: "100px", fontFamily: "Just Another Hand", color: "#78A9BB" }}
-               as="h1" textAlign="center">
+               as="h1"
+               align="center">
+               <Image src={largeSucculent} style={{ height: "13%", width: "13%" }} />
                 Flower Power
               </Header>
-            <Image src={loginPicture} size="medium" centered />
-           <Header as="h2" color="grey" textAlign="center" fontFamiy="Raleway">
+            <Header as="h2" color="grey" textAlign="center" fontFamiy="Raleway">
               Plan Your Garden With Us!
             </Header>
             <div 
@@ -50,7 +51,6 @@ import loginPicture from "./Images/Header.png"
               Register as a New User Or Login To Your Active Account.
               </div>
             </div>
-            <div style={{padding: '5%'}}></div>
           </Grid.Column> 
         </Grid>
         <div className="pageDiv">
@@ -80,7 +80,7 @@ import loginPicture from "./Images/Header.png"
                   type="submit"
                   positive
                   size="large"
-                  to="/profile"
+                  to="/canvas"
                   disabled={isLoading}
                 >
                   Login to Your Account!
@@ -92,12 +92,14 @@ import loginPicture from "./Images/Header.png"
                   </Button>
                 </Link>
               </Button.Group>
-              {/* <div>{this.props.result}</div> */}
+              <div>{this.props.result}</div>
             </Segment>
           </Form>
+          
            {isLoading && <Spinner name="circle" color="blue" />}
             {err && <p style={{ color: "red" }}>{err}</p>}
         </div>
+        <Image src={loginPicture} size="large" centered />
       </React.Fragment>
     )
   }
