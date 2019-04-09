@@ -15,3 +15,15 @@ export const loadLayout = id => dispatch => {
     })
 
 }
+
+export const preloadUserLayout = userLayouts => dispatch =>{
+    let maxDate = 0
+    let id
+    if (userLayouts.length !== 0) {
+      userLayouts.forEach(entry => {
+          console.log(entry)
+        if(entry.updated > maxDate) id = entry.id
+      })
+      return dispatch(loadLayout(id))
+    }
+}

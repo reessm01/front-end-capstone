@@ -7,12 +7,15 @@ import {
   REGISTER_FAIL,
   LOGOUTCURRENTUSER,
   LOGOUT,
-  LOGOUT_SUCCESS,
-} from "../actions/auth.js";
+  LOGOUT_SUCCESS
+} from "../actions/auth.js"
 
 const initialState = {
   loginLoading: false,
-  login: null,
+  login: {
+    token: null,
+    id: null
+  },
   loginError: null,
   logoutLoading: false,
   logout: null,
@@ -20,34 +23,34 @@ const initialState = {
   registerLoading: false,
   register: null,
   registerError: null
-};
+}
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case LOGIN:
-      return { ...state, loginLoading: true, loginError: null };
+      return { ...state, loginLoading: true, loginError: null }
 
     case LOGIN_SUCCESS:
-      return { ...state, login: action.payload, loginLoading: false };
+      return { ...state, login: action.payload, loginLoading: false }
 
     case LOGIN_FAIL:
-      return { ...state, loginError: action.payload, loginLoading: false };
+      return { ...state, loginError: action.payload, loginLoading: false }
 
     case REGISTER:
-      return { ...state, registerLoading: true, registerError: null };
+      return { ...state, registerLoading: true, registerError: null }
 
     case REGISTER_SUCCESS:
-      return { ...state, register: action.payload, registerLoading: false };
+      return { ...state, register: action.payload, registerLoading: false }
 
     case REGISTER_FAIL:
       return {
         ...state,
         registerError: action.payload,
         registerLoading: false
-      };
+      }
 
     case LOGOUTCURRENTUSER:
-      return { initialState };
+      return { initialState }
 
     case LOGOUT:
       return state
@@ -56,6 +59,6 @@ export default (state = initialState, action) => {
       return { ...state, login: null }
 
     default:
-      return state;
+      return state
   }
-};
+}

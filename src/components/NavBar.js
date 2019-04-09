@@ -26,13 +26,20 @@ export class NavBar extends Component {
             onClick={this.handleItemClick}
             as={Link}
           />
-          {/* <Menu.Item
-            name="feed"
-            active={activeItem === "feed"}
-            to="/feed"
+          <Menu.Item
+            name="flowers"
+            active={activeItem === "flowers"}
+            to="/flowers"
             onClick={this.handleItemClick}
             as={Link}
-          /> */}
+          />
+          <Menu.Item
+            name="veggies"
+            active={activeItem === "veggies"}
+            to="/veggies"
+            onClick={this.handleItemClick}
+            as={Link}
+          />
           <Menu.Item
             name="profile"
             active={activeItem === "profile"}
@@ -47,14 +54,7 @@ export class NavBar extends Component {
             to="/canvas"
             onClick={this.handleItemClick}
           />
-          <Menu.Menu position="right"
-              // name="logout"
-              // as={Link}
-              // // active={activeItem === "logout"}
-              // onClick={this.handleItemClick}
-            > 
-            <Logout />
-          </Menu.Menu>
+
         </Menu>
       </React.Fragment>
     )

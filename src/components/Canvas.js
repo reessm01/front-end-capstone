@@ -1,14 +1,16 @@
 import React, { Component } from "react"
 import { Grid } from "./Grid/Grid"
-import { PictureList } from "./PictureList"
+import PictureList from "./PictureList"
 import { OverlayTrigger } from "react-bootstrap"
 import { Button } from "semantic-ui-react"
 import { toolTip } from "./ToolTip"
 import { getFlowerData } from "../actions/getFlowerData"
+import {getVeggieData} from "../actions/getVeggieData.js"
 import { connect } from "react-redux"
 import { NavBar } from "./NavBar"
 import { PageHeader } from "./PageHeader"
 import MainMenu from "./MainMenu/MainMenu"
+import SideInfo from "./SideInfo"
 import {
   initGrid,
   expandGrid,
@@ -16,7 +18,9 @@ import {
   dropPlant,
   removePlant,
   saveLayout,
-  filterFlowers
+  filterFlowers,
+  filterVeggies,
+  patchLayout
 } from "../actions"
 
 class Canvas extends Component {
@@ -24,11 +28,13 @@ class Canvas extends Component {
     prevElement: null,
     name: "",
     value: "",
-    selectedState: "all"
+    selectedState: "all",
+    selectedCategory:"Choose Flowers"
   }
 
   componentWillMount() {
     this.props.getFlowerData()
+    this.props.getVeggieData()
   }
   componentDidMount() {
     this.setState((state, props) => ({
@@ -46,11 +52,17 @@ class Canvas extends Component {
   }
 
   handleFilter = e => {
+    let curCategory = document.querySelector("a.active").textContent
     let value = e.target.textContent
-    if (value !== "All States") {
+    if(curCategory === "Choose Flowers"){
+     if (value !== "All States") {
       this.props.filterFlowers(this.filterState(value, [...this.props.flowers]))
-      this.setState({ ...this.state, selectedState: null })
-    } else this.setState({...this.state, selectedState: "all"})
+      this.setState({ ...this.state, selectedState: null ,selectedCategory:curCategory})
+    } else this.setState({...this.state, selectedState: "all", selectedCategory:curCategory})
+  }
+    if (curCategory === "Choose Veggies") {
+      this.setState({ ...this.state, selectedState: "all", selectedCategory: curCategory })
+    }
   }
 
   filterState(stateValue, flowers) {
@@ -101,12 +113,23 @@ class Canvas extends Component {
 
     let name = e.dataTransfer.getData("name")
     if (name) {
-      let curflower = this.props.flowers.find(flower => flower.name === name)
-      this.props.dropPlant(
-        this.state.targetRow,
-        this.state.targetCol,
-        curflower.image
-      )
+      if(this.state.selectedCategory === "Choose Veggies"){
+        let curflower = this.props.veggies.find(flower => flower.name === name)
+        this.props.dropPlant(
+          this.state.targetRow,
+          this.state.targetCol,
+          curflower.image
+        )
+      }
+      else{
+        let curflower = this.props.flowers.find(flower => flower.name === name)
+        this.props.dropPlant(
+          this.state.targetRow,
+          this.state.targetCol,
+          curflower.image
+        )
+      }
+      
     } else {
       this.props.dropPlant(
         this.state.targetRow,
@@ -130,19 +153,6 @@ class Canvas extends Component {
     })
   }
 
-  handleSave = e => {
-    e.preventDefault()
-    if (this.props.id !== null) {
-      this.props.patchLayout(this.props.id, this.state.name, this.props.grid)
-    } else {
-      this.props.saveLayout(this.state.name, this.props.grid)
-    }
-  }
-
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
   render() {
     const { grid } = this.props
     const store = []
@@ -163,6 +173,8 @@ class Canvas extends Component {
       }
       store.push(row)
     }
+    
+    
 
     return (
       <div>
@@ -170,38 +182,52 @@ class Canvas extends Component {
         <NavBar />
         <MainMenu
           width={this.props.width}
-          handleSave={this.handleSave}
-          handleChange={this.handleChange}
-          userLayouts={this.props.userLayouts}
-          userHasLayouts={this.props.userHasLayouts}
-          saveMessage={this.props.saveMessage}
           chooseState={this.handleFilter}
-          value={this.state.stateValue}
-          width={this.props.width}
-          saveMessage={this.props.saveMessage}
-          errorMessage={this.props.errorMessage}
+          grid={this.props.grid}
         />
+        
+
         <br />
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            // width: "510px",
-            width: "auto",
-             height: "210px",
-            
-            overflow: "scroll"
-          }}
-        >
-          <PictureList
-            images={
-              this.state.selectedState === "all"
-                ? this.props.flowers
-                : this.props.filteredFlowers
-            }
-            handleDragStart={this.handleDragStart}
-          />
-        </div>
+       <React.Fragment>
+        {this.state.selectedCategory === "Choose Veggies"?(
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  width: "auto",
+                  height: "210px",
+                  overflow: "scroll"
+                }}
+              >
+              <PictureList
+                images={this.props.veggies}
+                handleDragStart={this.handleDragStart}
+              />
+          
+          </div>
+        ): (
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  width: "510px",
+                  height: "110px",
+                  overflow: "scroll"
+                }}
+              >
+                <PictureList
+                  images={
+                    this.state.selectedState === "all"
+                      ? this.props.flowers
+                      : this.props.filteredFlowers
+                  }
+                  handleDragStart={this.handleDragStart}
+                />
+              </div>
+        )}
+        </React.Fragment> 
+        
+        
         <div style={{ display: "block" }}>
           <div style={{ display: "flex" }}>
             <div
@@ -267,10 +293,11 @@ class Canvas extends Component {
             >
               <i id="rows" className="fas fa-chevron-down" />
             </div>
+            <SideInfo/>
           </Button>
         </OverlayTrigger>
       </div>
-    )
+    );
   }
 }
 
@@ -285,7 +312,9 @@ const mapStateToProps = state => {
     saveMessage: state.grid.saveMessage,
     errorMessage: state.grid.errorMessage,
     userLayouts: state.grid.userLayouts,
-    userHasLayouts: state.grid.userHasLayouts
+    userHasLayouts: state.grid.userHasLayouts,
+    veggies:state.veggies.veggie,
+    filteredVeggies:state.veggies.filteredVeggies
   }
 }
 
@@ -296,8 +325,11 @@ const mapDispatchToProps = {
   dropPlant,
   removePlant,
   getFlowerData,
+  getVeggieData,
   saveLayout,
-  filterFlowers
+  filterFlowers,
+  filterVeggies,
+  patchLayout
 }
 
 export default connect(
