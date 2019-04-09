@@ -112,12 +112,23 @@ class Canvas extends Component {
 
     let name = e.dataTransfer.getData("name")
     if (name) {
-      let curflower = this.props.flowers.find(flower => flower.name === name)
-      this.props.dropPlant(
-        this.state.targetRow,
-        this.state.targetCol,
-        curflower.image
-      )
+      if(this.state.selectedCategory === "Choose Veggies"){
+        let curflower = this.props.veggies.find(flower => flower.name === name)
+        this.props.dropPlant(
+          this.state.targetRow,
+          this.state.targetCol,
+          curflower.image
+        )
+      }
+      else{
+        let curflower = this.props.flowers.find(flower => flower.name === name)
+        this.props.dropPlant(
+          this.state.targetRow,
+          this.state.targetCol,
+          curflower.image
+        )
+      }
+      
     } else {
       this.props.dropPlant(
         this.state.targetRow,
