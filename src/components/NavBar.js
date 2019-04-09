@@ -1,10 +1,7 @@
 import React, { Component } from "react"
-// import Logout from "../Logout.js"
-import "../App.css"
-//import { connect } from 'react-redux'
 import { Menu } from "semantic-ui-react"
 import { Link } from "react-router-dom"
-
+import { Logout } from './Logout'
 export class NavBar extends Component {
   state = { activeItem: "home" }
 
@@ -29,13 +26,13 @@ export class NavBar extends Component {
             onClick={this.handleItemClick}
             as={Link}
           />
-          <Menu.Item
+          {/* <Menu.Item
             name="feed"
             active={activeItem === "feed"}
             to="/feed"
             onClick={this.handleItemClick}
             as={Link}
-          />
+          /> */}
           <Menu.Item
             name="profile"
             active={activeItem === "profile"}
@@ -50,12 +47,13 @@ export class NavBar extends Component {
             to="/canvas"
             onClick={this.handleItemClick}
           />
-          <Menu.Menu position="right">
-            <Menu.Item
-              name="logout"
-              active={activeItem === "logout"}
-              onClick={this.handleItemClick}
-            />
+          <Menu.Menu position="right"
+              // name="logout"
+              // as={Link}
+              // // active={activeItem === "logout"}
+              // onClick={this.handleItemClick}
+            > 
+            <Logout />
           </Menu.Menu>
         </Menu>
       </React.Fragment>

@@ -108,7 +108,7 @@ export const user = id => dispatch => {
     return dispatch(userUpdate(newUserData))
   };
     
-    export const downloadUserImage = id => (dispatch,getState) => {
+    export const downloadUserImage = id => (dispatch, getState) => {
       dispatch({
         type:DOWNLOAD_USER_IMAGE
       })

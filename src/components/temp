@@ -1,0 +1,56 @@
+import React, { Component } from "react";
+import { logout } from "../actions/auth";
+import { connect } from "react-redux";
+import { Button, Dimmer, Divider, Menu, Image, Header } from "semantic-ui-react";
+import largeSucculent from "../components/Images/side.jpg"
+import { Link } from "react-router-dom"
+export class Logout extends Component {
+  state = {};
+
+  handleLogout = event => {
+    this.props.logout({ ...this.state });
+    this.setState({ active: false });
+  };
+
+  handleOpen = () => this.setState({ active: true });
+
+  render() {
+    const { active } = this.state;
+    return (
+
+         <Menu.Menu position="right">
+            <Menu.Item
+              name="logout"
+              onClick={this.handleOpen}
+            /> 
+            <Dimmer style = {{backgroundColor: "teal", opacity: "0.7"}} active={active} page>
+           <Header as='h1' inverted>
+              You Have Successfully Logged Out.
+             <Image src={largeSucculent} style={{width: "8%", height:"10%", marginLeft: "45%"}} />
+           </Header>
+            <Divider style={{color: "teal", width:"10%"}} />
+            <Menu.Content as = 'h2'>Thank You for Stopping By.</Menu.Content>
+            <Menu.Content as='h3'>Tend Your Garden Again With Us Soon!</Menu.Content>
+           
+            {/* <Button
+              name="logout"
+              onClick={this.handleLogout}
+              size="large"
+              color="green"
+            >
+              Return to the Homepage
+            </Button> */}
+       
+        </Dimmer>
+       </Menu.Menu>
+    );
+  }
+}
+
+export default connect(
+  ({ auth }) => ({
+    isLoading: auth.logoutLoading,
+    err: auth.loginError
+  }),
+  { logout }
+)(Logout);

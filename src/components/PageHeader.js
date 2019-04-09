@@ -1,6 +1,4 @@
 import React, { Component } from "react"
-import { connect } from "react-redux"
-
 import { Header, Image } from "semantic-ui-react"
 import largeSucculent from "../components/Images/side.jpg"
 
@@ -16,7 +14,7 @@ export class PageHeader extends Component {
           }}
           textAlign="left"
         >
-          <Image src={largeSucculent} style={{ height: "10%", width: "10%" }} />
+          <Image src={largeSucculent} style={{ height: "12%", width: "12%" }} />
           Flower Power
         </Header>
       </React.Fragment>
