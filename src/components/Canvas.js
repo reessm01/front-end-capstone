@@ -196,7 +196,7 @@ class Canvas extends Component {
           handleDragStart={this.handleDragStart}
           handleTabClicked={this.handleTabClicked}
         />
-        <div style={{ display: "block" }}>
+        <div style={{ display: "flex" }}>
           <div style={{ display: "flex" }}>
             <div
               onDragOverCapture={this.handleDragOver}
@@ -235,6 +235,9 @@ class Canvas extends Component {
               </Button>
             </OverlayTrigger>
           </div>
+          <div style={{marginLeft:"30px",marginTop:"25px"}}>
+          <SideInfo  />
+          </div>
         </div>
         <OverlayTrigger
           placement="bottom"
@@ -261,9 +264,10 @@ class Canvas extends Component {
             >
               <i id="rows" className="fas fa-chevron-down" />
             </div>
-            <SideInfo/>
+            {/* <SideInfo  style={{float:"right"}}/> */}
           </Button>
         </OverlayTrigger>
+       
       </div>
     );
   }
