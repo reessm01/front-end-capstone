@@ -23,7 +23,7 @@ export class SideInfo extends Component {
               </Card.Description>
             </Card.Content>
           </Card>
-        ) : (flower!==null?(
+        ) : (flower!==null && flower.type==="veggie"?(
           <Card className="sideInfo" style={{ marginTop: "25px" }}>
             <Image src={flower.image} />
             <Card.Content>
@@ -36,7 +36,35 @@ export class SideInfo extends Component {
               </Card.Description>
             </Card.Content>
           </Card>
+        ):(flower!==null && flower.type==="tree"?(
+              <Card className="sideInfo" style={{ marginTop: "25px" }}>
+                <Image src={flower.image} />
+                <Card.Content>
+                  <Card.Header>{flower.name}</Card.Header>
+
+                  <Card.Description>
+                    <p>Height: {flower.height}</p>
+                    <p>Description: {flower.description}</p>
+                  </Card.Description>
+                </Card.Content>
+              </Card>
+        ):( flower!==null?(
+                <Card className="sideInfo" style={{ marginTop: "25px" }}>
+                  <Image src={flower.image} />
+                  <Card.Content>
+                    <Card.Header>{flower.name}</Card.Header>
+
+                    <Card.Description>
+                      <p>Size: {flower.size}</p>
+                      <p>Description: {flower.description}</p>
+                      
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
         ):(null)
+        )
+
+        )
         )}
       </React.Fragment>
     );
