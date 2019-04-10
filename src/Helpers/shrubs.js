@@ -1,4 +1,4 @@
-import config from "./config.js";
+import config from "./config.js"
 
 export default function load(callback) {
     window.gapi.client.load("sheets", "v4", () => {
@@ -9,24 +9,25 @@ export default function load(callback) {
         })
         .then(
           response => {
-            const data = response.result.values;
-            const shrubs =
+            console.log(response)
+            const data = response.result.values
+            const shrub =
               data.map(shrubs => ({
                 name: shrubs[0],
                 height: shrubs[1],
-                state: shrubs[2],
+                state: shrubs[5],
                 description: shrubs[3],
-                image: shrubs[4],
-                site: shrubs[5],
+                image: shrubs[7],
+                size: shrubs[2],
                 type: shrubs[6]
-              })) || [];
+              })) || []
             callback({
-              shrubs
-            });
+              shrub
+            })
           },
           response => {
-            callback(false, response.result.error);
+            callback(false, response.result.error)
           }
-        );
-    });
+        )
+    })
   }

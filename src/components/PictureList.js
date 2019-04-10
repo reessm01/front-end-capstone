@@ -4,7 +4,6 @@ import {connect} from "react-redux"
 import {setCurrentFlower} from "../actions"
 
 class PictureList extends Component {
-    
     render() {
         return (
             this.props.images.map(image =>(
