@@ -30,7 +30,7 @@ export class FlowerCards extends Component {
                             className="flower-card"
                         >
                             <Card.Content>
-                                <h2>{flower.name}</h2>
+                            <Header>{flower.name}</Header>
                                 <br />
                                 <img src={flower.image} className="thumbnail" />
 
@@ -43,12 +43,11 @@ export class FlowerCards extends Component {
                                     closeIcon
                                     style={{ height: 'initial', top: "initial", left: 'initial' }}
                                 >
-                                    <Modal.Header>{flower.species}</Modal.Header>
                                     <Modal.Content image>
                                         <Image wrapped size="huge" src={flower.image} />
                                         <Modal.Description>
                                             <Header>{flower.species}</Header>
-                                            <p>Name: <i>{flower.name}</i></p>
+                                            <Header>{flower.name}</Header>
                                             <p>Blooms: {flower.blooms} ({flower.blooms})</p>
                                             <p>Size: {flower.size}</p>
                                             <p>Needs: {flower.sun}</p>
@@ -62,7 +61,7 @@ export class FlowerCards extends Component {
                                             <br></br>
                                             
                                             <Button basic color='green' href={flower.amazon} target="_blank">
-                                                Click to buy from Amazon </Button>
+                                                Buy from Amazon </Button>
                                         </Modal.Description>
                                     </Modal.Content>
 
