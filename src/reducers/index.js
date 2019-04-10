@@ -17,5 +17,6 @@ export default history =>
         flowers,
         veggies,
         trees,
-        shrubs
+        shrubs,
+        browser
     })
