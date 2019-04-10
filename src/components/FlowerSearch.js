@@ -153,66 +153,64 @@ class FlowerSearch extends Component {
                 <NavBar /> 
                 <div className="filter-total">
                     <div className="filter-advanced">
-                        <Accordion as={Menu} vertical>
-                            <Menu.Item>
-                                <Accordion.Title
-                                    active={activeIndex === 0}
-                                    content="Colors"
-                                    index={0}
-                                    onClick={this.handleClick}
-                                />
-                                <Accordion.Content
-                                    active={activeIndex === 0}
-                                    content={
+                        
                                         <Form>
-                                            <Form.Group grouped>
+                            <Form.Group grouped style={{ display: "flex", flexWrap: "wrap" , marginLeft:"300px"}}>
                                                 <Form.Checkbox
                                                     onChange={this.handleFilter}
                                                     label="Purple"
                                                     name="color"
                                                     value="purple"
+                                                    style={{marginRight:"20px"}}
                                                 />
                                                 <Form.Checkbox
                                                     onChange={this.handleFilter}
                                                     label="Violet"
                                                     name="color"
                                                     value="violet"
+                                                    style={{ marginRight: "20px" }}
                                                 />
                                                 <Form.Checkbox
                                                     onChange={this.handleFilter}
                                                     label="Blue"
                                                     name="color"
                                                     value="blue"
+                                    style={{ marginRight: "20px" }}
                                                 />
                                                 <Form.Checkbox
                                                     onChange={this.handleFilter}
                                                     label="Green"
                                                     name="color"
                                                     value="green"
+                                    style={{ marginRight: "20px" }}
                                                 />
                                                 <Form.Checkbox
                                                     onChange={this.handleFilter}
                                                     label="Brown"
                                                     name="color"
                                                     value="brown"
+                                    style={{ marginRight: "20px" }}
                                                 />
                                                 <Form.Checkbox
                                                     onChange={this.handleFilter}
                                                     label="Orange"
                                                     name="color"
                                                     value="orange"
+                                    style={{ marginRight: "20px" }}
                                                 />
                                                 <Form.Checkbox
                                                     onChange={this.handleFilter}
                                                     label="Pink"
                                                     name="color"
                                                     value="pink"
+                                    style={{ marginRight: "20px" }}
                                                 />
                                                 <Form.Checkbox
                                                     onChange={this.handleFilter}
                                                     label="Red"
                                                     name="color"
                                                     value="red"
+                                    style={{ marginRight: "20px" }}
                                                 />
                             
                                                 <Form.Checkbox
@@ -220,30 +218,26 @@ class FlowerSearch extends Component {
                                                     label="White"
                                                     name="color"
                                                     value="white"
+                                    style={{ marginRight: "20px" }}
                                                 />
                                                 <Form.Checkbox
                                                     onChange={this.handleFilter}
                                                     label="Yellow"
                                                     name="color"
                                                     value="yellow"
+                                    style={{ marginRight: "20px" }}
                                                 />
                                             </Form.Group>
+                                            <hr />
                                         </Form>
-                                    }
-                                />
-                            </Menu.Item>
-                        </Accordion>
+                                    
+                                
+                            
                         
-                        <Dropdown
-                            placeholder=" Pick your state "
-                            selection
-                            options={stateOptions}
-                            onChange={this.handleFilter2}
-                            value={this.state.value}
-                        />
+                        
                         
                     </div>
-                    <div className="filter-cards">
+                    <div className="filter-cards" style={{marginLeft:"150px"}}>
                         <FlowerCards flowers={this.state.filterflowers} />
                         {/* <ScrollUpButton
                             className="scroll"
