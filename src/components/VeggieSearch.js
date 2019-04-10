@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import {VeggieCards} from "./VeggieCards";
+import { VeggieCards } from "./VeggieCards";
 import { NavBar } from "./NavBar"
-
+import { PageHeader } from './PageHeader'
 import { connect } from "react-redux";
 import { getVeggieData } from "../actions/getVeggieData";
+import { generalStyling } from "./MainMenu/styles";
 
 class VeggieSearch extends Component {
     state = { activeIndex: 0, filterveggies: this.props.veggies || [], value: "" };
@@ -21,8 +22,11 @@ class VeggieSearch extends Component {
         const { activeIndex } = this.state;
         return (
             <React.Fragment>
-                <NavBar /> 
+                <PageHeader/>
+                <NavBar/>
+                <div className='fonts'>
                         <VeggieCards veggies={this.state.filterveggies} />
+                        </div>
             </React.Fragment>
         );
     }

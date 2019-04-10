@@ -113,6 +113,7 @@ class Canvas extends Component {
       })
     } 
     event.target.dataset.name && event.dataTransfer.setData("name", event.target.dataset.name)
+    event.dataTransfer.setDragImage(event.target, 50, 50)
   }
 
   handleDrop = e => {
@@ -181,8 +182,8 @@ class Canvas extends Component {
 
     return (
       <div>
-        <PageHeader />
-        <NavBar />
+         <PageHeader /> 
+         <NavBar /> 
         <MainMenu
           width={this.props.width}
           chooseState={this.handleFilter}
