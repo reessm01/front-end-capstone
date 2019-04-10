@@ -93,6 +93,7 @@ class PlantDisplayBar extends Component {
         menu={{ borderless: true, attached: false, tabular: false }}
         style={{ width: this.props.width + 25 + "px" }}
         panes={panes}
+        onClick={this.props.handleTabClicked}
       />
     )
   }

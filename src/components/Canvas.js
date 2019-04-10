@@ -25,13 +25,15 @@ import {
   getShrubData
 } from "../actions"
 
+const categories = ["flowers", "veggies", "trees", "shrubs"]
+
 class Canvas extends Component {
   state = {
     prevElement: null,
     name: "",
     value: "",
     selectedState: "all",
-    selectedCategory:"Choose Flowers"
+    selectedCategory: "Flowers"
   }
 
   componentWillMount() {
@@ -53,6 +55,10 @@ class Canvas extends Component {
     } else {
       this.props.removePlant(e.target.dataset.i, e.target.dataset.j)
     }
+  }
+
+  handleTabClicked = e => {
+    this.setState({...this.state, selectedCategory: e.target.innerHTML})
   }
 
   handleFilter = e => {
@@ -105,34 +111,27 @@ class Canvas extends Component {
         originCol: event.target.dataset.j,
         prevElement: event.target
       })
-    }
-    let name = event.target.dataset.name
-    if (name) {
-      event.dataTransfer.setData("name", name)
-    }
+    } 
+    event.target.dataset.name && event.dataTransfer.setData("name", event.target.dataset.name)
   }
 
   handleDrop = e => {
     e.preventDefault()
-
-    let name = e.dataTransfer.getData("name")
+    let name = e.dataTransfer.getData("name").toLowerCase()
     if (name) {
-      if(this.state.selectedCategory === "Choose Veggies"){
-        let curflower = this.props.veggies.find(flower => flower.name === name)
-        this.props.dropPlant(
-          this.state.targetRow,
-          this.state.targetCol,
-          curflower.image
-        )
-      }
-      else{
-        let curflower = this.props.flowers.find(flower => flower.name === name)
-        this.props.dropPlant(
-          this.state.targetRow,
-          this.state.targetCol,
-          curflower.image
-        )
-      }
+      let plantImage
+      categories.forEach(plant => {
+        if(this.state.selectedCategory.toLowerCase() === plant){
+          plantImage = this.props[plant].find(plant => plant.name.toLowerCase() === name)
+          if(plantImage !== undefined) {
+            this.props.dropPlant(
+              this.state.targetRow,
+              this.state.targetCol,
+              plantImage.image
+            )
+          }
+        }
+      })
       
     } else {
       this.props.dropPlant(
@@ -195,6 +194,7 @@ class Canvas extends Component {
         <PlantDisplayBar
           selectedState={this.state.selectedState}
           handleDragStart={this.handleDragStart}
+          handleTabClicked={this.handleTabClicked}
         />
         <div style={{ display: "block" }}>
           <div style={{ display: "flex" }}>
@@ -275,6 +275,9 @@ const mapStateToProps = state => {
     width: state.grid.canvasWidth,
     id: state.grid.id,
     flowers: state.flowers.flower,
+    veggies: state.veggies.veggie,
+    trees: state.trees.tree,
+    shrubs: state.shrubs.shrub,
     filteredFlowers: state.flowers.filteredFlowers,
     error: state.error,
     saveMessage: state.grid.saveMessage,
