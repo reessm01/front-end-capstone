@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import PictureList from "../PictureList"
 import { Tab } from "semantic-ui-react"
 import { connect } from "react-redux"
+import { basicStyling } from "./styles"
 
 class PlantDisplayBar extends Component {
 
@@ -11,13 +12,7 @@ class PlantDisplayBar extends Component {
         menuItem: "Flowers",
         render: () => (
           <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              width: "auto",
-              height: "210px",
-              overflow: "scroll"
-            }}
+            style={basicStyling}
           >
             <PictureList
               images={
@@ -34,13 +29,7 @@ class PlantDisplayBar extends Component {
         menuItem: "Veggies",
         render: () => (
           <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              width: "auto",
-              height: "210px",
-              overflow: "scroll"
-            }}
+            style={basicStyling}
           >
             <PictureList
               images={this.props.veggies}
@@ -53,13 +42,7 @@ class PlantDisplayBar extends Component {
         menuItem: "Trees",
         render: () => (
           <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              width: "auto",
-              height: "210px",
-              overflow: "scroll"
-            }}
+            style={basicStyling}
           >
             <PictureList
               images={this.props.trees}
@@ -72,13 +55,7 @@ class PlantDisplayBar extends Component {
         menuItem: "Shrubs",
         render: () => (
           <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              width: "auto",
-              height: "210px",
-              overflow: "scroll"
-            }}
+            style={basicStyling}
           >
             <PictureList
               images={this.props.shrubs}

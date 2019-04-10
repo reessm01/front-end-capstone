@@ -58,20 +58,35 @@ class Canvas extends Component {
   }
 
   handleTabClicked = e => {
-    this.setState({...this.state, selectedCategory: e.target.innerHTML})
+    this.setState({ ...this.state, selectedCategory: e.target.innerHTML })
   }
 
   handleFilter = e => {
     let curCategory = document.querySelector("a.active").textContent
     let value = e.target.textContent
-    if(curCategory === "Choose Flowers"){
-     if (value !== "All States") {
-      this.props.filterFlowers(this.filterState(value, [...this.props.flowers]))
-      this.setState({ ...this.state, selectedState: null ,selectedCategory:curCategory})
-    } else this.setState({...this.state, selectedState: "all", selectedCategory:curCategory})
-  }
+    if (curCategory === "Choose Flowers") {
+      if (value !== "All States") {
+        this.props.filterFlowers(
+          this.filterState(value, [...this.props.flowers])
+        )
+        this.setState({
+          ...this.state,
+          selectedState: null,
+          selectedCategory: curCategory
+        })
+      } else
+        this.setState({
+          ...this.state,
+          selectedState: "all",
+          selectedCategory: curCategory
+        })
+    }
     if (curCategory === "Choose Veggies") {
-      this.setState({ ...this.state, selectedState: "all", selectedCategory: curCategory })
+      this.setState({
+        ...this.state,
+        selectedState: "all",
+        selectedCategory: curCategory
+      })
     }
   }
 
@@ -111,8 +126,9 @@ class Canvas extends Component {
         originCol: event.target.dataset.j,
         prevElement: event.target
       })
-    } 
-    event.target.dataset.name && event.dataTransfer.setData("name", event.target.dataset.name)
+    }
+    event.target.dataset.name &&
+      event.dataTransfer.setData("name", event.target.dataset.name)
     event.dataTransfer.setDragImage(event.target, 50, 50)
   }
 
@@ -122,9 +138,11 @@ class Canvas extends Component {
     if (name) {
       let plantImage
       categories.forEach(plant => {
-        if(this.state.selectedCategory.toLowerCase() === plant){
-          plantImage = this.props[plant].find(plant => plant.name.toLowerCase() === name)
-          if(plantImage !== undefined) {
+        if (this.state.selectedCategory.toLowerCase() === plant) {
+          plantImage = this.props[plant].find(
+            plant => plant.name.toLowerCase() === name
+          )
+          if (plantImage !== undefined) {
             this.props.dropPlant(
               this.state.targetRow,
               this.state.targetCol,
@@ -133,7 +151,6 @@ class Canvas extends Component {
           }
         }
       })
-      
     } else {
       this.props.dropPlant(
         this.state.targetRow,
@@ -177,19 +194,16 @@ class Canvas extends Component {
       }
       store.push(row)
     }
-    
-    
 
     return (
       <div>
-         <PageHeader /> 
-         <NavBar /> 
+        <PageHeader />
+        <NavBar />
         <MainMenu
           width={this.props.width}
           chooseState={this.handleFilter}
           grid={this.props.grid}
         />
-        
 
         <br />
         <PlantDisplayBar
@@ -197,7 +211,11 @@ class Canvas extends Component {
           handleDragStart={this.handleDragStart}
           handleTabClicked={this.handleTabClicked}
         />
-        <div style={{ display: "flex" }}>
+        <div style={{width:this.props.width+25+"px", borderStyle:"hidden", textAlign:"center", margin:"25px"}}><h1>Title</h1></div>
+        <div style={{ display: "flex", justifyContent:"space-evenly" }}>
+          <div style={{}}>
+            <SideInfo />
+          </div>
           <div style={{ display: "flex" }}>
             <div
               onDragOverCapture={this.handleDragOver}
@@ -236,9 +254,7 @@ class Canvas extends Component {
               </Button>
             </OverlayTrigger>
           </div>
-          <div style={{marginLeft:"30px",marginTop:"25px"}}>
-          <SideInfo  />
-          </div>
+          
         </div>
         <OverlayTrigger
           placement="bottom"
@@ -265,12 +281,10 @@ class Canvas extends Component {
             >
               <i id="rows" className="fas fa-chevron-down" />
             </div>
-            {/* <SideInfo  style={{float:"right"}}/> */}
           </Button>
         </OverlayTrigger>
-       
       </div>
-    );
+    )
   }
 }
 

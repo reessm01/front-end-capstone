@@ -1,11 +1,6 @@
 import React, { Component } from "react";
-//import { VeggieCards } from "./VeggieCards";
-//import { NavBar } from "./NavBar"
 import { Card, Image } from 'semantic-ui-react'
-
-
 import { connect } from "react-redux";
-//import { getVeggieData } from "../actions/getVeggieData";
 
 export class SideInfo extends Component {
 
