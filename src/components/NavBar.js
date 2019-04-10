@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { Menu } from "semantic-ui-react"
 import { Link } from "react-router-dom"
 import { Logout } from './Logout'
-
+import {PageHeader } from './PageHeader'
 export class NavBar extends Component {
   state = { activeItem: "home" }
 
@@ -21,6 +21,7 @@ export class NavBar extends Component {
 
     return (
       <React.Fragment>
+        <PageHeader />
         <Menu
           pointing
           secondary
