@@ -22,8 +22,6 @@ class VeggieSearch extends Component {
         const { activeIndex } = this.state;
         return (
             <React.Fragment>
-                <PageHeader/>
-                <NavBar/>
                 <div className='fonts'>
                         <VeggieCards veggies={this.state.filterveggies} />
                         </div>

@@ -197,8 +197,6 @@ class Canvas extends Component {
 
     return (
       <div>
-        <PageHeader />
-        <NavBar />
         <MainMenu
           width={this.props.width}
           chooseState={this.handleFilter}
