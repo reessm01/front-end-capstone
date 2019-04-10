@@ -21,7 +21,6 @@ export class NavBar extends Component {
 
     return (
       <React.Fragment>
-        <PageHeader />
         <Menu
           pointing
           secondary
@@ -69,10 +68,9 @@ export class NavBar extends Component {
             as={Link}
             to="/canvas"
           />
-          <Menu.Menu position='right'>
+          <Menu.Menu position='right' style={{color:'gray'}}>
             <Menu.Item
               name='logout'
-               style={{color:'gray'}}
               active={activeItem === 'logout'}
               onClick={this.handleItemClick}
               as={Logout}

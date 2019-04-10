@@ -7,8 +7,6 @@ import {
     
 } from "semantic-ui-react";
 import {FlowerCards} from "./FlowerCards";
-import { PageHeader } from './PageHeader';
- import { NavBar } from "./NavBar";
 
 import { connect } from "react-redux";
 import { getFlowerData } from "../actions/getFlowerData";
