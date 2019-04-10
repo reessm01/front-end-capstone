@@ -234,21 +234,9 @@ class FlowerSearch extends Component {
                             </Menu.Item>
                         </Accordion>
                         
-                        <Dropdown
-                            placeholder=" Pick your state "
-                            selection
-                            options={stateOptions}
-                            onChange={this.handleFilter2}
-                            value={this.state.value}
-                        />
-                        
                     </div>
                     <div className="filter-cards">
                         <FlowerCards flowers={this.state.filterflowers} />
-                        {/* <ScrollUpButton
-                            className="scroll"
-                            style={{ border: "5px solid #6FB0CE" }}
-                        /> */}
                     </div>
                 </div>
             </React.Fragment>
