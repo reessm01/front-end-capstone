@@ -58,20 +58,35 @@ class Canvas extends Component {
   }
 
   handleTabClicked = e => {
-    this.setState({...this.state, selectedCategory: e.target.innerHTML})
+    this.setState({ ...this.state, selectedCategory: e.target.innerHTML })
   }
 
   handleFilter = e => {
     let curCategory = document.querySelector("a.active").textContent
     let value = e.target.textContent
-    if(curCategory === "Choose Flowers"){
-     if (value !== "All States") {
-      this.props.filterFlowers(this.filterState(value, [...this.props.flowers]))
-      this.setState({ ...this.state, selectedState: null ,selectedCategory:curCategory})
-    } else this.setState({...this.state, selectedState: "all", selectedCategory:curCategory})
-  }
+    if (curCategory === "Choose Flowers") {
+      if (value !== "All States") {
+        this.props.filterFlowers(
+          this.filterState(value, [...this.props.flowers])
+        )
+        this.setState({
+          ...this.state,
+          selectedState: null,
+          selectedCategory: curCategory
+        })
+      } else
+        this.setState({
+          ...this.state,
+          selectedState: "all",
+          selectedCategory: curCategory
+        })
+    }
     if (curCategory === "Choose Veggies") {
-      this.setState({ ...this.state, selectedState: "all", selectedCategory: curCategory })
+      this.setState({
+        ...this.state,
+        selectedState: "all",
+        selectedCategory: curCategory
+      })
     }
   }
 
@@ -111,8 +126,9 @@ class Canvas extends Component {
         originCol: event.target.dataset.j,
         prevElement: event.target
       })
-    } 
-    event.target.dataset.name && event.dataTransfer.setData("name", event.target.dataset.name)
+    }
+    event.target.dataset.name &&
+      event.dataTransfer.setData("name", event.target.dataset.name)
     event.dataTransfer.setDragImage(event.target, 50, 50)
   }
 
@@ -122,9 +138,11 @@ class Canvas extends Component {
     if (name) {
       let plantImage
       categories.forEach(plant => {
-        if(this.state.selectedCategory.toLowerCase() === plant){
-          plantImage = this.props[plant].find(plant => plant.name.toLowerCase() === name)
-          if(plantImage !== undefined) {
+        if (this.state.selectedCategory.toLowerCase() === plant) {
+          plantImage = this.props[plant].find(
+            plant => plant.name.toLowerCase() === name
+          )
+          if (plantImage !== undefined) {
             this.props.dropPlant(
               this.state.targetRow,
               this.state.targetCol,
@@ -133,7 +151,6 @@ class Canvas extends Component {
           }
         }
       })
-      
     } else {
       this.props.dropPlant(
         this.state.targetRow,
@@ -177,8 +194,6 @@ class Canvas extends Component {
       }
       store.push(row)
     }
-    
-    
 
     return (
       <div>
@@ -187,7 +202,6 @@ class Canvas extends Component {
           chooseState={this.handleFilter}
           grid={this.props.grid}
         />
-        
 
         <br />
         <PlantDisplayBar
@@ -195,80 +209,105 @@ class Canvas extends Component {
           handleDragStart={this.handleDragStart}
           handleTabClicked={this.handleTabClicked}
         />
-        <div style={{ display: "flex" }}>
-          <div style={{ display: "flex" }}>
-            <div
-              onDragOverCapture={this.handleDragOver}
-              onDrop={this.handleDrop}
-              style={{
-                display: "flex",
-                width: this.props.width + "px",
-                flexWrap: "wrap",
-                margin: "0px"
-              }}
-              onContextMenu={this.contextMenu}
-            >
-              {store}
-            </div>
-            <OverlayTrigger
-              placement="right"
-              delay={{ show: 250, hide: 400 }}
-              overlay={toolTip}
-            >
-              <Button
-                id="col"
-                onClick={e => this.props.expandGrid(e.target.id)}
-                onContextMenu={this.contextMenu}
-                style={{ width: "25px", margin: "0px", padding: "0px" }}
-              >
-                <div
-                  id="col"
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    marginRight: "3px"
-                  }}
-                >
-                  <i id="col" className="fas fa-chevron-right" />
-                </div>
-              </Button>
-            </OverlayTrigger>
-          </div>
-          <div style={{marginLeft:"30px",marginTop:"25px"}}>
-          <SideInfo  />
-          </div>
-        </div>
-        <OverlayTrigger
-          placement="bottom"
-          delay={{ show: 250, hide: 400 }}
-          overlay={toolTip}
-        >
-          <Button
-            id="rows"
-            onClick={e => this.props.expandGrid(e.target.id)}
-            onContextMenu={this.contextMenu}
+        <div style={{ display: "block" }}>
+          <div
             style={{
-              height: "25px",
-              margin: "0px",
-              width: this.props.width + "px"
+              display: "flex",
+              justifyContent: "space-evenly",
+              alignItems: "center"
             }}
           >
-            <div
-              id="rows"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                width: "initial"
-              }}
-            >
-              <i id="rows" className="fas fa-chevron-down" />
+            <div style={{}}>
+              <SideInfo />
             </div>
-            {/* <SideInfo  style={{float:"right"}}/> */}
-          </Button>
-        </OverlayTrigger>
-       
+
+            <div style={{ width: this.props.width + 25 + "px" }}>
+              <div
+                style={{
+                  width: this.props.width + "px",
+                  borderStyle: "hidden",
+                  textAlign: "center",
+                  margin: "25px 0px 10px 0px"
+                }}
+              >
+                <h2 style={{lineHeight:"0px"}}>
+                  {this.props.title !== null ? this.props.title:"Untitled"}
+                  
+                  </h2>
+                  <span style={{lineHeight:"0em", fontSize:"15px"}}>
+                  {"Size: " + this.props.numRows + "ft. x " + this.props.numCols + "ft."}
+                  </span>
+              </div>
+              <div style={{ display: "flex" }}>
+                <div
+                  onDragOverCapture={this.handleDragOver}
+                  onDrop={this.handleDrop}
+                  style={{
+                    display: "flex",
+                    width: this.props.width + "px",
+                    flexWrap: "wrap",
+                    margin: "0px"
+                  }}
+                  onContextMenu={this.contextMenu}
+                >
+                  {store}
+                </div>
+                <OverlayTrigger
+                  placement="right"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={toolTip}
+                >
+                  <Button
+                    id="col"
+                    onClick={e => this.props.expandGrid(e.target.id)}
+                    onContextMenu={this.contextMenu}
+                    style={{ width: "25px", margin: "0px", padding: "0px" }}
+                  >
+                    <div
+                      id="col"
+                      style={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        marginRight: "3px"
+                      }}
+                    >
+                      <i id="col" className="fas fa-chevron-right" />
+                    </div>
+                  </Button>
+                </OverlayTrigger>
+              </div>
+              <OverlayTrigger
+                placement="bottom"
+                delay={{ show: 250, hide: 400 }}
+                overlay={toolTip}
+              >
+                <Button
+                  id="rows"
+                  onClick={e => this.props.expandGrid(e.target.id)}
+                  onContextMenu={this.contextMenu}
+                  style={{
+                    height: "25px",
+                    margin: "0px",
+                    width: this.props.width + "px"
+                  }}
+                >
+                  <div
+                    id="rows"
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      width: "initial"
+                    }}
+                  >
+                    <i id="rows" className="fas fa-chevron-down" />
+                  </div>
+                </Button>
+              </OverlayTrigger>
+            </div>
+          </div>
+        </div>
       </div>
-    );
+    )
   }
 }
 
@@ -286,7 +325,10 @@ const mapStateToProps = state => {
     saveMessage: state.grid.saveMessage,
     errorMessage: state.grid.errorMessage,
     userLayouts: state.grid.userLayouts,
-    userHasLayouts: state.grid.userHasLayouts
+    userHasLayouts: state.grid.userHasLayouts,
+    title: state.grid.name,
+    numRows: state.grid.numRows,
+    numCols: state.grid.numCols
   }
 }
 

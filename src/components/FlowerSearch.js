@@ -151,8 +151,6 @@ class FlowerSearch extends Component {
         const { activeIndex } = this.state;
         return (
             <React.Fragment>
-                <PageHeader/>
-                 <NavBar />
                 <div className="filter-total">
                     <div className="filter-advanced">
                         

@@ -34,9 +34,6 @@ export class RegistrationPage extends Component {
 
         return (
             <React.Fragment>
-                <PageHeader />
-                <NavBar />
-
                 <div className="pageDiv">
                     <Form className="formDiv" onSubmit={this.handleRegister} >
                         <Form.Field

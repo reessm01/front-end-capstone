@@ -178,11 +178,13 @@ class MainMenu extends Component {
       }
     ]
     return (
+      <div style={{display:"flex", justifyContent:"center"}}>
       <Tab
         menu={{ borderless: true, attached: false, tabular: false }}
         style={{ width: this.props.width + 25 + "px" }}
         panes={panes}
       />
+      </div>
     )
   }
 }
