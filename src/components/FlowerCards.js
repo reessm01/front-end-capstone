@@ -8,6 +8,10 @@ const styles = {
     cardPosition: {
         margin: "30px",
         padding: "20px"
+    },
+    cardButtons: {
+        backgroundColor: '#78A9BB', 
+        color: 'white'
     }
 };
 
@@ -16,7 +20,7 @@ export class FlowerCards extends Component {
         const { flowers, error } = this.props;
         return (
             <React.Fragment>
-                <Header as="h2" color="grey" textAlign="center" className="search">Flower Search</Header>
+                <Header color="grey" textAlign="center" style={{fontSize: '30px'}}>Flower Search</Header>
                 <Image src={picture} size="large" centered />
                 <Card.Group>
                     {flowers.map((flower, i) => (

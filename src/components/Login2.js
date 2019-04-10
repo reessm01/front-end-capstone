@@ -78,10 +78,11 @@ import largeSucculent from "../components/Images/side.jpg"
               <Button.Group>
                 <Button
                   type="submit"
-                  positive
+                  style={{backgroundColor: '#ACC9AC'}}
                   size="large"
                   to="/canvas"
                   disabled={isLoading}
+
                 >
                   Login to Your Account!
                 </Button>

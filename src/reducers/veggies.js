@@ -3,14 +3,12 @@ import {
   GET_VEGGIE_DATA_SUCCESS,
   GET_VEGGIE_DATA_FAIL,
   FILTER_VEGGIES
-} from "../actions/";
+} from "../actions";
 
 
 const initialState = {
   veggie: [],
   error: { message: "" },
-  username: "",
-  token: "",
   filteredVeggies: null
 };
 

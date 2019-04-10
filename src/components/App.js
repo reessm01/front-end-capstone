@@ -8,7 +8,6 @@ import  VeggieSearch from "./VeggieSearch.js";
 import RegistrationPage from './RegistrationPage'
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
-import {AmazonAds } from './Amazon'
 import { UserImage } from './UserImage'
 import  '../App.css'
 
@@ -24,7 +23,6 @@ class App extends Component {
           <Route exact path="/register" render={() => <RegistrationPage /> } />
           <Route exact path="/flowers" render={() => <FlowerSearch />} />
           <Route exact path="/veggies" render={() => <VeggieSearch />} />
-          <Route exact path="/amazonAds" render={() => <AmazonAds />} />
           <Route exact path="/userImage" render={() => <UserImage />} />
         </Switch>
     );
