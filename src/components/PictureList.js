@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Picture } from "./Picture/Picture"
 import {connect} from "react-redux" 
-import {setCurrentFlower} from "../actions"
+import {setCurrentFlower} from "../actions" //
 
 class PictureList extends Component {
     render() {
