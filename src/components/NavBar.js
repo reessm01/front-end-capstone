@@ -7,7 +7,7 @@ export class NavBar extends Component {
   state = { activeItem: "home" }
 
   handleItemClick = (e, { name }) => {
-    e.preventDefault()
+ 
     this.setState({ activeItem: name })
   };
 
