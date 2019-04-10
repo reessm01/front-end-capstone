@@ -1,11 +1,8 @@
 import React, { Component } from "react"
 import { Grid } from "./Grid/Grid"
-import PictureList from "./PictureList"
 import { OverlayTrigger } from "react-bootstrap"
 import { Button } from "semantic-ui-react"
 import { toolTip } from "./ToolTip"
-import { getFlowerData } from "../actions/getFlowerData"
-import { getVeggieData } from "../actions/getVeggieData.js"
 import { connect } from "react-redux"
 import { NavBar } from "./NavBar"
 import { PageHeader } from "./PageHeader"
@@ -21,7 +18,11 @@ import {
   saveLayout,
   filterFlowers,
   filterVeggies,
-  patchLayout
+  patchLayout,
+  getFlowerData,
+  getVeggieData,
+  getTreeData,
+  getShrubData
 } from "../actions"
 
 class Canvas extends Component {
@@ -36,6 +37,8 @@ class Canvas extends Component {
   componentWillMount() {
     this.props.getFlowerData()
     this.props.getVeggieData()
+    this.props.getTreeData()
+    this.props.getShrubData()
   }
   componentDidMount() {
     this.setState((state, props) => ({
@@ -191,7 +194,6 @@ class Canvas extends Component {
         <br />
         <PlantDisplayBar
           selectedState={this.state.selectedState}
-          veggies={this.props.veggies}
           handleDragStart={this.handleDragStart}
         />
         <div style={{ display: "block" }}>
@@ -278,9 +280,7 @@ const mapStateToProps = state => {
     saveMessage: state.grid.saveMessage,
     errorMessage: state.grid.errorMessage,
     userLayouts: state.grid.userLayouts,
-    userHasLayouts: state.grid.userHasLayouts,
-    veggies:state.veggies.veggie,
-    filteredVeggies:state.veggies.filteredVeggies
+    userHasLayouts: state.grid.userHasLayouts
   }
 }
 
@@ -295,7 +295,9 @@ const mapDispatchToProps = {
   saveLayout,
   filterFlowers,
   filterVeggies,
-  patchLayout
+  patchLayout,
+  getTreeData,
+  getShrubData
 }
 
 export default connect(

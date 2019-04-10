@@ -4,6 +4,7 @@ import { Tab } from "semantic-ui-react"
 import { connect } from "react-redux"
 
 class PlantDisplayBar extends Component {
+
   render() {
     const panes = [
       {
@@ -47,6 +48,44 @@ class PlantDisplayBar extends Component {
             />
           </div>
         )
+      },
+      {
+        menuItem: "Trees",
+        render: () => (
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              width: "auto",
+              height: "210px",
+              overflow: "scroll"
+            }}
+          >
+            <PictureList
+              images={this.props.trees}
+              handleDragStart={this.props.handleDragStart}
+            />
+          </div>
+        )
+      },
+      {
+        menuItem: "Shrubs",
+        render: () => (
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              width: "auto",
+              height: "210px",
+              overflow: "scroll"
+            }}
+          >
+            <PictureList
+              images={this.props.shrubs}
+              handleDragStart={this.props.handleDragStart}
+            />
+          </div>
+        )
       }
     ]
     return (
@@ -62,12 +101,14 @@ class PlantDisplayBar extends Component {
 const mapStateToProps = state => {
   return {
     flowers: state.flowers.flower,
-    filteredFlowers: state.flowers.filteredFlowers
+    filteredFlowers: state.flowers.filteredFlowers,
+    veggies: state.veggies.veggie,
+    trees: state.trees.tree,
+    shrubs: state.shrubs.shrub
   }
 }
 
 const mapDispatchToProps = {
-
 }
 
 export default connect(
