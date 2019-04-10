@@ -51,19 +51,6 @@ export const user = id => dispatch => {
       })
   };
 
-  //  export const getMessagesAndUserPics = ()=> (dispatch,getState) => {
-  //    dispatch(getMessages())
-  //    .then(()=>{
-  //      const messages=getState().messages.list
-  //      const usersImages=getState().users.usersImages
-  //      messages.forEach(message=>{
-  //        const id=message.userId
-  //        if(usersImages[id] === undefined){
-  //            dispatch(downloadUserImage(id))
-  //        }
-  //      })
-  //    })
-  //  }
 
   const userUpdate = newUserData => dispatch => {
         const token = newUserData.loginInfo.token

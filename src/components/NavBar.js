@@ -2,16 +2,26 @@ import React, { Component } from "react"
 import { Menu } from "semantic-ui-react"
 import { Link } from "react-router-dom"
 import { Logout } from './Logout'
+import { connect } from "react-redux"
+import { logoutThenGoToLogin as logout } from "../actions/auth.js";
 export class NavBar extends Component {
-  state = { activeItem: "home" }
+  state = { activeItem: "flowers" }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => {
+    
+    this.setState({ activeItem: name })
+    if(name==="logout"){
+      this.props.logout(this.props.token)
+    }
+}
 
   render() {
     const { activeItem } = this.state
 
     return (
       <React.Fragment>
+        {this.props.login !== null ? (
+          
         <Menu
           stackable
           pointing
@@ -19,13 +29,6 @@ export class NavBar extends Component {
           color="pink"
           style={{ fontSize: "20px", fontFamily: "Raleway" }}
         >
-          <Menu.Item
-            name="home"
-            active={activeItem === "login"}
-            to="/"
-            onClick={this.handleItemClick}
-            as={Link}
-          />
           <Menu.Item
             name="flowers"
             active={activeItem === "flowers"}
@@ -54,11 +57,26 @@ export class NavBar extends Component {
             to="/canvas"
             onClick={this.handleItemClick}
           />
+          <Menu.Item
+              name="logout"
+              active={activeItem === "logout"}
+              
+              onClick={this.handleItemClick}
+          />
 
         </Menu>
+        ):(null)
+        }
       </React.Fragment>
     )
   }
 }
-
-export default NavBar
+const mapStateToProps = state => {
+  return {
+    token: state.auth.login.token
+  }
+}
+export default connect(
+  mapStateToProps,
+  { logout }
+)(NavBar);

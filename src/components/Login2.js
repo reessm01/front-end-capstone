@@ -37,7 +37,7 @@ import largeSucculent from "../components/Images/side.jpg"
           <Grid.Column >
           <div>
               <Header 
-              style={{fontSize: "100px", fontFamily: "Just Another Hand", color: "#78A9BB" }}
+              style={{fontSize: "70px", fontFamily: "Just Another Hand", color: "#78A9BB" }}
                as="h1"
                align="center">
                <Image src={largeSucculent} style={{ height: "13%", width: "13%" }} />
@@ -99,26 +99,12 @@ import largeSucculent from "../components/Images/side.jpg"
            {isLoading && <Spinner name="circle" color="blue" />}
             {err && <p style={{ color: "red" }}>{err}</p>}
         </div>
-        <Image src={loginPicture} size="large" centered />
+        <Image src={loginPicture} size="small" centered />
+        
       </React.Fragment>
     )
   }
 }
-
-// const mapStateToProps = state => {
-//   return {
-//     result: state.loginResult
-//   };
-// };
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     login: loginData => dispatch(login(loginData))
-//   };
-// };
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Login2);
 
 export default connect(
   ({auth}) => ({
