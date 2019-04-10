@@ -211,78 +211,103 @@ class Canvas extends Component {
           handleDragStart={this.handleDragStart}
           handleTabClicked={this.handleTabClicked}
         />
-        <div style={{width:this.props.width+25+"px", borderStyle:"hidden", textAlign:"center", margin:"25px"}}><h1>Title</h1></div>
-        <div style={{ display: "flex", justifyContent:"space-evenly" }}>
-          <div style={{}}>
-            <SideInfo />
-          </div>
-          <div style={{ display: "flex" }}>
-            <div
-              onDragOverCapture={this.handleDragOver}
-              onDrop={this.handleDrop}
-              style={{
-                display: "flex",
-                width: this.props.width + "px",
-                flexWrap: "wrap",
-                margin: "0px"
-              }}
-              onContextMenu={this.contextMenu}
-            >
-              {store}
-            </div>
-            <OverlayTrigger
-              placement="right"
-              delay={{ show: 250, hide: 400 }}
-              overlay={toolTip}
-            >
-              <Button
-                id="col"
-                onClick={e => this.props.expandGrid(e.target.id)}
-                onContextMenu={this.contextMenu}
-                style={{ width: "25px", margin: "0px", padding: "0px" }}
-              >
-                <div
-                  id="col"
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    marginRight: "3px"
-                  }}
-                >
-                  <i id="col" className="fas fa-chevron-right" />
-                </div>
-              </Button>
-            </OverlayTrigger>
-          </div>
-          
-        </div>
-        <OverlayTrigger
-          placement="bottom"
-          delay={{ show: 250, hide: 400 }}
-          overlay={toolTip}
-        >
-          <Button
-            id="rows"
-            onClick={e => this.props.expandGrid(e.target.id)}
-            onContextMenu={this.contextMenu}
+        <div style={{ display: "block" }}>
+          <div
             style={{
-              height: "25px",
-              margin: "0px",
-              width: this.props.width + "px"
+              display: "flex",
+              justifyContent: "space-evenly",
+              alignItems: "center"
             }}
           >
-            <div
-              id="rows"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                width: "initial"
-              }}
-            >
-              <i id="rows" className="fas fa-chevron-down" />
+            <div style={{}}>
+              <SideInfo />
             </div>
-          </Button>
-        </OverlayTrigger>
+
+            <div style={{ width: this.props.width + 25 + "px" }}>
+              <div
+                style={{
+                  width: this.props.width + "px",
+                  borderStyle: "hidden",
+                  textAlign: "center",
+                  margin: "25px 0px 10px 0px"
+                }}
+              >
+                <h2 style={{lineHeight:"0px"}}>
+                  {this.props.title !== null ? this.props.title:"Untitled"}
+                  
+                  </h2>
+                  <span style={{lineHeight:"0em", fontSize:"15px"}}>
+                  {"Size: " + this.props.numRows + "ft. x " + this.props.numCols + "ft."}
+                  </span>
+              </div>
+              <div style={{ display: "flex" }}>
+                <div
+                  onDragOverCapture={this.handleDragOver}
+                  onDrop={this.handleDrop}
+                  style={{
+                    display: "flex",
+                    width: this.props.width + "px",
+                    flexWrap: "wrap",
+                    margin: "0px"
+                  }}
+                  onContextMenu={this.contextMenu}
+                >
+                  {store}
+                </div>
+                <OverlayTrigger
+                  placement="right"
+                  delay={{ show: 250, hide: 400 }}
+                  overlay={toolTip}
+                >
+                  <Button
+                    id="col"
+                    onClick={e => this.props.expandGrid(e.target.id)}
+                    onContextMenu={this.contextMenu}
+                    style={{ width: "25px", margin: "0px", padding: "0px" }}
+                  >
+                    <div
+                      id="col"
+                      style={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        marginRight: "3px"
+                      }}
+                    >
+                      <i id="col" className="fas fa-chevron-right" />
+                    </div>
+                  </Button>
+                </OverlayTrigger>
+              </div>
+              <OverlayTrigger
+                placement="bottom"
+                delay={{ show: 250, hide: 400 }}
+                overlay={toolTip}
+              >
+                <Button
+                  id="rows"
+                  onClick={e => this.props.expandGrid(e.target.id)}
+                  onContextMenu={this.contextMenu}
+                  style={{
+                    height: "25px",
+                    margin: "0px",
+                    width: this.props.width + "px"
+                  }}
+                >
+                  <div
+                    id="rows"
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      width: "initial"
+                    }}
+                  >
+                    <i id="rows" className="fas fa-chevron-down" />
+                  </div>
+                </Button>
+              </OverlayTrigger>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
@@ -302,7 +327,10 @@ const mapStateToProps = state => {
     saveMessage: state.grid.saveMessage,
     errorMessage: state.grid.errorMessage,
     userLayouts: state.grid.userLayouts,
-    userHasLayouts: state.grid.userHasLayouts
+    userHasLayouts: state.grid.userHasLayouts,
+    title: state.grid.name,
+    numRows: state.grid.numRows,
+    numCols: state.grid.numCols
   }
 }
 
