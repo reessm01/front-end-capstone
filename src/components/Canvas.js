@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Grid } from "./Grid/Grid"
-import PictureList from "./PictureList"
+//import PictureList from "./PictureList"
 import { OverlayTrigger } from "react-bootstrap"
 import { Button } from "semantic-ui-react"
 import { toolTip } from "./ToolTip"
@@ -179,8 +179,8 @@ class Canvas extends Component {
 
     return (
       <div>
-        <PageHeader />
-        <NavBar />
+         <PageHeader /> 
+         <NavBar /> 
         <MainMenu
           width={this.props.width}
           chooseState={this.handleFilter}

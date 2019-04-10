@@ -2,7 +2,7 @@ import { domain, jsonHeaders, handleJsonResponse } from "./constants"
 import { push } from "connected-react-router"
 import { history } from '../configureStore'
 import { getUserLayoutData } from './getUserLayoutData'
- import { downloadUserImage } from "."
+//import { downloadUserImage } from "."
 
 // action types
 export const LOGIN = "LOGIN"
@@ -37,6 +37,7 @@ const login = loginData => dispatch => {
     .then(result => {
       localStorage.setItem("id", result.token)
       dispatch(getUserLayoutData(result.id))
+      console.log(result)
       return dispatch({
         type: LOGIN_SUCCESS,
         payload: result
@@ -117,4 +118,5 @@ export const logout = logoutData => (dispatch, getState) => {
       })
     })
 }
+
 export const logoutThenGoToLogin = logoutData => dispatch => { return dispatch(logout(logoutData)).then(() => dispatch(push("/"))) }
