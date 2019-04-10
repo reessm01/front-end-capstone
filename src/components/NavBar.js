@@ -6,7 +6,15 @@ import { Logout } from './Logout'
 export class NavBar extends Component {
   state = { activeItem: "home" }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => {
+ 
+    this.setState({ activeItem: name })
+  };
+
+  // handleLogin = e => {
+  //   e.preventDefault()
+  //   this.props.login({ ...this.state });
+  // };
 
   render() {
     const { activeItem } = this.state
@@ -14,9 +22,9 @@ export class NavBar extends Component {
     return (
       <React.Fragment>
         <Menu
-          stackable
+          pointing
           secondary
-          pointing 
+          stackable
           color="pink"
           style={{ fontSize: "20px", fontFamily: "Raleway"}}
         >
@@ -24,9 +32,10 @@ export class NavBar extends Component {
             name="home"
             style={{color:'gray'}}
             active={activeItem === "login"}
-            as={Link}
-            to="/"
+             as={Link}
+             to="/"
             onClick={this.handleItemClick}
+            
           />
           {/* <Menu.Item
             name="profile"
@@ -37,23 +46,23 @@ export class NavBar extends Component {
           /> */}
           <Menu.Item
             name="flowers"
-            style={{color:'gray'}}
+             style={{color:'gray'}}
             active={activeItem === "flowers"}
             onClick={this.handleItemClick}
-            as={Link}
-            to="/flowers"
+             as={Link}
+             to="/flowers"
           />
           <Menu.Item
             name="veggies"
-            style={{color:'gray'}}
+             style={{color:'gray'}}
             active={activeItem === "veggies"}
             onClick={this.handleItemClick}
-            as={Link}
-            to="/veggies"
+             as={Link}
+             to="/veggies"
           />
           <Menu.Item
             name="garden planner"
-            style={{color:'gray'}}
+             style={{color:'gray'}}
             active={activeItem === "garden planner"}
             onClick={this.handleItemClick}
             as={Link}
@@ -62,7 +71,7 @@ export class NavBar extends Component {
           <Menu.Menu position='right'>
             <Menu.Item
               name='logout'
-              style={{color:'gray'}}
+               style={{color:'gray'}}
               active={activeItem === 'logout'}
               onClick={this.handleItemClick}
               as={Logout}
