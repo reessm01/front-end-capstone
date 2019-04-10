@@ -35,11 +35,12 @@ export class FlowerCards extends Component {
                                 <img src={flower.image} className="thumbnail" />
                                 
                                 <br />
+                                
                                 <Modal
-                                    size={"small"}
-                                    trigger={<Button className="more-info" style={styles.cardButtons} >Read More</Button>}
+                                    size={"medium"}
+                                    trigger={<Button className="more-info">Read More</Button>}
                                     closeIcon
-                                     style={{ marginTop: "20px" }}
+                                    style={{ marginTop: "20px" ,marginLeft:"300px"}}
                                 >
                                     <Modal.Header>{flower.species}</Modal.Header>
                                     <Modal.Content image>
@@ -60,10 +61,12 @@ export class FlowerCards extends Component {
                                                 <br></br>
                                                 <br></br>
                                                 <Button basic color='green' href={flower.amazon} target="_blank">
-                                                Click to buy from Amazon </Button> 
+                                                    Click to buy from Amazon </Button> 
                                         </Modal.Description>
                                     </Modal.Content>
+                                    
                                 </Modal>
+                                
                             </Card.Content>
                         </Card>
                     ))}
