@@ -51,7 +51,8 @@
 //                         </div> */}
 //                         <div className="formDiv">
 //                             <Form onSubmit={this.handleUserUpdate} align="center"
-//                                 style={{ fontSize: "16px", color: "#5B5F50"}}>
+//                                 style={{ fontSize: "16px", color: 
+//"#5B5F50"}}>
 //                                 <label style={{padding: "20px", fontSize: "18px"}}>Make Changes to Your Account</label>
 //                                 <Form.Field
 //                                     placeholder="Change Your Display Name"
