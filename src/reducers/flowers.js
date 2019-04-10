@@ -10,8 +10,6 @@ import { SETCURRENTLOWER } from "../actions/setCurrentFlower";
 const initialState = {
     flower: [],
     error: { message: "" },
-    username: "",
-    token: "",
     filteredFlowers: null, 
     currentFlower: null
 };

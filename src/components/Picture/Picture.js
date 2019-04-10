@@ -16,6 +16,7 @@ export class Picture extends Component {
         style={pictureStyle}
         onDragStart={this.props.handleDragStart}
         onClick={this.props.onClick}
+        id={"static"}
       >
       </div>
 

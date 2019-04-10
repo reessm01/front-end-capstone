@@ -1,11 +1,8 @@
 import React, { Component } from "react"
 import { Grid } from "./Grid/Grid"
-import PictureList from "./PictureList"
 import { OverlayTrigger } from "react-bootstrap"
 import { Button } from "semantic-ui-react"
 import { toolTip } from "./ToolTip"
-import { getFlowerData } from "../actions/getFlowerData"
-import { getVeggieData } from "../actions/getVeggieData.js"
 import { connect } from "react-redux"
 import { NavBar } from "./NavBar"
 import { PageHeader } from "./PageHeader"
@@ -21,8 +18,14 @@ import {
   saveLayout,
   filterFlowers,
   filterVeggies,
-  patchLayout
+  patchLayout,
+  getFlowerData,
+  getVeggieData,
+  getTreeData,
+  getShrubData
 } from "../actions"
+
+const categories = ["flowers", "veggies", "trees", "shrubs"]
 
 class Canvas extends Component {
   state = {
@@ -30,12 +33,14 @@ class Canvas extends Component {
     name: "",
     value: "",
     selectedState: "all",
-    selectedCategory:"Choose Flowers"
+    selectedCategory: "Flowers"
   }
 
   componentWillMount() {
     this.props.getFlowerData()
     this.props.getVeggieData()
+    this.props.getTreeData()
+    this.props.getShrubData()
   }
   componentDidMount() {
     this.setState((state, props) => ({
@@ -50,6 +55,10 @@ class Canvas extends Component {
     } else {
       this.props.removePlant(e.target.dataset.i, e.target.dataset.j)
     }
+  }
+
+  handleTabClicked = e => {
+    this.setState({...this.state, selectedCategory: e.target.innerHTML})
   }
 
   handleFilter = e => {
@@ -102,34 +111,27 @@ class Canvas extends Component {
         originCol: event.target.dataset.j,
         prevElement: event.target
       })
-    }
-    let name = event.target.dataset.name
-    if (name) {
-      event.dataTransfer.setData("name", name)
-    }
+    } 
+    event.target.dataset.name && event.dataTransfer.setData("name", event.target.dataset.name)
   }
 
   handleDrop = e => {
     e.preventDefault()
-
-    let name = e.dataTransfer.getData("name")
+    let name = e.dataTransfer.getData("name").toLowerCase()
     if (name) {
-      if(this.state.selectedCategory === "Choose Veggies"){
-        let curflower = this.props.veggies.find(flower => flower.name === name)
-        this.props.dropPlant(
-          this.state.targetRow,
-          this.state.targetCol,
-          curflower.image
-        )
-      }
-      else{
-        let curflower = this.props.flowers.find(flower => flower.name === name)
-        this.props.dropPlant(
-          this.state.targetRow,
-          this.state.targetCol,
-          curflower.image
-        )
-      }
+      let plantImage
+      categories.forEach(plant => {
+        if(this.state.selectedCategory.toLowerCase() === plant){
+          plantImage = this.props[plant].find(plant => plant.name.toLowerCase() === name)
+          if(plantImage !== undefined) {
+            this.props.dropPlant(
+              this.state.targetRow,
+              this.state.targetCol,
+              plantImage.image
+            )
+          }
+        }
+      })
       
     } else {
       this.props.dropPlant(
@@ -191,8 +193,8 @@ class Canvas extends Component {
         <br />
         <PlantDisplayBar
           selectedState={this.state.selectedState}
-          veggies={this.props.veggies}
           handleDragStart={this.handleDragStart}
+          handleTabClicked={this.handleTabClicked}
         />
         <div style={{ display: "block" }}>
           <div style={{ display: "flex" }}>
@@ -273,14 +275,15 @@ const mapStateToProps = state => {
     width: state.grid.canvasWidth,
     id: state.grid.id,
     flowers: state.flowers.flower,
+    veggies: state.veggies.veggie,
+    trees: state.trees.tree,
+    shrubs: state.shrubs.shrub,
     filteredFlowers: state.flowers.filteredFlowers,
     error: state.error,
     saveMessage: state.grid.saveMessage,
     errorMessage: state.grid.errorMessage,
     userLayouts: state.grid.userLayouts,
-    userHasLayouts: state.grid.userHasLayouts,
-    veggies:state.veggies.veggie,
-    filteredVeggies:state.veggies.filteredVeggies
+    userHasLayouts: state.grid.userHasLayouts
   }
 }
 
@@ -295,7 +298,9 @@ const mapDispatchToProps = {
   saveLayout,
   filterFlowers,
   filterVeggies,
-  patchLayout
+  patchLayout,
+  getTreeData,
+  getShrubData
 }
 
 export default connect(

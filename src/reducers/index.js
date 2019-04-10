@@ -4,8 +4,9 @@ import auth from './auth'
 import users from './users'
 import grid from './grid'
 import flowers from './flowers'
-import getVeggieData from './getVeggieData'
-//import messages from './messages';
+import veggies from './veggies'
+import trees from './trees'
+import shrubs from './shrubs'
 
 export default history => 
     combineReducers({
@@ -14,6 +15,7 @@ export default history =>
         users,
         grid, 
         flowers,
-        veggies: getVeggieData
-        //messages
-    });
+        veggies,
+        trees,
+        shrubs
+    })
