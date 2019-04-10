@@ -8,15 +8,23 @@ const styles = {
     cardPosition: {
         margin: "30px",
         padding: "20px"
+    },
+    cardButtons: {
+        backgroundColor: '#78A9BB', 
+        color: 'white',
+        
     }
 };
+
+
 
 export class VeggieCards extends Component {
     render() {
         const { veggies, error } = this.props;
         return (
             <React.Fragment>
-                <Header as="h2" color="grey" textAlign="center" className="search">Veggie Search</Header>
+                <div></div>
+                <Header color="grey" textAlign="center" style={{fontSize: '30px'}}>Veggie Search</Header>
                 <Image src={picture} size="large" centered />
                 <Card.Group>
                     {veggies.map((veggie, i) => (
@@ -33,7 +41,7 @@ export class VeggieCards extends Component {
                                 <br />
                                 <Modal
                                     size={"small"}
-                                    trigger={<Button className="more-info">Read More</Button>}
+                                    trigger={<Button className="more-info" style={styles.cardButtons}>Read More</Button>}
                                     closeIcon
                                     style={{ marginTop: "20px" }}
                                 >

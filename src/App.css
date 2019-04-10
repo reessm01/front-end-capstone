@@ -27,8 +27,6 @@ body {
   color: #61dafb;
 }
 
-
-
 .formDiv {
   width: 40%; 
   border:  9px solid rgb(131, 137, 114);
@@ -86,4 +84,13 @@ align-items: center;
 
 }
 
+.fonts {
+  color: gray;
+  text-align: center;
 
+}
+
+.flower-card {
+  color: gray;
+  text-align: center;
+}

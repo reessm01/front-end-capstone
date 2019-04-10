@@ -8,6 +8,10 @@ const styles = {
     cardPosition: {
         margin: "30px",
         padding: "20px"
+    },
+    cardButtons: {
+        backgroundColor: '#78A9BB', 
+        color: 'white'
     }
 };
 
@@ -16,7 +20,7 @@ export class FlowerCards extends Component {
         const { flowers, error } = this.props;
         return (
             <React.Fragment>
-                <Header as="h2" color="grey" textAlign="center" className="search">Flower Search</Header>
+                <Header color="grey" textAlign="center" style={{fontSize: '30px'}}>Flower Search</Header>
                 <Image src={picture} size="large" centered />
                 <Card.Group>
                     {flowers.map((flower, i) => (
@@ -33,9 +37,9 @@ export class FlowerCards extends Component {
                                 <br />
                                 <Modal
                                     size={"small"}
-                                    trigger={<Button className="more-info">Read More</Button>}
+                                    trigger={<Button className="more-info" style={styles.cardButtons} >Read More</Button>}
                                     closeIcon
-                                    style={{ marginTop: "20px" }}
+                                     style={{ marginTop: "20px" }}
                                 >
                                     <Modal.Header>{flower.species}</Modal.Header>
                                     <Modal.Content image>
