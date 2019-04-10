@@ -30,7 +30,7 @@ const initialState = {
   layouts: null,
   saveMessage: null,
   errorMessage: null,
-  name: ""
+  name: null
 }
 
 export default (state = initialState, action) => {

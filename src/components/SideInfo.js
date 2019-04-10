@@ -1,11 +1,6 @@
 import React, { Component } from "react";
-//import { VeggieCards } from "./VeggieCards";
-//import { NavBar } from "./NavBar"
 import { Card, Image } from 'semantic-ui-react'
-
-
 import { connect } from "react-redux";
-//import { getVeggieData } from "../actions/getVeggieData";
 
 export class SideInfo extends Component {
 
@@ -14,7 +9,7 @@ export class SideInfo extends Component {
     return (
       <React.Fragment>
         {flower &&
-          <Card className='sideInfo'>
+          <Card className='sideInfo' style={{marginTop:"25px"}}>
             <Image src={flower.image} />
             <Card.Content>
               <Card.Header>{flower.name}</Card.Header>

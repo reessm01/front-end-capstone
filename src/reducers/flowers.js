@@ -21,7 +21,11 @@ export default (state = initialState, action) => {
         case GET_FLOWER_DATA:
             return state;
         case GET_FLOWER_DATA_SUCCESS:
-            return { ...state, flower: action.flower }
+            return { 
+                ...state, 
+                flower: action.flower,
+                currentFlower: action.flower[0] 
+            }
         case GET_FLOWER_DATA_FAIL:
             return { ...state, error: action.error }
         case FILTER_FLOWERS:
