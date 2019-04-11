@@ -21,7 +21,9 @@ class ShrubSearch extends Component {
         const { activeIndex } = this.state;
         return (
             <React.Fragment>
+                <div className="fonts">
                 <ShrubCards shrubs={this.state.filtershrubs} />
+                </div>
             </React.Fragment>
         );
     }
