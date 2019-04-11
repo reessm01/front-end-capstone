@@ -58,7 +58,6 @@ export class FlowerCards extends Component {
                                             <a href={flower.site} target="_blank">
                                                 Research more about the {flower.name} </a>
                                             <br></br>
-                                            <br></br>
                                             
                                             <Button basic color='green' href={flower.amazon} target="_blank">
                                                 Buy from Amazon </Button>

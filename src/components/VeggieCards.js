@@ -55,10 +55,10 @@ export class VeggieCards extends Component {
                                             <p>Days to harvest: {veggie.days}</p>
                                             <p>Description: {veggie.description}</p>
                                             <a href={veggie.site} target="_blank">
-                                                Click here to learn more about {veggie.name}!
+                                                Click here to learn more about {veggie.name}!</a>
+                                                <br></br>
                                                 <Button basic color='green' href={veggie.amazon} target="_blank">
-                                                    Buy from Amazon </Button>
-                                            </a>
+                                                Buy from Amazon </Button>
                                         </Modal.Description>
                                     </Modal.Content>
                                 </Modal>
