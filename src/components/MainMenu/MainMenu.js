@@ -3,12 +3,12 @@ import { Tab, Select } from "semantic-ui-react"
 import { connect } from "react-redux"
 import { Input, Button, Dropdown, Form, Message } from "semantic-ui-react"
 import { generalStyling, buttonStyling, tabStyling } from "./styles"
-import { 
-    loadLayout, 
-    newLayout,
-    saveLayout,
-    getUserLayoutData,
-    patchLayout
+import {
+  loadLayout,
+  newLayout,
+  saveLayout,
+  getUserLayoutData,
+  patchLayout
 } from "../../actions"
 import { stateOptions } from "./constants"
 
@@ -35,19 +35,21 @@ class MainMenu extends Component {
     if (this.props.id !== null) {
       this.props.patchLayout(this.props.grid, this.props.id)
     } else {
-      this.props.saveLayout(this.state.name, this.props.grid).then(()=>this.props.getUserLayoutData(this.props.userId))
+      this.props
+        .saveLayout(this.state.name, this.props.grid)
+        .then(() => this.props.getUserLayoutData(this.props.userId))
     }
   }
 
   handleLoad = e => {
     e.preventDefault()
     this.props.loadLayout(this.state.id)
-    this.setState({...this.state, name: this.props.name})
+    this.setState({ ...this.state, name: this.props.name })
   }
 
   handleNewLayOut = e => {
-      e.preventDefault()
-      this.props.newLayout()
+    e.preventDefault()
+    this.props.newLayout()
   }
 
   render() {
@@ -65,8 +67,10 @@ class MainMenu extends Component {
                   name="name"
                   required
                   onChange={this.handleChange}
-                  value={this.props.id===null ? this.state.name:this.props.name}
-                  disabled={this.props.id!==null ? true:false}
+                  value={
+                    this.props.id === null ? this.state.name : this.props.name
+                  }
+                  disabled={this.props.id !== null ? true : false}
                 />
                 <Button
                   style={{backgroundColor:'#78A9BB', color: 'white'}}
@@ -192,7 +196,7 @@ const mapStateToProps = state => {
     userLayouts: state.grid.userLayouts,
     userHasLayouts: state.grid.userHasLayouts,
     saveMessage: state.grid.saveMessage,
-    errorMessage: state.grid.errorMessage,
+    errorMessage: state.grid.errorMessage
   }
 }
 

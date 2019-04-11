@@ -12,7 +12,9 @@ class PlantDisplayBar extends Component {
         menuItem: "Flowers",
         render: () => (
           <div
-            style={basicStyling}
+            style={{
+              ...basicStyling, 
+            }}
           >
             <PictureList
               images={
@@ -67,7 +69,7 @@ class PlantDisplayBar extends Component {
     ]
     return (
       <Tab
-        menu={{ borderless: true, attached: false, tabular: false }}
+        menu={{ borderless: false, attached: true, tabular: false } }
         style={{ width: this.props.width + 25 + "px" }}
         panes={panes}
         onClick={this.props.handleTabClicked}
