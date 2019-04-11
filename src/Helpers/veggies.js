@@ -18,9 +18,9 @@ export default function load(callback) {
                 description: veggies[3],
                 days: veggies[4],
                 image: veggies[5],
-                site: veggies[6],
-                type: veggies[7]
-
+                site: veggies[10],
+                type: veggies[7],
+                amazon: veggies[12]
               })) || [];
             callback({
               veggies

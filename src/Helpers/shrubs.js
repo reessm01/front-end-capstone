@@ -5,12 +5,12 @@ export default function load(callback) {
       window.gapi.client.sheets.spreadsheets.values
         .get({
           spreadsheetId: config.spreadsheetId,
-          range: "shrubs!A2:H"
+          range: "shrubs!A2:I"
         })
         .then(
           response => {
-            console.log(response)
             const data = response.result.values
+            console.log(data)
             const shrub =
               data.map(shrubs => ({
                 name: shrubs[0],
@@ -19,7 +19,8 @@ export default function load(callback) {
                 description: shrubs[3],
                 image: shrubs[7],
                 size: shrubs[2],
-                type: shrubs[6]
+                type: shrubs[6],
+                amazon: shrubs[8]
               })) || []
             callback({
               shrub
