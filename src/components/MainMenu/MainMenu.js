@@ -32,7 +32,6 @@ class MainMenu extends Component {
 
   handleSave = e => {
     e.preventDefault()
-    console.log(this.state.name + " " + this.props.grid)
     if (this.props.id !== null) {
       this.props.patchLayout(this.props.grid, this.props.id)
     } else {
@@ -55,32 +54,16 @@ class MainMenu extends Component {
 
   render() {
     const panes = [
-      {
-        menuItem: "New",
+
+         {
+        menuItem: "Save Your Garden As...",
         render: () => (
-          <div style={{ width: this.props.width + 25 + "px" }}>
-            <Form onSubmit={this.handleNewLayOut}>
-              <Tab.Pane style={tabStyling}>
-                <Button
-                  style={{ width: "50%" }}
-                  disabled={this.props.userHasLayouts ? false : true}
-                >
-                  New Layout
-                </Button>
-              </Tab.Pane>
-            </Form>
-          </div>
-        )
-      },
-      {
-        menuItem: "Save",
-        render: () => (
-          <div style={{ maxWidth: this.props.width + 25 + "px" }}>
+          <div style={{ }}>
             <Form onSubmit={this.handleSave}>
-              <Tab.Pane style={tabStyling}>
+              <Tab.Pane style={tabStyling} >
                 <Input
                   style={generalStyling}
-                  placeholder="Layout name..."
+                  placeholder="Garden Name..."
                   name="name"
                   required
                   onChange={this.handleChange}
@@ -90,7 +73,7 @@ class MainMenu extends Component {
                   disabled={this.props.id !== null ? true : false}
                 />
                 <Button
-                  style={buttonStyling}
+                  style={{backgroundColor:'#78A9BB', color: 'white'}}
                   disabled={this.props.token === null ? true : false}
                 >
                   Save
@@ -98,7 +81,7 @@ class MainMenu extends Component {
                 {this.props.saveMessage && (
                   <Message positive>
                     <Message.Header>Success!</Message.Header>
-                    <p>Layout saved.</p>
+                    <p>Your Garden Was Saved.</p>
                   </Message>
                 )}
                 {this.props.errorMessage && (
@@ -118,9 +101,27 @@ class MainMenu extends Component {
         )
       },
       {
-        menuItem: "Load",
+        menuItem: "Start a New Garden",
         render: () => (
-          <div style={{ width: this.props.width + 25 + "px" }}>
+           <div>
+            <Form onSubmit={this.handleNewLayOut}>
+              <Tab.Pane style={tabStyling}>
+                <Button
+                  style={{width:"50%", backgroundColor: "#78A9BB", color: 'white'}}
+                  disabled={this.props.userHasLayouts ? false : true}
+                >
+                  New Garden
+                </Button>
+              </Tab.Pane>
+            </Form>
+           </div>
+        )
+      },
+     
+      {
+        menuItem: "Open an Existing Garden",
+        render: () => (
+          <div>
             <Form onSubmit={e => this.handleLoad(e)}>
               <Tab.Pane style={tabStyling}>
                 {this.props.userHasLayouts ? (
@@ -157,21 +158,15 @@ class MainMenu extends Component {
         )
       },
       {
-        menuItem: "Choose State",
+        menuItem: "Find Flowers By State",
         render: () => (
-          <div
-            style={{
-              width: this.props.width + 25 + "px",
-              zIndex: "2000"
-            }}
-          >
+          <div style={{display:"flex", justifyContent:"center"}}>
             <Form style={{ zIndex: "2000" }}>
               <Tab.Pane style={tabStyling}>
                 <Dropdown
                   onChange={this.props.chooseState}
                   control={Select}
-                  style={generalStyling}
-                  placeholder="State"
+                  placeholder="All States"
                   options={stateOptions}
                 />
               </Tab.Pane>
@@ -181,12 +176,12 @@ class MainMenu extends Component {
       }
     ]
     return (
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Tab
-          menu={{ borderless: true, attached: true, tabular: false }}
-          style={{ width: this.props.width + 25 + "px" }}
-          panes={panes}
-        />
+      <div style={{display:"flex", justifyContent:"center"}}>
+      <Tab
+        menu={{ borderless: true, attached: false, tabular: false }}
+        panes={panes}
+        grid={{tabWidth: 12, paneWidth:12}}
+      />
       </div>
     )
   }

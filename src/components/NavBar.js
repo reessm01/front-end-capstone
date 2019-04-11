@@ -20,6 +20,7 @@ export class NavBar extends Component {
 
     return (
       <React.Fragment>
+      
         <Menu
           pointing
           secondary
@@ -68,7 +69,8 @@ export class NavBar extends Component {
               style={{ color: "gray" }}
               active={activeItem === "logout"}
               onClick={this.handleItemClick}
-              as={Logout}
+              as={Logout} 
+             
             />
           </Menu.Menu>
         </Menu>

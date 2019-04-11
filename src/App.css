@@ -46,6 +46,7 @@ body {
   flex-direction: row;
   justify-content: center;
   margin-top: 2%;
+  color: gray;
 }
 
 .userCard {
