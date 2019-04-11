@@ -3,12 +3,12 @@ import { Tab, Select } from "semantic-ui-react"
 import { connect } from "react-redux"
 import { Input, Button, Dropdown, Form, Message } from "semantic-ui-react"
 import { generalStyling, buttonStyling, tabStyling } from "./styles"
-import { 
-    loadLayout, 
-    newLayout,
-    saveLayout,
-    getUserLayoutData,
-    patchLayout
+import {
+  loadLayout,
+  newLayout,
+  saveLayout,
+  getUserLayoutData,
+  patchLayout
 } from "../../actions"
 import { stateOptions } from "./constants"
 
@@ -36,24 +36,25 @@ class MainMenu extends Component {
     if (this.props.id !== null) {
       this.props.patchLayout(this.props.grid, this.props.id)
     } else {
-      this.props.saveLayout(this.state.name, this.props.grid).then(()=>this.props.getUserLayoutData(this.props.userId))
+      this.props
+        .saveLayout(this.state.name, this.props.grid)
+        .then(() => this.props.getUserLayoutData(this.props.userId))
     }
   }
 
   handleLoad = e => {
     e.preventDefault()
     this.props.loadLayout(this.state.id)
-    this.setState({...this.state, name: this.props.name})
+    this.setState({ ...this.state, name: this.props.name })
   }
 
   handleNewLayOut = e => {
-      e.preventDefault()
-      this.props.newLayout()
+    e.preventDefault()
+    this.props.newLayout()
   }
 
   render() {
     const panes = [
-        
       {
         menuItem: "New",
         render: () => (
@@ -61,7 +62,7 @@ class MainMenu extends Component {
             <Form onSubmit={this.handleNewLayOut}>
               <Tab.Pane style={tabStyling}>
                 <Button
-                  style={{width:"50%"}}
+                  style={{ width: "50%" }}
                   disabled={this.props.userHasLayouts ? false : true}
                 >
                   New Layout
@@ -83,8 +84,10 @@ class MainMenu extends Component {
                   name="name"
                   required
                   onChange={this.handleChange}
-                  value={this.props.id===null ? this.state.name:this.props.name}
-                  disabled={this.props.id!==null ? true:false}
+                  value={
+                    this.props.id === null ? this.state.name : this.props.name
+                  }
+                  disabled={this.props.id !== null ? true : false}
                 />
                 <Button
                   style={buttonStyling}
@@ -178,12 +181,12 @@ class MainMenu extends Component {
       }
     ]
     return (
-      <div style={{display:"flex", justifyContent:"center"}}>
-      <Tab
-        menu={{ borderless: true, attached: false, tabular: false }}
-        style={{ width: this.props.width + 25 + "px" }}
-        panes={panes}
-      />
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Tab
+          menu={{ borderless: true, attached: true, tabular: false }}
+          style={{ width: this.props.width + 25 + "px" }}
+          panes={panes}
+        />
       </div>
     )
   }
@@ -198,7 +201,7 @@ const mapStateToProps = state => {
     userLayouts: state.grid.userLayouts,
     userHasLayouts: state.grid.userHasLayouts,
     saveMessage: state.grid.saveMessage,
-    errorMessage: state.grid.errorMessage,
+    errorMessage: state.grid.errorMessage
   }
 }
 
