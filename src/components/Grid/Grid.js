@@ -21,7 +21,7 @@ export class Grid extends Component {
             data-i={this.props.i}
             data-j={this.props.j}
             draggable={this.props.image !== null ? "true" : "false"}
-            style={cellStyle}
+            style={{...cellStyle, borderWidth:"0px"}}
             onDragStartCapture={this.props.handleDragStart}
             onContextMenu={this.props.contextMenu}
           />

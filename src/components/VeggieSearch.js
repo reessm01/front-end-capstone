@@ -6,6 +6,7 @@ import { generalStyling } from "./MainMenu/styles";
 
 class VeggieSearch extends Component {
     state = { activeIndex: 0, filterveggies: this.props.veggies || [], value: "" };
+    
     componentDidMount() {
         this.props.getVeggieData();
     }

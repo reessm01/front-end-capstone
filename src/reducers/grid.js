@@ -90,6 +90,9 @@ export default (state = initialState, action) => {
       return {
         ...state,
         grid: action.payload.layout,
+        numRows: action.payload.layout.length,
+        numCols: action.payload.layout[0].length,
+        canvasWidth: action.payload.layout[0].length * width,
         id: action.payload.id,
         name: action.payload.name
       }
