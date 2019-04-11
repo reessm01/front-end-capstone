@@ -12,6 +12,7 @@ const styles = {
 export class TreeCards extends Component {
     render() {
         const { trees, error } = this.props;
+        console.log(trees)
         return (
             <React.Fragment>
                 <Header as="h2" color="grey" textAlign="center" className="search">Tree Search</Header>

@@ -19,8 +19,9 @@ export default function load(callback) {
                 description: shrubs[3],
                 image: shrubs[7],
                 size: shrubs[2],
-                type: shrubs[6],
-                amazon: shrubs[8]
+                type: shrubs[4],
+                amazon: shrubs[8],
+                site: shrubs[6]
               })) || []
             callback({
               shrub
