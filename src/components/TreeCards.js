@@ -6,6 +6,10 @@ const styles = {
     cardPosition: {
         margin: "30px",
         padding: "20px"
+    },
+    cardButtons: {
+        backgroundColor: '#78A9BB',
+        color: 'white'
     }
 };
 
@@ -17,14 +21,14 @@ export class TreeCards extends Component {
             <React.Fragment>
                 <Header as="h2" color="grey" textAlign="center" className="search">Tree Search</Header>
                 <Image src={picture} size="large" centered />
-                <Card.Group>
+                <Card.Group centered >
                     {trees.map((tree, i) => (
                         <Card
                             style={styles.cardPosition}
                             key={tree.name}
-                            className="tree-card"
+                            className="flower-card"
                         >
-                            <Card.Content>
+                            <Card.Content centered>
                                 <h2>{tree.name}</h2>
                                 <br />
                                 <img src={tree.image} className="thumbnail" />
@@ -32,9 +36,9 @@ export class TreeCards extends Component {
                                 <br />
                                 <Modal
                                     size={"small"}
-                                    trigger={<Button className="more-info">Read More</Button>}
+                                    trigger={<Button className="more-info" style={styles.cardButtons}>Read More</Button>}
                                     closeIcon
-                                    style={{ marginTop: "20px" }}
+                                    style={{ height: 'initial', top: "initial", left: 'initial' }}
                                 >
                                     <Modal.Header>{tree.name}</Modal.Header>
                                     <Modal.Content image>

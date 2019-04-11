@@ -21,7 +21,7 @@ class VeggieSearch extends Component {
         const { activeIndex } = this.state;
         return (
             <React.Fragment>
-                <div className='fonts'>
+                <div className="filter-cards" style={{ marginLeft: "150px" }}>
                         <VeggieCards veggies={this.state.filterveggies} />
                         </div>
             </React.Fragment>

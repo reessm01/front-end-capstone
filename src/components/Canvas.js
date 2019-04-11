@@ -57,6 +57,12 @@ class Canvas extends Component {
     }
   }
 
+  handlePrint = e => {
+    window.print()
+  }
+
+
+
   handleTabClicked = e => {
     
     if(e.target.innerHTML !== "") {
@@ -216,6 +222,12 @@ class Canvas extends Component {
           >
             <div style={{}}>
               <SideInfo />
+              <div style={{ textAlign: "center" }}>
+                <br />
+                <br />
+                <Button basic color='green' target="_blank" onClick={this.handlePrint}>
+                  Click to print your awesome creation </Button>
+              </div>
             </div>
 
             <div style={{ width: this.props.width + 25 + "px" }}>
@@ -300,6 +312,9 @@ class Canvas extends Component {
                   </div>
                 </Button>
               </OverlayTrigger>
+              
+
+
             </div>
           </div>
         </div>
