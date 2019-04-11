@@ -60,6 +60,26 @@ export class NavBar extends Component {
                 >
                   Veggies
                 </Dropdown.Item>
+                <Dropdown.Item
+                  name="trees"
+                  style={{ color: "gray" }}
+                  active={activeItem === "trees"}
+                  onClick={this.handleItemClick}
+                  as={Link}
+                  to="/trees"
+                >
+                  Trees
+                </Dropdown.Item>
+                <Dropdown.Item
+                  name="shrubs"
+                  style={{ color: "gray" }}
+                  active={activeItem === "shrubs"}
+                  onClick={this.handleItemClick}
+                  as={Link}
+                  to="/shrubs"
+                >
+                  Shrubs
+                </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Menu.Item>

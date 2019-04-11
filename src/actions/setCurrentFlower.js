@@ -1,5 +1,5 @@
 export const setCurrentFlower = (flowerData) => (dispatch) => {
-    dispatch({type: SETCURRENTLOWER, flower: flowerData})
+    dispatch({type: SETCURRENTFLOWER, flower: flowerData})
 }
 
-export const SETCURRENTLOWER = 'SETCURRENTFLOWER';
+export const SETCURRENTFLOWER = 'SETCURRENTFLOWER';
