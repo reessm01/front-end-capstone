@@ -98,7 +98,7 @@ class Login2 extends Component {
               <Button.Group>
                 <Button
                   type="submit"
-                  style={{ backgroundColor: "#ACC9AC" }}
+                  style={{backgroundColor: '#ACC9AC', color: 'white'}}
                   size="large"
                   to="/canvas"
                   disabled={isLoading}
