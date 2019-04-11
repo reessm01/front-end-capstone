@@ -17,7 +17,6 @@ export * from './patchLayout'
 export * from './newLayout'
 export * from './getTreeData'
 export * from './getShrubData'
-export * from './windowResize'
 
 //If we use the feed, maybe post images as messages to share?//
 //export * from './messages'

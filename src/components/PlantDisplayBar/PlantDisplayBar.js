@@ -5,27 +5,6 @@ import { connect } from "react-redux"
 import { basicStyling } from "./styles"
 
 class PlantDisplayBar extends Component {
-  state = {
-    width: window.innerWidth,
-    maxPics: null,
-    maxWidth: null
-  }
-
-  handleResize =() =>{
-    this.setState({
-      ...this.state, 
-      width: window.innerWidth, 
-      maxPics: parseInt(this.state.width / 100), 
-      maxWidth: this.state.maxPics*100
-    })
-    console.log(this.state.maxWidth)
-  }
-
-  componentWillMount(){
-    window.addEventListener("resize", this.handleResize)
-    window.addEventListener("load", this.handleResize)
-    this.handleResize()
-  }
 
   render() {
     const panes = [
@@ -35,7 +14,6 @@ class PlantDisplayBar extends Component {
           <div
             style={{
               ...basicStyling, 
-              width: this.props.maxWidth-500+"px"
             }}
           >
             <PictureList
@@ -106,7 +84,7 @@ const mapStateToProps = state => {
     filteredFlowers: state.flowers.filteredFlowers,
     veggies: state.veggies.veggie,
     trees: state.trees.tree,
-    shrubs: state.shrubs.shrub,
+    shrubs: state.shrubs.shrub
   }
 }
 
