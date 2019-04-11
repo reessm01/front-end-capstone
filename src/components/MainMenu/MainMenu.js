@@ -32,7 +32,6 @@ class MainMenu extends Component {
 
   handleSave = e => {
     e.preventDefault()
-    console.log(this.state.name + " " + this.props.grid)
     if (this.props.id !== null) {
       this.props.patchLayout(this.props.grid, this.props.id)
     } else {
@@ -57,9 +56,9 @@ class MainMenu extends Component {
          {
         menuItem: "Save Your Garden As...",
         render: () => (
-          <div style={{ maxWidth: this.props.width + 25 + "px"}}>
+          <div style={{ }}>
             <Form onSubmit={this.handleSave}>
-              <Tab.Pane style={tabStyling}>
+              <Tab.Pane style={tabStyling} >
                 <Input
                   style={generalStyling}
                   placeholder="Garden Name..."
@@ -100,7 +99,7 @@ class MainMenu extends Component {
       {
         menuItem: "Start a New Garden",
         render: () => (
-           <div style={{ width: this.props.width + 25 + "px" }}>
+           <div>
             <Form onSubmit={this.handleNewLayOut}>
               <Tab.Pane style={tabStyling}>
                 <Button
@@ -118,7 +117,7 @@ class MainMenu extends Component {
       {
         menuItem: "Open an Existing Garden",
         render: () => (
-          <div style={{ width: this.props.width + 25 + "px" }}>
+          <div>
             <Form onSubmit={e => this.handleLoad(e)}>
               <Tab.Pane style={tabStyling}>
                 {this.props.userHasLayouts ? (
@@ -157,19 +156,13 @@ class MainMenu extends Component {
       {
         menuItem: "Find Flowers By State",
         render: () => (
-          <div
-            style={{
-              width: this.props.width + 25 + "px",
-              zIndex: "2000"
-            }}
-          >
+          <div style={{display:"flex", justifyContent:"center"}}>
             <Form style={{ zIndex: "2000" }}>
               <Tab.Pane style={tabStyling}>
                 <Dropdown
                   onChange={this.props.chooseState}
                   control={Select}
-                  style={generalStyling}
-                  placeholder="State"
+                  placeholder="All States"
                   options={stateOptions}
                 />
               </Tab.Pane>
@@ -182,8 +175,8 @@ class MainMenu extends Component {
       <div style={{display:"flex", justifyContent:"center"}}>
       <Tab
         menu={{ borderless: true, attached: false, tabular: false }}
-        style={{ width: this.props.width + 25 + "px" }}
         panes={panes}
+        grid={{tabWidth: 12, paneWidth:12}}
       />
       </div>
     )
