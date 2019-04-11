@@ -10,7 +10,7 @@ const styles = {
         padding: "20px"
     },
     cardButtons: {
-        backgroundColor: '#78A9BB', 
+        backgroundColor: '#78A9BB',
         color: 'white'
     }
 };
@@ -20,7 +20,7 @@ export class FlowerCards extends Component {
         const { flowers, error } = this.props;
         return (
             <React.Fragment>
-                <Header color="grey" textAlign="center" style={{fontSize: '30px'}}>Flower Search</Header>
+                <Header color="grey" textAlign="center" style={{ fontSize: '30px' }}>Flower Search</Header>
                 <Image src={picture} size="large" centered />
                 <Card.Group>
                     {flowers.map((flower, i) => (
@@ -33,14 +33,15 @@ export class FlowerCards extends Component {
                                 <h2>{flower.name}</h2>
                                 <br />
                                 <img src={flower.image} className="thumbnail" />
-                                
+
                                 <br />
-                                
+
                                 <Modal
+                                className = "modalStyle"
                                     size={"medium"}
-                                    trigger={<Button className="more-info">Read More</Button>}
+                                    trigger={<Button style={styles.cardButtons} >Read More</Button>}
                                     closeIcon
-                                    style={{ marginTop: "20px" ,marginLeft:"300px"}}
+                                    style={{ height: 'initial', top: "initial", left: 'initial' }}
                                 >
                                     <Modal.Header>{flower.species}</Modal.Header>
                                     <Modal.Content image>
@@ -57,16 +58,16 @@ export class FlowerCards extends Component {
 
                                             <a href={flower.site} target="_blank">
                                                 Research more about the {flower.name} </a>
-                                                <br></br>
-                                                <br></br>
-                                                <br></br>
-                                                <Button basic color='green' href={flower.amazon} target="_blank">
-                                                    Click to buy from Amazon </Button> 
+                                            <br></br>
+                                            <br></br>
+                                            
+                                            <Button basic color='green' href={flower.amazon} target="_blank">
+                                                Click to buy from Amazon </Button>
                                         </Modal.Description>
                                     </Modal.Content>
-                                    
+
                                 </Modal>
-                                
+
                             </Card.Content>
                         </Card>
                     ))}

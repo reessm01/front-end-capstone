@@ -3,12 +3,12 @@ import { Tab, Select } from "semantic-ui-react"
 import { connect } from "react-redux"
 import { Input, Button, Dropdown, Form, Message } from "semantic-ui-react"
 import { generalStyling, buttonStyling, tabStyling } from "./styles"
-import { 
-    loadLayout, 
-    newLayout,
-    saveLayout,
-    getUserLayoutData,
-    patchLayout
+import {
+  loadLayout,
+  newLayout,
+  saveLayout,
+  getUserLayoutData,
+  patchLayout
 } from "../../actions"
 import { stateOptions } from "./constants"
 
@@ -32,62 +32,48 @@ class MainMenu extends Component {
 
   handleSave = e => {
     e.preventDefault()
-    console.log(this.state.name + " " + this.props.grid)
     if (this.props.id !== null) {
       this.props.patchLayout(this.props.grid, this.props.id)
     } else {
-      this.props.saveLayout(this.state.name, this.props.grid).then(()=>this.props.getUserLayoutData(this.props.userId))
+      this.props
+        .saveLayout(this.state.name, this.props.grid)
+        .then(() => this.props.getUserLayoutData(this.props.userId))
     }
   }
 
   handleLoad = e => {
     e.preventDefault()
     this.props.loadLayout(this.state.id)
-    this.setState({...this.state, name: this.props.name})
+    this.setState({ ...this.state, name: this.props.name })
   }
 
   handleNewLayOut = e => {
-      e.preventDefault()
-      this.props.newLayout()
+    e.preventDefault()
+    this.props.newLayout()
   }
 
   render() {
     const panes = [
-        
-      {
-        menuItem: "New",
+
+         {
+        menuItem: "Save Your Garden As...",
         render: () => (
-          <div style={{ width: this.props.width + 25 + "px" }}>
-            <Form onSubmit={this.handleNewLayOut}>
-              <Tab.Pane style={tabStyling}>
-                <Button
-                  style={{width:"50%"}}
-                  disabled={this.props.userHasLayouts ? false : true}
-                >
-                  New Layout
-                </Button>
-              </Tab.Pane>
-            </Form>
-          </div>
-        )
-      },
-      {
-        menuItem: "Save",
-        render: () => (
-          <div style={{ maxWidth: this.props.width + 25 + "px" }}>
+          <div style={{ }}>
             <Form onSubmit={this.handleSave}>
-              <Tab.Pane style={tabStyling}>
+              <Tab.Pane style={tabStyling} >
                 <Input
                   style={generalStyling}
-                  placeholder="Layout name..."
+                  placeholder="Garden Name..."
                   name="name"
                   required
                   onChange={this.handleChange}
-                  value={this.props.id===null ? this.state.name:this.props.name}
-                  disabled={this.props.id!==null ? true:false}
+                  value={
+                    this.props.id === null ? this.state.name : this.props.name
+                  }
+                  disabled={this.props.id !== null ? true : false}
                 />
                 <Button
-                  style={buttonStyling}
+                  style={{backgroundColor:'#78A9BB', color: 'white'}}
                   disabled={this.props.token === null ? true : false}
                 >
                   Save
@@ -95,7 +81,7 @@ class MainMenu extends Component {
                 {this.props.saveMessage && (
                   <Message positive>
                     <Message.Header>Success!</Message.Header>
-                    <p>Layout saved.</p>
+                    <p>Your Garden Was Saved.</p>
                   </Message>
                 )}
                 {this.props.errorMessage && (
@@ -115,9 +101,27 @@ class MainMenu extends Component {
         )
       },
       {
-        menuItem: "Load",
+        menuItem: "Start a New Garden",
         render: () => (
-          <div style={{ width: this.props.width + 25 + "px" }}>
+           <div>
+            <Form onSubmit={this.handleNewLayOut}>
+              <Tab.Pane style={tabStyling}>
+                <Button
+                  style={{width:"50%", backgroundColor: "#78A9BB", color: 'white'}}
+                  disabled={this.props.userHasLayouts ? false : true}
+                >
+                  New Garden
+                </Button>
+              </Tab.Pane>
+            </Form>
+           </div>
+        )
+      },
+     
+      {
+        menuItem: "Open an Existing Garden",
+        render: () => (
+          <div>
             <Form onSubmit={e => this.handleLoad(e)}>
               <Tab.Pane style={tabStyling}>
                 {this.props.userHasLayouts ? (
@@ -154,21 +158,15 @@ class MainMenu extends Component {
         )
       },
       {
-        menuItem: "Choose State",
+        menuItem: "Find Flowers By State",
         render: () => (
-          <div
-            style={{
-              width: this.props.width + 25 + "px",
-              zIndex: "2000"
-            }}
-          >
+          <div style={{display:"flex", justifyContent:"center"}}>
             <Form style={{ zIndex: "2000" }}>
               <Tab.Pane style={tabStyling}>
                 <Dropdown
                   onChange={this.props.chooseState}
                   control={Select}
-                  style={generalStyling}
-                  placeholder="State"
+                  placeholder="All States"
                   options={stateOptions}
                 />
               </Tab.Pane>
@@ -181,8 +179,8 @@ class MainMenu extends Component {
       <div style={{display:"flex", justifyContent:"center"}}>
       <Tab
         menu={{ borderless: true, attached: false, tabular: false }}
-        style={{ width: this.props.width + 25 + "px" }}
         panes={panes}
+        grid={{tabWidth: 12, paneWidth:12}}
       />
       </div>
     )
@@ -198,7 +196,7 @@ const mapStateToProps = state => {
     userLayouts: state.grid.userLayouts,
     userHasLayouts: state.grid.userHasLayouts,
     saveMessage: state.grid.saveMessage,
-    errorMessage: state.grid.errorMessage,
+    errorMessage: state.grid.errorMessage
   }
 }
 

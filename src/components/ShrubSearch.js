@@ -21,7 +21,6 @@ class ShrubSearch extends Component {
         const { activeIndex } = this.state;
         return (
             <React.Fragment>
-                <NavBar />
                 <ShrubCards shrubs={this.state.filtershrubs} />
             </React.Fragment>
         );

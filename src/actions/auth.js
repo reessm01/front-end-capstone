@@ -3,6 +3,7 @@ import { push } from "connected-react-router"
 import { history } from '../configureStore'
 import { getUserLayoutData } from './getUserLayoutData'
 
+// import { downloadUserImage } from "."
 
 // action types
 export const LOGIN = "LOGIN"

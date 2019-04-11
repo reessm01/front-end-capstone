@@ -15,7 +15,7 @@ export class ShrubCards extends Component {
         const { shrubs, error } = this.props;
         return (
             <React.Fragment>
-                <Header as="h2" color="grey" textAlign="center" className="search">Tree Search</Header>
+                <Header as="h2" color="grey" textAlign="center" className="search">Shrub Search</Header>
                 <Image src={picture} size="large" centered />
                 <Card.Group>
                     {shrubs.map((shrub, i) => (

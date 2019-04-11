@@ -21,7 +21,6 @@ class TreeSearch extends Component {
         const { activeIndex } = this.state;
         return (
             <React.Fragment>
-                <NavBar />
                 <TreeCards trees={this.state.filtertrees} />
             </React.Fragment>
         );

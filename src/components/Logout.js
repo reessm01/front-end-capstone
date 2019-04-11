@@ -21,6 +21,7 @@
           <Menu.Menu position="right">
              <Menu.Item
                name="logout"
+               style={{color: 'gray'}}
                onClick={this.handleOpen}
              /> 
          <Dimmer style = {{backgroundColor: "teal", opacity: "0.7"}} active={active} page>
