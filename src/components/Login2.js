@@ -108,7 +108,7 @@ class Login2 extends Component {
                 <Button.Or />
                 <Link to="/register">
                   <Button size="large" color="teal">
-                    Don't Have an Account? Register Here!
+                     Register Here!
                   </Button>
                 </Link>
               </Button.Group>

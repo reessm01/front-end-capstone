@@ -21,7 +21,7 @@ class TreeSearch extends Component {
         const { activeIndex } = this.state;
         return (
             <React.Fragment>
-                <div className='fonts'>
+                <div className="filter-cards" style={{ marginLeft: "150px" }}>
                 <TreeCards trees={this.state.filtertrees} />
                 </div>
             </React.Fragment>
