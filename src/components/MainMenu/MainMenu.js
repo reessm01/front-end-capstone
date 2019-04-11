@@ -168,6 +168,7 @@ class MainMenu extends Component {
                   control={Select}
                   placeholder="All States"
                   options={stateOptions}
+                  disabled={this.props.selectedCategory!== "Flowers" ? true:false}
                 />
               </Tab.Pane>
             </Form>

@@ -21,7 +21,6 @@ export const preloadUserLayout = userLayouts => dispatch =>{
     let id
     if (userLayouts.length !== 0) {
       userLayouts.forEach(entry => {
-          console.log(entry)
         if(entry.updated > maxDate) id = entry.id
       })
       return dispatch(loadLayout(id))

@@ -38,7 +38,7 @@ const login = loginData => dispatch => {
     .then(result => {
       localStorage.setItem("id", result.token)
       dispatch(getUserLayoutData(result.id))
-      console.log(result)
+      history.push("/canvas")
       return dispatch({
         type: LOGIN_SUCCESS,
         payload: result
@@ -58,7 +58,6 @@ const login = loginData => dispatch => {
 export const loginThenNavToPlanner = loginData => dispatch => {
     
   dispatch(login(loginData))
-  history.push("/canvas")
 }
 
 const register = registerData => dispatch => {
