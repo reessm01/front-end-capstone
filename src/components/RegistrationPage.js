@@ -37,6 +37,7 @@ export class RegistrationPage extends Component {
                 <div className="pageDiv">
                     <Form className="formDiv" onSubmit={this.handleRegister} >
                         <Form.Field
+                        
                             label="Username:"
                             required
                             placeholder="Username"
@@ -48,6 +49,7 @@ export class RegistrationPage extends Component {
                             
                         />
                         <Form.Field
+                        style={{color: 'gray'}}
                             label="Password:"
                             required
                             placeholder="Password"
@@ -73,6 +75,7 @@ export class RegistrationPage extends Component {
                   to="/profile"
                   disabled={isLoading}
                   onClick={this.handleRegister}
+                  style={{backgroundColor: '#ACC9AC'}}
                 > 
                   Start Gardening!
                 </Button>
