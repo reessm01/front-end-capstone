@@ -4,7 +4,7 @@ import {
     GET_FLOWER_DATA_FAIL,
     FILTER_FLOWERS
 } from "../actions/";
-import { SETCURRENTLOWER } from "../actions/setCurrentFlower";
+import { SETCURRENTFLOWER } from "../actions/setCurrentFlower";
 
 
 const initialState = {
@@ -16,7 +16,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case SETCURRENTLOWER:
+        case SETCURRENTFLOWER:
             return { ...state, currentFlower: action.flower }
         case GET_FLOWER_DATA:
             return state;
