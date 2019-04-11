@@ -62,9 +62,8 @@ class Canvas extends Component {
   }
 
   handleFilter = e => {
-    let curCategory = document.querySelector("a.active").textContent
     let value = e.target.textContent
-    if (curCategory === "Choose Flowers") {
+    if (this.state.selectedCategory === "Flowers") {
       if (value !== "All States") {
         this.props.filterFlowers(
           this.filterState(value, [...this.props.flowers])
@@ -72,21 +71,14 @@ class Canvas extends Component {
         this.setState({
           ...this.state,
           selectedState: null,
-          selectedCategory: curCategory
+          selectedCategory: this.state.selectedCategory
         })
       } else
         this.setState({
           ...this.state,
           selectedState: "all",
-          selectedCategory: curCategory
+          selectedCategory: this.state.selectedCategory
         })
-    }
-    if (curCategory === "Choose Veggies") {
-      this.setState({
-        ...this.state,
-        selectedState: "all",
-        selectedCategory: curCategory
-      })
     }
   }
 

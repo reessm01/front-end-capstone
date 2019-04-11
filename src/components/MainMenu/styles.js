@@ -1,5 +1,5 @@
 export const generalStyling = {
-    width: "80%", 
+    width: "70%", 
     marginRight: "20px",
     zIndex: 1000000,
 }
