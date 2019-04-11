@@ -53,33 +53,16 @@ class MainMenu extends Component {
 
   render() {
     const panes = [
-        
-      {
-        menuItem: "New",
+
+         {
+        menuItem: "Save Your Garden As...",
         render: () => (
-          <div style={{ width: this.props.width + 25 + "px" }}>
-            <Form onSubmit={this.handleNewLayOut}>
-              <Tab.Pane style={tabStyling}>
-                <Button
-                  style={{width:"50%"}}
-                  disabled={this.props.userHasLayouts ? false : true}
-                >
-                  New Layout
-                </Button>
-              </Tab.Pane>
-            </Form>
-          </div>
-        )
-      },
-      {
-        menuItem: "Save",
-        render: () => (
-          <div style={{ maxWidth: this.props.width + 25 + "px" }}>
+          <div style={{ maxWidth: this.props.width + 25 + "px"}}>
             <Form onSubmit={this.handleSave}>
               <Tab.Pane style={tabStyling}>
                 <Input
                   style={generalStyling}
-                  placeholder="Layout name..."
+                  placeholder="Garden Name..."
                   name="name"
                   required
                   onChange={this.handleChange}
@@ -87,7 +70,7 @@ class MainMenu extends Component {
                   disabled={this.props.id!==null ? true:false}
                 />
                 <Button
-                  style={buttonStyling}
+                  style={{backgroundColor:'#78A9BB', color: 'white'}}
                   disabled={this.props.token === null ? true : false}
                 >
                   Save
@@ -95,7 +78,7 @@ class MainMenu extends Component {
                 {this.props.saveMessage && (
                   <Message positive>
                     <Message.Header>Success!</Message.Header>
-                    <p>Layout saved.</p>
+                    <p>Your Garden Was Saved.</p>
                   </Message>
                 )}
                 {this.props.errorMessage && (
@@ -115,7 +98,25 @@ class MainMenu extends Component {
         )
       },
       {
-        menuItem: "Load",
+        menuItem: "Start a New Garden",
+        render: () => (
+           <div style={{ width: this.props.width + 25 + "px" }}>
+            <Form onSubmit={this.handleNewLayOut}>
+              <Tab.Pane style={tabStyling}>
+                <Button
+                  style={{width:"50%", backgroundColor: "#78A9BB", color: 'white'}}
+                  disabled={this.props.userHasLayouts ? false : true}
+                >
+                  New Garden
+                </Button>
+              </Tab.Pane>
+            </Form>
+           </div>
+        )
+      },
+     
+      {
+        menuItem: "Open an Existing Garden",
         render: () => (
           <div style={{ width: this.props.width + 25 + "px" }}>
             <Form onSubmit={e => this.handleLoad(e)}>
@@ -154,7 +155,7 @@ class MainMenu extends Component {
         )
       },
       {
-        menuItem: "Choose State",
+        menuItem: "Find Flowers By State",
         render: () => (
           <div
             style={{
