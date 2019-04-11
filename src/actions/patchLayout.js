@@ -18,13 +18,7 @@ export const patchLayout = (layout, id) => dispatch => {
         }
     })  
         .then(result => {
-            console.log(result)
             if(result.status === 200) dispatch(getUserLayoutData(userId))
-            // return dispatch({
-            //     // type: PATCH_SUCCESS,
-            //     // layout: result.layout.layout,
-            //     // id: result.layout.id
-            // });
         })
         // .catch(err => {
         //     console.log(err)
