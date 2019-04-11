@@ -7,6 +7,10 @@ const styles = {
     cardPosition: {
         margin: "30px",
         padding: "20px"
+    },
+    cardButtons: {
+        backgroundColor: '#78A9BB',
+        color: 'white'
     }
 };
 
@@ -17,12 +21,12 @@ export class ShrubCards extends Component {
             <React.Fragment>
                 <Header as="h2" color="grey" textAlign="center" className="search">Shrub Search</Header>
                 <Image src={picture} size="large" centered />
-                <Card.Group>
+                <Card.Group centered>
                     {shrubs.map((shrub, i) => (
                         <Card
                             style={styles.cardPosition}
                             key={shrub.name}
-                            className="shrub-card"
+                            className="flower-card"
                         >
                             <Card.Content>
                                 <h2>{shrub.name}</h2>
@@ -32,9 +36,9 @@ export class ShrubCards extends Component {
                                 <br />
                                 <Modal
                                     size={"small"}
-                                    trigger={<Button className="more-info">Read More</Button>}
+                                    trigger={<Button className="more-info" style={styles.cardButtons}>Read More</Button>}
                                     closeIcon
-                                    style={{ marginTop: "20px" }}
+                                    style={{ height: 'initial', top: "initial", left: 'initial' }}
                                 >
                                     <Modal.Header>{shrub.name}</Modal.Header>
                                     <Modal.Content image>
