@@ -26,14 +26,14 @@ export class VeggieCards extends Component {
           Veggie Search
         </Header>
         <Image src={picture} size="large" centered />
-        <Card.Group>
+        <Card.Group centered>
           {veggies.map((veggie, i) => (
             <Card
               style={styles.cardPosition}
               key={veggie.name}
-              className="veggie-card"
+              className="flower-card"
             >
-              <Card.Content>
+              <Card.Content centered>
                 <h2>{veggie.name}</h2>
                 <br />
                 <img src={veggie.image} className="thumbnail" />

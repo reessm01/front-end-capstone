@@ -235,7 +235,7 @@ class FlowerSearch extends Component {
                         
                         
                     </div>
-                    <div className="filter-cards" style={{marginLeft:"150px"}}>
+                    <div className="filter-cards" >
                         <FlowerCards flowers={this.state.filterflowers} />
                         {/* <ScrollUpButton
                             className="scroll"
