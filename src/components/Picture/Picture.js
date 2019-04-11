@@ -8,7 +8,7 @@ export class Picture extends Component {
       zIndex: "1000"
     }
     return (
-      <div id="static" data-name={this.props.name}
+      <div id="static" data-name={this.props.name} style={{border:'1px inset white'}}
       >
         <img 
           src={this.props.image}

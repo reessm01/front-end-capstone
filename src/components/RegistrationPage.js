@@ -45,6 +45,7 @@ export class RegistrationPage extends Component {
                             autoFocus
                             onChange={this.handleChange}
                             name="username"
+                            
                         />
                         <Form.Field
                             label="Password:"
