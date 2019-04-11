@@ -1,57 +1,76 @@
-import React, { Component } from "react";
-import Spinner from "react-spinkit";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { loginThenNavToPlanner as login } from '../actions/auth';
+import React, { Component } from "react"
+import Spinner from "react-spinkit"
+import { Link } from "react-router-dom"
+import { connect } from "react-redux"
+import { loginThenNavToPlanner as login } from "../actions/auth"
 import {
   Button,
   Form,
   Input,
-  Segment, Grid, Image, Header
-} from "semantic-ui-react";
+  Segment,
+  Grid,
+  Image,
+  Header
+} from "semantic-ui-react"
 import loginPicture from "./Images/Header.png"
 import largeSucculent from "../components/Images/side.jpg"
- class Login2 extends Component {
+class Login2 extends Component {
   state = {
     username: "",
     password: ""
-  };
+  }
 
   handleLogin = e => {
     e.preventDefault()
-    this.props.login({ ...this.state });
-  };
+    this.props.login({ ...this.state })
+  }
 
   handleChange = e => {
     this.setState({ ...this.state, [e.target.name]: e.target.value })
-  };
+  }
 
   render() {
-
     const { isLoading, err } = this.props
 
     return (
-      <React.Fragment> 
-        
+      <React.Fragment>
         <Grid>
-          <Grid.Column >
-          <div>
-              <Header 
-              style={{fontSize: "100px", fontFamily: "Just Another Hand", color: "#78A9BB" }}
-               as="h1"
-               align="center">
-               <Image src={largeSucculent} style={{ height: "13%", width: "13%" }} />
+          <Grid.Column>
+            <div>
+              <Header
+                style={{
+                  fontSize: "100px",
+                  fontFamily: "Just Another Hand",
+                  color: "#78A9BB"
+                }}
+                as="h1"
+                align="center"
+              >
+                <Image
+                  src={largeSucculent}
+                  style={{ height: "13%", width: "13%" }}
+                />
                 Flower Power
               </Header>
-            <Header as="h2" color="grey" textAlign="center" fontFamily="Raleway">
-              Plan Your Garden With Us!
-            </Header>
-            <div 
-            style={{color:"grey", textAlign:"center", fontFamiy:"Raleway"}}>
-              Register as a New User Or Login To Your Active Account.
+              <Header
+                as="h2"
+                color="grey"
+                textAlign="center"
+                fontFamily="Raleway"
+              >
+                Plan Your Garden With Us!
+              </Header>
+              <div
+                style={{
+                  color: "grey",
+                  textAlign: "center",
+                  fontFamiy: "Raleway"
+                }}
+              >
+                Register as a New User Or Login To Your Active Account.
               </div>
             </div>
-          </Grid.Column> 
+          </Grid.Column>
         </Grid>
         <div className="pageDiv">
           <Form className="formDiv" onSubmit={this.handleLogin} size="large">
@@ -75,6 +94,7 @@ import largeSucculent from "../components/Images/side.jpg"
                 control={Input}
                 onChange={this.handleChange}
               />
+              <div style={{display:"flex", justifyContent: "center"}}>
               <Button.Group>
                 <Button
                   type="submit"
@@ -92,12 +112,13 @@ import largeSucculent from "../components/Images/side.jpg"
                   </Button>
                 </Link>
               </Button.Group>
+              </div>
               <div>{this.props.result}</div>
             </Segment>
           </Form>
-          
-           {isLoading && <Spinner name="circle" color="blue" />}
-            {err && <p style={{ color: "red" }}>{err}</p>}
+
+          {isLoading && <Spinner name="circle" color="blue" />}
+          {err && <p style={{ color: "red" }}>{err}</p>}
         </div>
         <Image src={loginPicture} size="large" centered />
       </React.Fragment>
@@ -105,24 +126,10 @@ import largeSucculent from "../components/Images/side.jpg"
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     result: state.loginResult
-//   };
-// };
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     login: loginData => dispatch(login(loginData))
-//   };
-// };
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(Login2);
-
 export default connect(
-  ({auth}) => ({
+  ({ auth }) => ({
     isLoading: auth.loginLoading,
     err: auth.loginError
-  }), {login}
+  }),
+  { login }
 )(Login2)

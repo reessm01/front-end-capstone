@@ -161,7 +161,7 @@ class MainMenu extends Component {
         menuItem: "Find Flowers By State",
         render: () => (
           <div style={{display:"flex", justifyContent:"center"}}>
-            <Form style={{ zIndex: "2000" }}>
+            <Form>
               <Tab.Pane style={tabStyling}>
                 <Dropdown
                   onChange={this.props.chooseState}
