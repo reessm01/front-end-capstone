@@ -30,8 +30,7 @@ const initialState = {
   layouts: null,
   saveMessage: null,
   errorMessage: null,
-  name: null,
-  
+  name: null
 }
 
 export default (state = initialState, action) => {
@@ -68,8 +67,7 @@ export default (state = initialState, action) => {
         ...state,
         grid: action.grid,
         saveMessage: false,
-        errorMessage: false,
-        
+        errorMessage: false
       }
     case SAVE_SUCCESS:
     case PATCH_SUCCESS:
@@ -98,16 +96,19 @@ export default (state = initialState, action) => {
       }
     case NEW_LAYOUT:
       return {
-          ...state,
-          grid: Array(10)
+        ...state,
+        grid: Array(10)
           .fill(null)
           .map(() =>
             Array(10)
               .fill(null)
               .map(entry => (entry = { pictureLink: null }))
           ),
-          id: null,
-          name: null
+        id: null,
+        name: null,
+        numRows: 10,
+        numCols: 10,
+        canvasWidth: 10 * width
       }
     default:
       return state
