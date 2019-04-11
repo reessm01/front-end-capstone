@@ -58,7 +58,11 @@ class Canvas extends Component {
   }
 
   handleTabClicked = e => {
-    this.setState({ ...this.state, selectedCategory: e.target.innerHTML })
+    
+    if(e.target.innerHTML !== "") {
+      console.log(e.target.innerHTML)
+      this.setState({ ...this.state, selectedCategory: e.target.innerHTML })
+    }
   }
 
   handleFilter = e => {
@@ -154,8 +158,8 @@ class Canvas extends Component {
         this.props.removePlant(this.state.originRow, this.state.originCol)
         stateCopy.style.opacity = 1.0
       }
+      
     }
-
     this.setState({
       ...this.state,
       originRow: null,
@@ -193,6 +197,7 @@ class Canvas extends Component {
           width={this.props.width}
           chooseState={this.handleFilter}
           grid={this.props.grid}
+          selectedCategory={this.state.selectedCategory}
         />
 
         <br />
