@@ -30,7 +30,8 @@ const initialState = {
   layouts: null,
   saveMessage: null,
   errorMessage: null,
-  name: null
+  name: null,
+  
 }
 
 export default (state = initialState, action) => {
@@ -67,7 +68,8 @@ export default (state = initialState, action) => {
         ...state,
         grid: action.grid,
         saveMessage: false,
-        errorMessage: false
+        errorMessage: false,
+        
       }
     case SAVE_SUCCESS:
     case PATCH_SUCCESS:

@@ -9,6 +9,7 @@ export const dropPlant = (row, col, pictureLink) => dispatch => {
    
     return dispatch({
         type: DROP_PLANT,
-        grid: newGrid
+        grid: newGrid,
+        
     })
 }
