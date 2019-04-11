@@ -41,9 +41,9 @@ export class VeggieCards extends Component {
                                 <br />
                                 <Modal
                                     size={"small"}
-                                    trigger={<Button className="more-info" style={styles.cardButtons}>Read More</Button>}
+                                    trigger={<Button style={styles.cardButtons}>Read More</Button>}
                                     closeIcon
-                                    style={{ marginTop: "20px" }}
+                                    style={{ height: 'initial', top: "initial", left: 'initial' }}
                                 >
                                     <Modal.Header>{veggie.name}</Modal.Header>
                                     <Modal.Content image>

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { VeggieCards } from "./VeggieCards";
-import { NavBar } from "./NavBar"
-import { PageHeader } from './PageHeader'
 import { connect } from "react-redux";
 import { getVeggieData } from "../actions/getVeggieData";
 import { generalStyling } from "./MainMenu/styles";
