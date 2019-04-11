@@ -22,14 +22,14 @@ export class FlowerCards extends Component {
             <React.Fragment>
                 <Header color="grey" textAlign="center" style={{ fontSize: '30px' }}>Flower Search</Header>
                 <Image src={picture} size="large" centered />
-                <Card.Group>
+                <Card.Group centered>
                     {flowers.map((flower, i) => (
                         <Card
                             style={styles.cardPosition}
                             key={flower.name}
                             className="flower-card"
                         >
-                            <Card.Content>
+                            <Card.Content centered>
                                 <h2>{flower.name}</h2>
                                 <br />
                                 <img src={flower.image} className="thumbnail" />
