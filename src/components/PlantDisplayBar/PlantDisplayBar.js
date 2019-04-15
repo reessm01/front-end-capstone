@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import PictureList from "../PictureList"
+import PictureList from "../PictureList/PictureList"
 import { Tab } from "semantic-ui-react"
 import { connect } from "react-redux"
 import { basicStyling } from "./styles"
