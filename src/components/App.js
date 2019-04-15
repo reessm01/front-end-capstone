@@ -1,18 +1,16 @@
 import React, { Component } from "react";
-import Canvas from "./Canvas";
-import PageHeader from "./PageHeader"
-import Login2 from "./Login2"
-import FlowerSearch from "./FlowerSearch.js"
-import VeggieSearch from "./VeggieSearch.js"
-import TreeSearch from "./TreeSearch.js"
-import ShrubSearch from "./ShrubSearch.js"
-import RegistrationPage from './RegistrationPage'
-import {TreeCards} from "./TreeCards"
-import {ShrubCards} from "./ShrubCards"
+import Canvas from "./Canvas/Canvas";
+import PageHeader from "./PageHeader/PageHeader"
+import Login from "./Login/Login"
+import FlowerSearch from "./FlowerSearch/FlowerSearch"
+import VeggieSearch from "./VeggieSearch/VeggieSearch"
+import TreeSearch from "./TreeSearch/TreeSearch"
+import ShrubSearch from "./ShrubSearch/ShrubSearch"
+import RegistrationPage from './RegistrationPage/RegistrationPage'
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
 import '../App.css'
-import { NavBar } from './NavBar'
+import { NavBar } from './NavBar/NavBar'
 
 
 //connect navbar to redux state//Can use component=//
@@ -20,7 +18,7 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" render={() => <Login2 />} />
+        <Route exact path="/" render={() => <Login />} />
         <Switch>
           <Route exact path=
             {["/canvas", "/register", "/flowers", "/veggies","/trees","/shrubs"]} render={() => 
