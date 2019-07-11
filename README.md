@@ -1,4 +1,4 @@
-#Flower Power Capstone
+# Flower Power Capstone
 *Garden Planning App*
 [Start Your Garden](https://front-end-capstone-project.gitlab.io/frontend/)
 
